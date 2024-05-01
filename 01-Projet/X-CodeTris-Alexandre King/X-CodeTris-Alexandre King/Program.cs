@@ -11,12 +11,22 @@ namespace X_CodeTris_Alexandre_King
         static void Main(string[] args)
         {
             //Console.CursorVisible = false;
+
+            //name of the window
             Console.Title = "CodeTris";
 
             //Make sure the log file exist, otherwise create one
             ExternalManager.LogFile();
+            
+            
+            //Define the console size to the maximum possible size
+            Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
+            //remove the ability to resize the console and to maximaxied it
+            ConsoleUtility.DeleteResizeMenu();
+            //Move to window to the top left corner
+            WindowUtility.MoveWindowToTopLeftCorner();
 
-            //open DB
+            //Configure DB infos and open it
             DatabaseManager.ConfigureDBInfos();
             DatabaseManager.OpenDB();
 
@@ -42,20 +52,7 @@ namespace X_CodeTris_Alexandre_King
             void MenuManagement()
             {
                 do
-                {
-                    /*if (menuManager.GetCurrentMenu() == "connect")
-                    {
-                        cursorLeftPos = menuManager.GetMenuOptionPos()[menuSelector];
-                        if (menuSelector == 0)
-                        {
-                            cursorLeftPos = menuManager.GetMenuOptionPos()[menuSelector] + nickname.Length;
-                        }
-                        else if (menuSelector == 1)
-                        {
-                            cursorLeftPos = menuManager.GetMenuOptionPos()[menuSelector] + password.Length;
-                        }
-                        Console.SetCursorPosition(cursorLeftPos, Console.CursorTop);
-                    }*/
+                {                    
 
                     if (menuSelector == 0)
                     {
@@ -77,22 +74,7 @@ namespace X_CodeTris_Alexandre_King
                                 menuSelector = 0;
                                 cursorLeftPos = menuManager.GetMenuOptionPos()[menuSelector];
                                 Console.SetCursorPosition(cursorLeftPos, menuTop);
-                            }
-                            /*if (menuManager.GetConnectArrow() && menuSelector != menuManager.GetConnectMenu().Last().Key)
-                            {
-                                if (menuSelector == 0)
-                                {
-                                    Console.SetCursorPosition(Console.CursorLeft+nickname.Length, Console.CursorTop);
-                                }
-                                else if (menuSelector == 1)
-                                {
-                                    Console.SetCursorPosition(Console.CursorLeft + password.Length, Console.CursorTop);
-                                }                                
-                                Console.Write("_");
-                            }
-                            else
-                            {
-                            }*/
+                            }                            
                             Console.Write(">");
                             Console.SetCursorPosition(cursorLeftPos, Console.CursorTop);
                             break;
@@ -109,23 +91,7 @@ namespace X_CodeTris_Alexandre_King
                                 cursorLeftPos = menuManager.GetMenuOptionPos()[menuSelector];
                                 Console.SetCursorPosition(cursorLeftPos, menuTop + menuSelector);
                             }
-
-                            /*if (menuManager.GetConnectArrow() && menuSelector != menuManager.GetConnectMenu().Last().Key)
-                            {
-                                if (menuSelector == 0)
-                                {
-                                    Console.SetCursorPosition(Console.CursorLeft + nickname.Length, Console.CursorTop);
-                                }
-                                else if (menuSelector == 1)
-                                {
-                                    Console.SetCursorPosition(Console.CursorLeft + password.Length, Console.CursorTop);
-                                }
-                                Console.Write("_");
-                            }
-                            else
-                            {
-                            }
-                            */
+                           
                             Console.Write(">");
                             Console.SetCursorPosition(cursorLeftPos, Console.CursorTop);
                             break;
@@ -153,58 +119,7 @@ namespace X_CodeTris_Alexandre_King
                             break;
 
                         default:
-                            /*if (menuManager.GetCurrentMenu() == "connect" && menuSelector != menuManager.GetConnectMenu().Last().Key)
-                            {
-                                switch (keyInfo.Key)
-                                {
-                                    case ConsoleKey.Spacebar:
-                                        cursorLeftPos = menuManager.GetMenuOptionPos()[menuSelector];
-                                        if (menuSelector == 0)
-                                        {
-                                            nickname += " ";
-                                            cursorLeftPos = menuManager.GetMenuOptionPos()[menuSelector] + nickname.Length;
-                                        }
-                                        else if (menuSelector == 1)
-                                        {
-                                            password += " ";
-                                            cursorLeftPos = menuManager.GetMenuOptionPos()[menuSelector] + password.Length;
-
-                                        }
-                                        Console.SetCursorPosition(cursorLeftPos, Console.CursorTop);
-
-                                        break;
-                                    case ConsoleKey.Backspace:
-                                        if (menuSelector == 0)
-                                        {
-                                            nickname = nickname.Remove(nickname.Length - 1);
-                                        }
-                                        else if (menuSelector == 1)
-                                        {
-                                            password = password.Remove(password.Length - 1);
-                                        }
-                                        Console.Write("  ");
-                                        Console.SetCursorPosition(Console.CursorLeft - 2, Console.CursorTop);
-
-
-                                        break;
-                                    default:
-                                        if (menuSelector == 0)
-                                        {
-                                            nickname += keyInfo.Key.ToString();
-                                        }
-                                        else if (menuSelector == 1)
-                                        {
-                                            password += keyInfo.Key.ToString();
-                                        }
-                                        break;
-
-                                }
-
-                                Console.Write("_");
-                            }
-                            else
-                            {
-                            }*/
+                            
                             Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
                             Console.Write(">");
                             Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
@@ -261,7 +176,26 @@ namespace X_CodeTris_Alexandre_King
                         break;
 
                 }
-            }            
+            }
+            
+            void ManageHighscoreMenuEnter()
+            {
+                switch (menuManager.HighscoreMenuEnter(menuSelector))
+                {                    
+                    case 3:
+                        lastIndexMenu = menuManager.GetMainMenu().Last().Key;
+                        menuTop = menuManager.GetMenuTopStart();
+                        menuSelector = 0;
+                        break;
+                    default:
+                        lastIndexMenu = menuManager.GetDetailHighscoreMenu().Last().Key;
+                        menuTop = menuManager.GetMenuTopStart();
+                        menuSelector = 0;
+                        break;
+                }
+            }                        
+
+
             /*
             void ManagePauseMenuEnter()
             {
@@ -314,18 +248,7 @@ namespace X_CodeTris_Alexandre_King
                 }
             }*/
 
-            void ManageHighscoreMenuEnter()
-            {
-                switch (menuManager.HighscoreMenuEnter(menuSelector))
-                {
-                    case 0:
-                        //go back to main menu
-                        lastIndexMenu = menuManager.GetMainMenu().Last().Key;
-                        menuTop = menuManager.GetMenuTopStart();
-                        menuSelector = 0;
-                        break;
-                }
-            }
+
         }
     }
 

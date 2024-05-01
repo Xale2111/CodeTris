@@ -190,10 +190,13 @@ namespace X_CodeTris_Alexandre_King
 
         static public void LogError(string error)
         {
-            if (File.Exists(logsFilePath))
+            if (File.Exists(logsDirPath+ logsFilePath))
             {
                 string message = DateTime.Now.ToString() + "\t\t" + "ERROR" + "\t\t" + error;
-                File.WriteAllText(logsDirPath + logsFilePath, message);
+                using (StreamWriter w = File.AppendText(logsDirPath + logsFilePath))
+                {
+                    w.WriteLine(message);
+                }
             }
         }
 

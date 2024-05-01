@@ -1,47 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace X_CodeTris_Alexandre_King
 {
     public class MenuManager
     {
-        Dictionary<int, string> mainMenu = new Dictionary<int, string>();
-        Dictionary<int, string> optionMenu = new Dictionary<int, string>();
-        Dictionary<int, string> highscore = new Dictionary<int, string>();
-        Dictionary<int, string> pauseMenu = new Dictionary<int, string>();
+        Dictionary<int, string> _mainMenu = new Dictionary<int, string>();
+        Dictionary<int, string> _optionMenu = new Dictionary<int, string>();
+        Dictionary<int, string> _highscore = new Dictionary<int, string>();
+        Dictionary<int, string> _detailHighscore = new Dictionary<int, string>();
+        Dictionary<int, string> _pauseMenu = new Dictionary<int, string>();
 
-        string[] difficultyOptions = new string[3] { "Facile", "Moyen", "Difficile" };
-        string[] keysOptions = new string[2] { "WASD", "Flèches" };
+        string[] _difficultyOptions = new string[3] { "Facile", "Moyen", "Difficile" };
+        string[] _keysOptions = new string[2] { "WASD", "Flèches" };
 
-        int[] xPosMenuOption;
-        static bool soundIsOn = false;
-        static int currentDifficulty;
-        static int playKeys = 0;
+        int[] _xPosMenuOption;
+        static bool _soundIsOn = false;
+        static int _currentDifficulty;
+        static int _playKeys = 0;
 
-        int menuTopStart;
+        int _menuTopStart;
 
-        string currentMenu;
+        string _currentMenu;
 
         public MenuManager()
         {
             DefineMainMenu();
             DefineOptionMenu();
             DefineHighscoreMenu();
+            DefineDetailHighscoreMenu();
             //DefinePauseMenu();
         }
 
         public void CallMainMenu()
         {
-            currentMenu = "main";
-            CreateMenu(mainMenu);
+            _currentMenu = "main";
+            CreateMenu(_mainMenu);
         }
         private void CallOptionMenu()
         {
-            currentMenu = "option";
-            CreateMenu(optionMenu);
+            _currentMenu = "option";
+            CreateMenu(_optionMenu);
         }
         /*
             public void CallPauseMenu()
@@ -51,37 +51,47 @@ namespace X_CodeTris_Alexandre_King
             }*/
         private void CallHighscoreMenu()
         {
-            currentMenu = "highscore";
-            CreateMenu(highscore);
+            _currentMenu = "highscore";
+            CreateMenu(_highscore);
+        }
+        private void CallDetailHighscoreMenu()
+        {
+            _currentMenu = "detailHighscore";
+            CreateMenu(_detailHighscore);
         }
 
         public string GetCurrentMenu()
         {
-            return currentMenu;
+            return _currentMenu;
         }
 
         private void DefineMainMenu()
         {
-            mainMenu.Add(0, "Jouer");
-            mainMenu.Add(1, "Options");
-            mainMenu.Add(2, "Score");
-            mainMenu.Add(3, "Quitter");
+            _mainMenu.Add(0, "Jouer");
+            _mainMenu.Add(1, "Options");
+            _mainMenu.Add(2, "Score");
+            _mainMenu.Add(3, "Quitter");
         }
 
         private void DefineOptionMenu()
         {
-            optionMenu.Add(0, "Musique");
-            optionMenu.Add(1, "Touches");
-            optionMenu.Add(2, "Difficulté");
-            optionMenu.Add(3, "Retour <=");
+            _optionMenu.Add(0, "Musique");
+            _optionMenu.Add(1, "Touches");
+            _optionMenu.Add(2, "Difficulté");
+            _optionMenu.Add(3, "Retour <=");
         }
 
         private void DefineHighscoreMenu()
         {
-            highscore.Add(0, "Facile");
-            highscore.Add(1, "Moyen");
-            highscore.Add(2, "Difficile");
-            highscore.Add(3, "Retour <=");
+            _highscore.Add(0, "Facile");
+            _highscore.Add(1, "Moyen");
+            _highscore.Add(2, "Difficile");
+            _highscore.Add(3, "Retour <=");
+        }
+
+        private void DefineDetailHighscoreMenu()
+        {
+            _detailHighscore.Add(0, "Retour <=");
         }
         /*
             private void DefinePauseMenu()
@@ -95,7 +105,7 @@ namespace X_CodeTris_Alexandre_King
         private void CreateMenu(Dictionary<int, string> menu)
         {
             char movementArrow = '>';
-            if (currentMenu == "main")
+            if (_currentMenu == "main")
             {
                 Console.SetCursorPosition(0, Console.WindowHeight - 1);
                 if (DatabaseManager.GetDBState())
@@ -111,54 +121,18 @@ namespace X_CodeTris_Alexandre_King
             }
 
 
-            xPosMenuOption = new int[menu.Count];
-            menuTopStart = Console.WindowHeight / 2 - menu.Count;
-
-            if (currentMenu == "highscore")
-            {/*
-                    List<Tuple<string, int, string>> highscores = DatabaseManager.GetHighScores();
-                    int count = 0;
-
-                    foreach (Tuple<string, int, string> highscore in highscores)
-                    {
-                        switch (count)
-                        {
-                            case 0:
-                                WorldGenerator.TextColor("DKyellow");
-                                break;
-                            case 1:
-                                WorldGenerator.TextColor("DKgray");
-                                break;
-                            case 2:
-                                WorldGenerator.TextColor("DKmagenta");
-                                break;
-                            default:
-                                WorldGenerator.TextColor("white");
-                                break;
-                        }
-                        string score = (count + 1) + ". " + highscore.Item1 + " : " + highscore.Item2 + " pts";
-                        Console.SetCursorPosition(Console.WindowWidth / 2 - score.Length / 2, menuTopStart - 5 + count);
-                        Console.WriteLine(score);
-                        count++;
-                        WorldGenerator.TextColor("white");
-
-                    }
-                    menuTopStart += 10;*/
-            }
+            _xPosMenuOption = new int[menu.Count];
+            _menuTopStart = Console.WindowHeight / 2 - menu.Count;
+            
             Console.ForegroundColor = ConsoleColor.White;
-            Console.SetCursorPosition(Console.WindowWidth / 2, menuTopStart);
-            /*if (currentMenu == "highscore")
-            {
-                Console.SetCursorPosition(Console.WindowWidth / 2, menuTopStart);
-
-            }*/
+            Console.SetCursorPosition(Console.WindowWidth / 2, _menuTopStart);            
             foreach (var menuOption in menu)
             {
-                xPosMenuOption[menuOption.Key] = Console.WindowWidth / 2 - 4;
+                _xPosMenuOption[menuOption.Key] = Console.WindowWidth / 2 - 4;
 
                 if (menuOption.Value == "Musique")
                 {
-                    if (soundIsOn)
+                    if (_soundIsOn)
                     {
                         Console.ForegroundColor = ConsoleColor.Green;
                     }
@@ -171,7 +145,7 @@ namespace X_CodeTris_Alexandre_King
                 if (menuOption.Value == "Difficulté")
                 {
                     Console.Write(menuOption.Value + " : ");
-                    switch (currentDifficulty)
+                    switch (_currentDifficulty)
                     {
                         case 0:
                             Console.ForegroundColor = ConsoleColor.Green;
@@ -183,11 +157,11 @@ namespace X_CodeTris_Alexandre_King
                             Console.ForegroundColor = ConsoleColor.Red;
                             break;
                     }
-                    Console.WriteLine(difficultyOptions[currentDifficulty]);
+                    Console.WriteLine(_difficultyOptions[_currentDifficulty]);
                 }
                 else if (menuOption.Value == "Touches")
                 {
-                    Console.WriteLine(menuOption.Value + " : " + keysOptions[playKeys]);
+                    Console.WriteLine(menuOption.Value + " : " + _keysOptions[_playKeys]);
                 }
                 else
                 {
@@ -197,26 +171,55 @@ namespace X_CodeTris_Alexandre_King
 
                 Console.ForegroundColor = ConsoleColor.White;
             }
-            if (currentMenu == "main")
+            if (_currentMenu == "main")
             {
                 Console.SetCursorPosition(0, 0);
                 Console.ForegroundColor = ConsoleColor.White;
-                //Console.Write("Welcome " + ExternalManager.GetPlayerName());
+                Console.Write("Welcome " + ExternalManager.GetPlayerName());
             }
 
-            Console.SetCursorPosition(xPosMenuOption[0], menuTopStart);
+            Console.SetCursorPosition(_xPosMenuOption[0], _menuTopStart);
             Console.Write(movementArrow);
 
         }
 
+        private void ShowDetailHighScoreMenu(int difficulty)
+        {
+            Console.Clear();
+            char movementArrow = '>';
+            List<Tuple<string, int, string>> highscores = new List<Tuple<string, int, string>>();
+            highscores = DatabaseManager.GetHighScores(difficulty);
+            int count = 0;
+            
+
+            foreach (Tuple<string, int, string> highscore in highscores)
+            {
+                string score = (count + 1) + ". " + highscore.Item1 + " : " + highscore.Item2 + " pts"+". Record date : "+ highscore.Item3;
+
+                Console.SetCursorPosition(Console.WindowWidth/2 - score.Length / 2, Console.WindowHeight/2-highscores.Count()/2+count);
+                Console.WriteLine(score);
+                count++;
+            }
+
+            _xPosMenuOption = new int[1];
+            _xPosMenuOption[0] = Console.WindowWidth / 2 - _detailHighscore[0].Length / 2;
+            _menuTopStart = Console.WindowHeight / 2 - highscores.Count() + 3 + count;
+
+            Console.SetCursorPosition(_xPosMenuOption[0], _menuTopStart );
+            Console.WriteLine(_detailHighscore[0]);
+
+            Console.SetCursorPosition(Console.WindowWidth / 2 - _detailHighscore[0].Length/2-2, Console.WindowHeight / 2 - highscores.Count() + 3 + count);
+            Console.Write(movementArrow);            
+        }
+
         public Dictionary<int, string> GetMainMenu()
         {
-            return mainMenu;
+            return _mainMenu;
         }
 
         public Dictionary<int, string> GetOptionMenu()
         {
-            return optionMenu;
+            return _optionMenu;
         }
         /*
             public Dictionary<int, string> GetPauseMenu()
@@ -225,24 +228,28 @@ namespace X_CodeTris_Alexandre_King
             }*/
         public Dictionary<int, string> GetHighscoreMenu()
         {
-            return highscore;
+            return _highscore;
+        }
+        public Dictionary<int, string> GetDetailHighscoreMenu()
+        {
+            return _detailHighscore;
         }
 
         public int GetMenuTopStart()
         {
-            return menuTopStart;
+            return _menuTopStart;
         }
 
         public int[] GetMenuOptionPos()
         {
-            return xPosMenuOption;
+            return _xPosMenuOption;
         }
 
         private void ChangeSoundState(int positionValue)
         {
-            soundIsOn = !soundIsOn;
-            Console.SetCursorPosition(xPosMenuOption[positionValue] + 2, GetMenuTopStart() + positionValue);
-            if (soundIsOn)
+            _soundIsOn = !_soundIsOn;
+            Console.SetCursorPosition(_xPosMenuOption[positionValue] + 2, GetMenuTopStart() + positionValue);
+            if (_soundIsOn)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
             }
@@ -250,29 +257,29 @@ namespace X_CodeTris_Alexandre_King
             {
                 Console.ForegroundColor = ConsoleColor.Red;
             }
-            Console.WriteLine(optionMenu[positionValue]);
+            Console.WriteLine(_optionMenu[positionValue]);
             Console.ForegroundColor = ConsoleColor.White;
-            Console.SetCursorPosition(xPosMenuOption[positionValue], GetMenuTopStart() + positionValue);
+            Console.SetCursorPosition(_xPosMenuOption[positionValue], GetMenuTopStart() + positionValue);
 
         }
         public int GetDifficulty()
         {
-            return currentDifficulty;
+            return _currentDifficulty;
         }
 
         private void ChangeDifficulty(int positionValue)
         {
-            int cursorPosition = xPosMenuOption[positionValue] + optionMenu[positionValue].Length + 5;
+            int cursorPosition = _xPosMenuOption[positionValue] + _optionMenu[positionValue].Length + 5;
             Console.SetCursorPosition(cursorPosition, GetMenuTopStart() + positionValue);
-            if (currentDifficulty < difficultyOptions.Length - 1)
+            if (_currentDifficulty < _difficultyOptions.Length - 1)
             {
-                currentDifficulty++;
+                _currentDifficulty++;
             }
             else
             {
-                currentDifficulty = 0;
+                _currentDifficulty = 0;
             }
-            switch (currentDifficulty)
+            switch (_currentDifficulty)
             {
                 case 0:
                     Console.ForegroundColor = ConsoleColor.Green;
@@ -284,70 +291,43 @@ namespace X_CodeTris_Alexandre_King
                     Console.ForegroundColor = ConsoleColor.Red;
                     break;
             }
-            Console.WriteLine(difficultyOptions[currentDifficulty] + new string(' ', 10));
+            Console.WriteLine(_difficultyOptions[_currentDifficulty] + new string(' ', 10));
             Console.ForegroundColor = ConsoleColor.White;
-            Console.SetCursorPosition(xPosMenuOption[positionValue], GetMenuTopStart() + positionValue);
+            Console.SetCursorPosition(_xPosMenuOption[positionValue], GetMenuTopStart() + positionValue);
         }
 
         private void ChangePlayKeys(int positionValue)
         {
-            int cursorPosition = xPosMenuOption[positionValue] + optionMenu[positionValue].Length + 5;
+            int cursorPosition = _xPosMenuOption[positionValue] + _optionMenu[positionValue].Length + 5;
             Console.SetCursorPosition(cursorPosition, GetMenuTopStart() + positionValue);            
 
-            if (playKeys < keysOptions.Length - 1)
+            if (_playKeys < _keysOptions.Length - 1)
             {
-                playKeys++;
+                _playKeys++;
             }
             else
             {
-                playKeys = 0;
+                _playKeys = 0;
             }
             //Rajoute du blanc après le nom de l'option dans le cas où une option est plus grande qu'une autre (efface le surplus)
-            Console.WriteLine(keysOptions[playKeys] + new string(' ', 10));
+            Console.WriteLine(_keysOptions[_playKeys] + new string(' ', 10));
             Console.ForegroundColor = ConsoleColor.White;
-            Console.SetCursorPosition(xPosMenuOption[positionValue], GetMenuTopStart() + positionValue);
-        }
-        /*
-            private void SetScreenResolution(int width, int height)
-            {
-                int newWidth = CalculateConsoleWidth(width);
-                int newHeight = CalculateConsoleHeight(height);
-                Console.SetWindowSize(newWidth, newHeight);
-            }
-
-            private int CalculateConsoleWidth(double newWidth)
-            {
-                double size;
-                double screenWidth = WindowUtility.GetScreenWidth();
-                double maxConsoleWidth = Console.LargestWindowWidth;
-                size = (newWidth / screenWidth) * maxConsoleWidth;
-                int finalSize = Convert.ToInt32(Math.Floor(size));
-
-                return finalSize;
-            }
-            private int CalculateConsoleHeight(double newHeight)
-            {
-                double size;
-                double screenHeight = WindowUtility.GetScreenHeight();
-                double maxConsoleWidth = Console.LargestWindowHeight;
-                size = (newHeight / screenHeight) * maxConsoleWidth;
-                int finalSize = Convert.ToInt32(Math.Floor(size));
-                return finalSize;
-            }
-        */
+            Console.SetCursorPosition(_xPosMenuOption[positionValue], GetMenuTopStart() + positionValue);
+        }                   
+        
         static public bool GetSoundStatus()
         {
-            return soundIsOn;
+            return _soundIsOn;
         }
 
         static public int GetDifficultyStatus()
         {
-            return currentDifficulty;
+            return _currentDifficulty;
         }
 
         static public int GetPlayingKeys()
         {
-            return playKeys;
+            return _playKeys;
         }
 
 
@@ -471,18 +451,22 @@ namespace X_CodeTris_Alexandre_King
                 CallMainMenu();
                 return 0;
             }
-            switch (menuOptionValue)
+            else
             {
-                case 0:
-                    //show easy highscore
-                    return 0;
-                case 1:
-                    //show medium highscore
-                    return 1;
-                case 2:
-                    //show hard highscore
-                    return 2;
+                ShowDetailHighScoreMenu(menuOptionValue);
             }
+            return -1;
+        }
+
+        public int DetailHighscoreMenuEnter(int menuOptionValue)
+        {
+            int lastIndex = GetHighscoreMenu().Last().Key;
+            if (menuOptionValue == lastIndex)
+            {
+                Console.Clear();
+                CallHighscoreMenu();
+                return 0;
+            }            
             return -1;
         }
     }

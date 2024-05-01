@@ -2,9 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-
-using System.Threading.Tasks;
 
 namespace X_CodeTris_Alexandre_King
 {
@@ -16,16 +13,24 @@ namespace X_CodeTris_Alexandre_King
         static private string userName;
         static private string difficulty;
 
-        const string userTable = "`t_user`";
-        const string userIdField = "`idUser`";
-        const string nicknameField = "`nickname`";
-        const string creationField = "`creationDate`";
+        //user Table infos
+        const string USER_TABLE = "`t_user`";
+        const string USER_ID_FIELD = "`idUser`";
+        const string NICKNAME_FIELD = "`nickname`";
+        const string USER_CREATION_DATE_FIELD = "`creationDate`";
 
-        const string gameTable = "`t_game`";
-        const string scoreField = "`score`";
-        const string dateField = "`date`";
-        const string fkUserField = "`fkUser`";
-        const string fkDifficultyField = "`fkDifficulty`";
+        //game table infos
+        const string GAME_TABLE = "`t_game`";
+        const string SCORE_FIELD = "`score`";
+        const string GAME_DATE_FIELD = "`gameDate`";
+        const string FK_USER_FIELD = "`fkUser`";
+        const string FK_DIFFICULTY_FIELD = "`fkDifficulty`";
+
+        //difficulty table infos
+        const string DIFFICULTY_TABLE = "`t_difficulty`";
+        const string DIFFICULTY_ID_FIELD = "`idDifficulty`";
+        const string DIFFICULTY_NAME_FIELD = "`name`";
+        const string DIFFICULTY_LEVEL_FIELD = "`level`";        
 
         //DB variables (from the config.ini file)
         static Dictionary<string, string> dbConfigurationInfos = new Dictionary<string, string>()
@@ -70,6 +75,7 @@ namespace X_CodeTris_Alexandre_King
                 try
                 {
                     _connection.Open();
+                    ExternalManager.LogInfo("Database opened successfully");
                     _dbState = true;
                 }
                 catch (Exception e)
@@ -121,7 +127,7 @@ namespace X_CodeTris_Alexandre_King
                 MySql.Data.MySqlClient.MySqlCommand com = _connection.CreateCommand();
 
                 com.CommandType = System.Data.CommandType.Text;
-                com.CommandText = "INSERT INTO " + userTable + "(" + nicknameField + "," + creationField + ") VALUES ('" + playerName + "','" + FormatDate() + "');";
+                com.CommandText = "INSERT INTO " + USER_TABLE + "(" + NICKNAME_FIELD + "," + USER_CREATION_DATE_FIELD + ") VALUES ('" + playerName + "','" + FormatDate() + "');";
                 MySql.Data.MySqlClient.MySqlDataReader reader = com.ExecuteReader();
                 ExternalManager.LogInfo("Player <<" + playerName + ">> was inserted in the database. Account has been created succesfully");
                 return true;
@@ -144,7 +150,7 @@ namespace X_CodeTris_Alexandre_King
                 MySql.Data.MySqlClient.MySqlCommand com = _connection.CreateCommand();
 
                 com.CommandType = System.Data.CommandType.Text;
-                com.CommandText = "INSERT INTO " + gameTable + "(" + scoreField + "," + dateField + "," + fkUserField + "," + fkDifficultyField + ") VALUES ('" + score + "','" + FormatDate() + "','" + id + "','" + difficulty + "');";
+                com.CommandText = "INSERT INTO " + GAME_TABLE + "(" + SCORE_FIELD + "," + DIFFICULTY_NAME_FIELD + "," + DIFFICULTY_LEVEL_FIELD + "," + FK_DIFFICULTY_FIELD + ") VALUES ('" + score + "','" + FormatDate() + "','" + id + "','" + difficulty + "');";
                 MySql.Data.MySqlClient.MySqlDataReader reader = com.ExecuteReader();
                 ExternalManager.LogInfo("New game by user <<" + id + " : " + ExternalManager.GetPlayerName() + ">> was inserted succesfully. Final score is " + score);
                 return true;
@@ -168,7 +174,7 @@ namespace X_CodeTris_Alexandre_King
                 MySql.Data.MySqlClient.MySqlCommand com = _connection.CreateCommand();
 
                 com.CommandType = System.Data.CommandType.Text;
-                com.CommandText = "SELECT * FROM " + userTable + " where nickname = '" + ExternalManager.GetPlayerName() + "' LIMIT 1;";
+                com.CommandText = "SELECT * FROM " + USER_TABLE + " where nickname = '" + ExternalManager.GetPlayerName() + "' LIMIT 1;";
                 MySql.Data.MySqlClient.MySqlDataReader reader = com.ExecuteReader();
 
                 if (reader.HasRows)
@@ -197,7 +203,7 @@ namespace X_CodeTris_Alexandre_King
                 MySql.Data.MySqlClient.MySqlCommand com = _connection.CreateCommand();
 
                 com.CommandType = System.Data.CommandType.Text;
-                com.CommandText = "SELECT " + nicknameField + " FROM " + userTable + " where " + userIdField + " = '" + id + "' LIMIT 1;";
+                com.CommandText = "SELECT " + NICKNAME_FIELD + " FROM " + USER_TABLE + " where " + USER_ID_FIELD + " = '" + id + "' LIMIT 1;";
                 MySql.Data.MySqlClient.MySqlDataReader reader = com.ExecuteReader();
 
                 if (reader.HasRows)
@@ -217,6 +223,36 @@ namespace X_CodeTris_Alexandre_King
             return userName;
         }
 
+        static private int FindDifficultyIDWithLevel(int level)
+        {
+            OpenDB();
+            int difficultyID = -1;
+            try
+            {
+                MySql.Data.MySqlClient.MySqlCommand com = _connection.CreateCommand();
+
+                com.CommandType = System.Data.CommandType.Text;
+                com.CommandText = "SELECT " + DIFFICULTY_ID_FIELD + " FROM " + DIFFICULTY_TABLE + " where " + DIFFICULTY_LEVEL_FIELD + " = '" + level + "' LIMIT 1;";
+                MySql.Data.MySqlClient.MySqlDataReader reader = com.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        difficultyID = reader.GetInt32(0);
+                    }
+                    reader.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                ExternalManager.LogError(e.Message);
+            }
+            _connection.Close();
+            return difficultyID;
+        }
+
+
         static private string FormatDate()
         {
             string date = string.Empty;
@@ -230,7 +266,7 @@ namespace X_CodeTris_Alexandre_King
             return date;
         }
 
-        static public List<Tuple<string, int, string>> GetHighScores()
+        static public List<Tuple<string, int, string>> GetHighScores(int difficulty)
         {
             List<Tuple<string, int, string>> highscores = new List<Tuple<string, int, string>>();
             List<int> usersId = new List<int>();
@@ -238,14 +274,14 @@ namespace X_CodeTris_Alexandre_King
             int playerId = -1;
             int playerScore = 0;
             string gameDate = string.Empty;
-
+            int difficultyID = FindDifficultyIDWithLevel(difficulty);
             OpenDB();
             try
             {
                 MySql.Data.MySqlClient.MySqlCommand com = _connection.CreateCommand();
 
                 com.CommandType = System.Data.CommandType.Text;
-                com.CommandText = "SELECT * FROM " + gameTable + " ORDER BY " + scoreField + " DESC LIMIT 10";
+                com.CommandText = "SELECT * FROM " + GAME_TABLE + "WHERE fkDifficulty = "+ difficultyID + " ORDER BY " + SCORE_FIELD + " DESC LIMIT 10";
                 MySql.Data.MySqlClient.MySqlDataReader reader = com.ExecuteReader();
 
                 if (reader.HasRows)

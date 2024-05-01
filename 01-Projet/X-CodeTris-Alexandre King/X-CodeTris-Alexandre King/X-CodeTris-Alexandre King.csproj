@@ -95,11 +95,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConsoleUtility.cs" />
     <Compile Include="DatabaseManager.cs" />
     <Compile Include="ExternalManager.cs" />
     <Compile Include="MenuManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WindowUtility.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
