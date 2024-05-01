@@ -1,0 +1,2 @@
+DATE 				|LEVEL 		|ERROR
+01.05.2024 14:09:31		INFO		Player <<GratefulLion90>> was inserted in the database. Account has been created succesfully

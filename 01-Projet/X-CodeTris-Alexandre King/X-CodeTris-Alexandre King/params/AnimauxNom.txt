@@ -1,0 +1,1 @@
+Cat;Dog;Horse;Elephant;Tiger;Lion;Giraffe;Zebra;Monkey;Bear;Fox;Wolf;Rabbit;Kangaroo;Dolphin;Whale;Shark;Octopus;Penguin;Owl;Eagle;Falcon;Hawk;Hummingbird;Butterfly;Bee;Ant;Ladybug;Dragonfly;Grasshopper;Spider;Snail;Frog;Turtle;Crocodile;Alligator;Fish;Salmon;Trout;Dolphin;Seahorse;Jellyfish;Starfish;Crab;Lobster;Shrimp;Squid;Cuttlefish;Bat;Sloth;Koala
