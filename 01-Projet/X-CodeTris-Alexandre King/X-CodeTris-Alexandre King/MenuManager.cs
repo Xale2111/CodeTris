@@ -199,6 +199,13 @@ namespace X_CodeTris_Alexandre_King
                 count++;
             }
 
+            if (highscores.Count == 0)
+            {
+                string noRecords = "Actuellement aucun record. Saisissez votre chance !";
+                Console.SetCursorPosition(Console.WindowWidth / 2 - noRecords.Length / 2, Console.WindowHeight / 2);
+                Console.WriteLine(noRecords);
+            }
+
             _xPosMenuOption = new int[1];
             _xPosMenuOption[0] = Console.WindowWidth / 2 - _detailHighscore[0].Length / 2;
             _menuTopStart = Console.WindowHeight / 2 - highscores.Count() + 3 + count;
