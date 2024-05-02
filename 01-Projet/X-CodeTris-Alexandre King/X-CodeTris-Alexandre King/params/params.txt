@@ -1,0 +1,1 @@
+sound = False;difficulty = 0;keys = 0;

@@ -28,6 +28,18 @@ namespace X_CodeTris_Alexandre_King
 
         public MenuManager()
         {
+            _soundIsOn = ExternalManager.GetSoundStatusAtStart();
+            _currentDifficulty = ExternalManager.GetDifficultyAtStart();
+            _playKeys = ExternalManager.GetKeysAtStart();
+            if (_playKeys>_keysOptions.Length-1)
+            {
+                _playKeys = 0;
+            }
+            if (_currentDifficulty > _difficultyOptions.Length-1)
+            {
+                _currentDifficulty = 0;
+            }
+
             DefineMainMenu();
             DefineOptionMenu();
             DefineHighscoreMenu();
@@ -104,7 +116,7 @@ namespace X_CodeTris_Alexandre_King
             char movementArrow = '>';
             if (_currentMenu == "main")
             {
-                VisualMenuManager.AddVisualToMainMenu();
+                VisualManager.AddVisualToMainMenu();
                 Console.SetCursorPosition(Console.WindowWidth-5,0);
                 if (DatabaseManager.GetDBState())
                 {
@@ -259,10 +271,12 @@ namespace X_CodeTris_Alexandre_King
             if (_soundIsOn)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
+                SoundManager.PlayTetrisThemeSong();
             }
             else
             {
                 Console.ForegroundColor = ConsoleColor.Red;
+                SoundManager.StopMusic();
             }
             Console.WriteLine(_optionMenu[positionValue]);
             Console.ForegroundColor = ConsoleColor.White;
@@ -352,7 +366,7 @@ namespace X_CodeTris_Alexandre_King
             int lastIndex = GetMainMenu().Last().Key;
             if (menuOptionValue == lastIndex)
             {
-                // ExternalManager.StockOptionsOnChange();
+                ExternalManager.StockOptionsOnChange();
                 Environment.Exit(0);
             }
             else
@@ -361,8 +375,7 @@ namespace X_CodeTris_Alexandre_King
                 switch (menuOptionValue)
                 {
                     case 0:
-                        Console.Clear();
-                        Console.WriteLine("Play game");
+                        Console.Clear();                        
                         return 0;
                     case 1:
                         Console.Clear();
@@ -397,14 +410,16 @@ namespace X_CodeTris_Alexandre_King
                 {
                     case 0:
                         ChangeSoundState(menuOptionValue);
-                        //ExternalManager.StockOptionsOnChange();
+                        ExternalManager.StockOptionsOnChange();
                         return 0;
                     case 1:                        
                         ChangePlayKeys(menuOptionValue);
+                        ExternalManager.StockOptionsOnChange();
+
                         return 1;
                     case 2:
                         ChangeDifficulty(menuOptionValue);
-                        //ExternalManager.StockOptionsOnChange();
+                        ExternalManager.StockOptionsOnChange();
                         return 2;
                 }
             }

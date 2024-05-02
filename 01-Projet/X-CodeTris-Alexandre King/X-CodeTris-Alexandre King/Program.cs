@@ -11,15 +11,14 @@ namespace X_CodeTris_Alexandre_King
         static void Main(string[] args)
         {
             //make the cursor invisible
-            Console.CursorVisible = false;
+            //Console.CursorVisible = false;
 
             //name of the window
             Console.Title = "CodeTris";
 
             //Make sure the log file exist, otherwise create one
-            ExternalManager.LogFile();
-            
-            
+            ExternalManager.LogFile();                       
+
             //Define the console size to the maximum possible size
             Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
             //remove the ability to resize the console and to maximaxied it
@@ -38,6 +37,12 @@ namespace X_CodeTris_Alexandre_King
             Console.ForegroundColor = ConsoleColor.White;
             MenuManager menuManager = new MenuManager();
             menuManager.CallMainMenu();
+            GameManager gameManager = new GameManager();
+
+            if (ExternalManager.GetSoundStatusAtStart())
+            {
+                SoundManager.PlayTetrisThemeSong();
+            }                       
 
             //Variables
             bool inMenu = true;
@@ -141,9 +146,7 @@ namespace X_CodeTris_Alexandre_King
                 {
                     case 0:
                         inMenu = false;
-                        /*gameManager.NewGame(menuManager.GetDifficulty());
-                        int gameResult = gameManager.StartGame();
-                        ManageGameResult(gameResult);*/
+                        gameManager.NewGame();
 
                         break;
                     case 1:
