@@ -101,6 +101,7 @@
     <Compile Include="MenuManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VisualMenuManager.cs" />
     <Compile Include="WindowUtility.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -15,6 +15,8 @@ namespace X_CodeTris_Alexandre_King
         string[] _difficultyOptions = new string[3] { "Facile", "Moyen", "Difficile" };
         string[] _keysOptions = new string[2] { "WASD", "Flèches" };
 
+               
+
         int[] _xPosMenuOption;
         static bool _soundIsOn = false;
         static int _currentDifficulty;
@@ -53,12 +55,7 @@ namespace X_CodeTris_Alexandre_King
         {
             _currentMenu = "highscore";
             CreateMenu(_highscore);
-        }
-        private void CallDetailHighscoreMenu()
-        {
-            _currentMenu = "detailHighscore";
-            CreateMenu(_detailHighscore);
-        }
+        }        
 
         public string GetCurrentMenu()
         {
@@ -107,7 +104,8 @@ namespace X_CodeTris_Alexandre_King
             char movementArrow = '>';
             if (_currentMenu == "main")
             {
-                Console.SetCursorPosition(0, Console.WindowHeight - 1);
+                VisualMenuManager.AddVisualToMainMenu();
+                Console.SetCursorPosition(Console.WindowWidth-5,0);
                 if (DatabaseManager.GetDBState())
                 {
                 Console.ForegroundColor = ConsoleColor.Green;
@@ -185,7 +183,7 @@ namespace X_CodeTris_Alexandre_King
 
         private void ShowDetailHighScoreMenu(int difficulty)
         {
-            Console.Clear();
+            Console.Clear();            
             char movementArrow = '>';
             List<Tuple<string, int, string>> highscores = new List<Tuple<string, int, string>>();
             highscores = DatabaseManager.GetHighScores(difficulty);
@@ -211,6 +209,8 @@ namespace X_CodeTris_Alexandre_King
             Console.SetCursorPosition(Console.WindowWidth / 2 - _detailHighscore[0].Length/2-2, Console.WindowHeight / 2 - highscores.Count() + 3 + count);
             Console.Write(movementArrow);            
         }
+
+        
 
         public Dictionary<int, string> GetMainMenu()
         {
@@ -453,6 +453,7 @@ namespace X_CodeTris_Alexandre_King
             }
             else
             {
+                _currentMenu = "detailHighscore";
                 ShowDetailHighScoreMenu(menuOptionValue);
             }
             return -1;
@@ -460,7 +461,7 @@ namespace X_CodeTris_Alexandre_King
 
         public int DetailHighscoreMenuEnter(int menuOptionValue)
         {
-            int lastIndex = GetHighscoreMenu().Last().Key;
+            int lastIndex = GetDetailHighscoreMenu().Last().Key;
             if (menuOptionValue == lastIndex)
             {
                 Console.Clear();
