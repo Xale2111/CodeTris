@@ -20,6 +20,11 @@ namespace X_CodeTris_Alexandre_King
             _currentState = 0;
             _width = 2;
             _height = 2;
+            DefineAllStates();
+        }
+        private void DefineAllStates()
+        {
+            _allStates.Add(_baseSprite);            
         }
     }
 }

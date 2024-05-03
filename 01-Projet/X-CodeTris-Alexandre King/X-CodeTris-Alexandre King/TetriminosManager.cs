@@ -11,8 +11,8 @@ namespace X_CodeTris_Alexandre_King
     {
         const int TOTAL_TETRIMINOS = 7;
         static Random _random = new Random();
-        static Tetriminos _currentTetriminos;        
-
+        static Tetriminos _currentTetriminos;
+        
         //héritage sur les pièces ? faire une classe par pièce (avec une instance de chaque position)?
         
         static public void DefineNewTetriminos()
@@ -23,18 +23,37 @@ namespace X_CodeTris_Alexandre_King
         static public void DrawTetriminos(int xPos, int yTopPos)
         {
             int yPos = yTopPos;
+            int multiplySpaces = 0;
+            
             VisualManager.SetTextColor(_currentTetriminos.Color);
-            foreach (string spriteLine in _currentTetriminos.BaseSprite)
+            foreach (string spriteLine in _currentTetriminos.AllStates[_currentTetriminos.CurrentState])
             {
-                Console.SetCursorPosition(xPos,yPos);
-                Console.Write(spriteLine);
+                string newSpriteLine = spriteLine;                
+                if (spriteLine.Contains("!!"))
+                {
+                    while (newSpriteLine.Contains("!!"))
+                    {
+                        multiplySpaces++;
+                        newSpriteLine = newSpriteLine.Remove(0, 2);
+                    }
+                    Console.SetCursorPosition(xPos + (4 * multiplySpaces), yPos);                    
+                    Console.Write(newSpriteLine);
+                    multiplySpaces = 0;
+
+                }
+                else
+                {
+                    Console.SetCursorPosition(xPos, yPos);
+                    Console.Write(spriteLine);
+                }
                 yPos++;
             }           
         }
 
         static private Tetriminos GetRandomTetriminos()
         {
-            int tetriminos = _random.Next(TOTAL_TETRIMINOS);            
+            //int tetriminos = _random.Next(TOTAL_TETRIMINOS);                                   
+            int tetriminos = 4;
             switch (tetriminos)
             {
                 case 0:
@@ -57,7 +76,7 @@ namespace X_CodeTris_Alexandre_King
 
                 case 6:
                     return new SBlock();
-            }
+            }            
             return new OBlock();
         }
 
@@ -83,17 +102,48 @@ namespace X_CodeTris_Alexandre_King
 
         static public void MoveTetriminos(int xPos, int yTopPos, int whereXpos, int whereYpos)
         {
-            int yPos = yTopPos;            
-            foreach (string spriteLine in _currentTetriminos.BaseSprite)
+            RemoveTetriminos(xPos,yTopPos);
+            DrawTetriminos(xPos+ (whereXpos*4), yTopPos+ (whereYpos*2));
+        }
+
+        static public void RotateTetriminos(int xPos, int yTopPos)
+        { 
+            RemoveTetriminos(xPos,yTopPos);
+            _currentTetriminos.ChangeState();            
+        }       
+
+        static private void RemoveTetriminos(int xPos, int yTopPos)
+        {
+            string newSpriteLine = string.Empty;
+            int multiplySpaces = 0;
+            int yPos = yTopPos;
+            foreach (string spriteLine in _currentTetriminos.AllStates[_currentTetriminos.CurrentState])
             {
-                Console.SetCursorPosition(xPos, yPos);
-                for (int i = 0; i < spriteLine.Length; i++)
+                newSpriteLine = spriteLine;
+
+                if (spriteLine.Contains("!!"))
+                {
+                    while (newSpriteLine.Contains("!!"))
+                    {
+                        multiplySpaces++;
+                        newSpriteLine = newSpriteLine.Remove(0, 2);
+                    }
+                    Console.SetCursorPosition(xPos + (4 * multiplySpaces), yPos);
+                    multiplySpaces = 0;
+                }
+                else
+                {
+                    Console.SetCursorPosition(xPos, yPos);
+                }
+
+                for (int i = 0; i < newSpriteLine.Length; i++)
                 {
                     Console.Write(" ");
                 }
                 yPos++;
             }
-            DrawTetriminos(xPos+ (whereXpos*4), yTopPos+ (whereYpos*2));
         }
+
+
     }
 }
