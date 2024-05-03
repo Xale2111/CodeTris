@@ -11,9 +11,10 @@ namespace X_CodeTris_Alexandre_King
     {
         static SoundPlayer _soundPlayer = new SoundPlayer();
         static string _musicPath = "../../music/";
+        
         static string _tetrisSongFile = "TetrisSong.wav";
         //string _QVGDMFile = "TetrisSong.wav"; //musique de qui veut gagner des millions
-        //string _tetrisSongFile = "temp.wav";
+        //static string _tetrisSongFile = "temp.wav";
 
         static public void PlayTetrisThemeSong()
         {

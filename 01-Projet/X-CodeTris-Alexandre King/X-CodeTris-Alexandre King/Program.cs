@@ -11,7 +11,7 @@ namespace X_CodeTris_Alexandre_King
         static void Main(string[] args)
         {
             //make the cursor invisible
-            //Console.CursorVisible = false;
+            Console.CursorVisible = false;
 
             //name of the window
             Console.Title = "CodeTris";

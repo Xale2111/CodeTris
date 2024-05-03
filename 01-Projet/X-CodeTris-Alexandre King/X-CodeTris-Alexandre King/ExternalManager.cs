@@ -10,21 +10,21 @@ namespace X_CodeTris_Alexandre_King
     static public class ExternalManager
     {
         //parameters variables
-        static string _paramDirPath = "../../params/";
-        static string _paramsFilePath = "../../params/params.txt";
-        static string _animalsFilePath = "../../params/AdjectivesNom.txt";
-        static string _adjectivesFilePath = "../../params/AnimauxNom.txt";
-        static string _playerNameFilePath = "../../params/PlayerName.txt";
+        const string PARAMS_DIR_PATH = "../../params/";
+        const string PARAMS_FILE_PATH = "../../params/params.txt";
+        const string ANIMALS_FILE_PATH = "../../params/AdjectivesNom.txt";
+        const string ADJECTIVES_FILE_PATH = "../../params/AnimauxNom.txt";
+        const string PLAYER_NAME_FILE_PATH = "../../params/PlayerName.txt";
         
         //logs variables
-        static string _logsDirPath = "../../logs/";
-        static string _logsFilePath = "/logs.txt";
+        const string LOGS_DIR_PATH = "../../logs/";
+        const string LOGS_FILE_PATH = "/logs.txt";
 
         //DB configuration variables        
-        static string _configFilePath = "../../config.ini";
+        const string CONFIG_FILE_PATH = "../../config.ini";
 
         static Random _rand = new Random();
-        static int _numberOfName = 50;
+        const int _numberOfName = 50;
 
 
         static bool _soundStatus;
@@ -51,23 +51,23 @@ namespace X_CodeTris_Alexandre_King
         static public string GetDBConfiguration()
         {
             string rawFile = String.Empty;            
-            if (File.Exists(_configFilePath))
+            if (File.Exists(CONFIG_FILE_PATH))
             {
-                rawFile = File.ReadAllText(_configFilePath);                
+                rawFile = File.ReadAllText(CONFIG_FILE_PATH);                
             }
             return rawFile;
         }
 
         static public void LogFile()
         {
-            if (!Directory.Exists(_logsDirPath))
+            if (!Directory.Exists(LOGS_DIR_PATH))
             {
-                Directory.CreateDirectory(_logsDirPath);
+                Directory.CreateDirectory(LOGS_DIR_PATH);
             }
-            if (!File.Exists(_logsDirPath + _logsFilePath))
+            if (!File.Exists(LOGS_DIR_PATH + LOGS_FILE_PATH))
             {
                 string header = "DATE \t\t\t\t|LEVEL \t\t|ERROR\n";
-                File.WriteAllText(_logsDirPath + _logsFilePath, header);
+                File.WriteAllText(LOGS_DIR_PATH + LOGS_FILE_PATH, header);
             }
         }
 
@@ -80,9 +80,9 @@ namespace X_CodeTris_Alexandre_King
             int keys;
             string name = string.Empty;
 
-            if (File.Exists(_paramsFilePath))
+            if (File.Exists(PARAMS_FILE_PATH))
             {
-                parameters = File.ReadAllText(_paramsFilePath);
+                parameters = File.ReadAllText(PARAMS_FILE_PATH);
             }
             else
             {
@@ -104,20 +104,20 @@ namespace X_CodeTris_Alexandre_King
                 keys = Convert.ToInt32(parameters.Split(';')[2].Split('=')[1].Trim());
             }
 
-            if (File.Exists(_playerNameFilePath))
+            if (File.Exists(PLAYER_NAME_FILE_PATH))
             {
-                name = File.ReadAllText(_playerNameFilePath);
+                name = File.ReadAllText(PLAYER_NAME_FILE_PATH);
             }
             else
             {
                 name = CreatePlayerNickname();
-                File.WriteAllText(_playerNameFilePath, name);
+                File.WriteAllText(PLAYER_NAME_FILE_PATH, name);
             }
 
             if (name.Length <= 5)
             {
                 name = CreatePlayerNickname();
-                File.WriteAllText(_playerNameFilePath, name);
+                File.WriteAllText(PLAYER_NAME_FILE_PATH, name);
             }
 
             _playerName = name;
@@ -132,11 +132,11 @@ namespace X_CodeTris_Alexandre_King
         static private void StockInformations(string informationsToStock = "", string pathToStock = "")
         {
             string parameters = string.Empty;
-            if (!Directory.Exists(_paramDirPath))
+            if (!Directory.Exists(PARAMS_DIR_PATH))
             {
-                Directory.CreateDirectory(_paramDirPath);
+                Directory.CreateDirectory(PARAMS_DIR_PATH);
             }
-            if (!File.Exists(_paramsFilePath))
+            if (!File.Exists(PARAMS_FILE_PATH))
             {
                 parameters = SetDefaultParameters();
             }
@@ -147,7 +147,7 @@ namespace X_CodeTris_Alexandre_King
                 parameters += "keys = " + MenuManager.GetPlayingKeys() + ";";
 
             }
-            File.WriteAllText(_paramsFilePath, parameters);
+            File.WriteAllText(PARAMS_FILE_PATH, parameters);
         }
 
         static private string SetDefaultParameters()
@@ -169,10 +169,10 @@ namespace X_CodeTris_Alexandre_King
             string nickname = string.Empty;
             do
             {
-                if (File.Exists(_animalsFilePath) && File.Exists(_adjectivesFilePath))
+                if (File.Exists(ANIMALS_FILE_PATH) && File.Exists(ADJECTIVES_FILE_PATH))
                 {
-                    string animals = File.ReadAllText(_animalsFilePath);
-                    string adjectives = File.ReadAllText(_adjectivesFilePath);
+                    string animals = File.ReadAllText(ANIMALS_FILE_PATH);
+                    string adjectives = File.ReadAllText(ADJECTIVES_FILE_PATH);
 
                     string animal = animals.Split(';')[_rand.Next(0, _numberOfName)];
                     string adjective = adjectives.Split(';')[_rand.Next(0, _numberOfName)];
@@ -191,10 +191,10 @@ namespace X_CodeTris_Alexandre_King
 
         static public void LogError(string error)
         {
-            if (File.Exists(_logsDirPath+ _logsFilePath))
+            if (File.Exists(LOGS_DIR_PATH+ LOGS_FILE_PATH))
             {
                 string message = DateTime.Now.ToString() + "\t\t" + "ERROR" + "\t\t" + error;
-                using (StreamWriter w = File.AppendText(_logsDirPath + _logsFilePath))
+                using (StreamWriter w = File.AppendText(LOGS_DIR_PATH + LOGS_FILE_PATH))
                 {
                     w.WriteLine(message);
                 }
@@ -203,10 +203,10 @@ namespace X_CodeTris_Alexandre_King
 
         static public void LogInfo(string info)
         {
-            if (File.Exists(_logsDirPath + _logsFilePath))
+            if (File.Exists(LOGS_DIR_PATH + LOGS_FILE_PATH))
             {
                 string message = DateTime.Now.ToString() + "\t\t" + "INFO" + "\t\t" + info;
-                using (StreamWriter w = File.AppendText(_logsDirPath + _logsFilePath))
+                using (StreamWriter w = File.AppendText(LOGS_DIR_PATH + LOGS_FILE_PATH))
                 {
                     w.WriteLine(message);
                 }
