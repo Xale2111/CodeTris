@@ -120,6 +120,9 @@ namespace X_CodeTris_Alexandre_King
                                 case "detailHighscore":
                                     ManageDetailsHighscoreMenuEnter();
                                     break;
+                                case "howToPlay":
+                                    ManageHowToPlayMenuEnter();
+                                    break;
                                     /*
                                 case "pause":
                                     ManagePauseMenuEnter();
@@ -156,6 +159,11 @@ namespace X_CodeTris_Alexandre_King
                         break;
                     case 2:
                         lastIndexMenu = menuManager.GetHighscoreMenu().Last().Key;
+                        menuTop = menuManager.GetMenuTopStart();
+                        menuSelector = 0;
+                        break;
+                    case 3:                        
+                        lastIndexMenu = menuManager.GetHowToPlayMenu().Last().Key;
                         menuTop = menuManager.GetMenuTopStart();
                         menuSelector = 0;
                         break;
@@ -212,6 +220,19 @@ namespace X_CodeTris_Alexandre_King
                         menuSelector = 0;
                         break;
                         
+                }
+            }
+
+            void ManageHowToPlayMenuEnter()
+            {
+                switch (menuManager.HowToPlayMenuEnter(menuSelector))
+                {
+                    default:
+                        lastIndexMenu = menuManager.GetMainMenu().Last().Key;
+                        menuTop = menuManager.GetMenuTopStart();
+                        menuSelector = 0;
+                        break;
+
                 }
             }
 

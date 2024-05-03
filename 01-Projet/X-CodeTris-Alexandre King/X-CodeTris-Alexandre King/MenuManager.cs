@@ -8,12 +8,30 @@ namespace X_CodeTris_Alexandre_King
     {
         Dictionary<int, string> _mainMenu = new Dictionary<int, string>();
         Dictionary<int, string> _optionMenu = new Dictionary<int, string>();
-        Dictionary<int, string> _highscore = new Dictionary<int, string>();
+        Dictionary<int, string> _highscoreMenu = new Dictionary<int, string>();
         Dictionary<int, string> _detailHighscore = new Dictionary<int, string>();
+        Dictionary<int, string> _howToPlay = new Dictionary<int, string>();
         Dictionary<int, string> _pauseMenu = new Dictionary<int, string>();
 
         string[] _difficultyOptions = new string[3] { "Facile", "Moyen", "Difficile" };
         string[] _keysOptions = new string[2] { "WASD", "Flèches" };
+
+        string[] _howToPlayMessage = new string[13]
+        {
+        "Comment Jouer ?",
+        "",
+        "Vous pouvez lancer le jeu via le menu principal>Jouer.",
+        "Ensuite, vous devrez aligner horizontalement les pièces dans la zone dédiée. Les pièces tombent toutes seules.",
+        "Cependant, vous pouvez les faires descendre plus vite avec la touche 'S' ou la flèche du bas selon votre séléction dans le menu 'options'.",
+        "Pour déplacer les pièces, utilisez les touches 'A' et 'D' ou les flèches gauche et droite.",
+        "Avec la touche 'W' ou la flèche du haut vous pouvez faire pivoter les pièces.",
+        "Pour chaque ligne complétée, une question sur le C# vous sera posée. La difficulté varie selon votre séléction dans le menu 'options'.",
+        "Plus la difficulté est haute, plus vous gagnerez de points en répondant correctement à une question.",
+        "Par contre, si vous répondez faux, une ligne de la zone se bloquera, réduisant ainsi l'espace de jeu.",
+        "Si les pièces atteignent le haut de la zone, la partie s'arrête.",
+        "",
+        "Bonne Chance :) !"
+        };
 
                
 
@@ -44,6 +62,7 @@ namespace X_CodeTris_Alexandre_King
             DefineOptionMenu();
             DefineHighscoreMenu();
             DefineDetailHighscoreMenu();
+            DefineHowToPlayMenu();
             //DefinePauseMenu();
         }
 
@@ -66,7 +85,13 @@ namespace X_CodeTris_Alexandre_King
         private void CallHighscoreMenu()
         {
             _currentMenu = "highscore";
-            CreateMenu(_highscore);
+            CreateMenu(_highscoreMenu);
+        }  
+        
+        private void CallHowToPlayMenu()
+        {
+            _currentMenu = "howToPlay";
+            CreateMenu(_howToPlay);
         }        
 
         public string GetCurrentMenu()
@@ -79,7 +104,8 @@ namespace X_CodeTris_Alexandre_King
             _mainMenu.Add(0, "Jouer");
             _mainMenu.Add(1, "Options");
             _mainMenu.Add(2, "Score");
-            _mainMenu.Add(3, "Quitter");
+            _mainMenu.Add(3, "Comment jouer ?");
+            _mainMenu.Add(4, "Quitter");
         }
 
         private void DefineOptionMenu()
@@ -92,15 +118,19 @@ namespace X_CodeTris_Alexandre_King
 
         private void DefineHighscoreMenu()
         {
-            _highscore.Add(0, "Facile");
-            _highscore.Add(1, "Moyen");
-            _highscore.Add(2, "Difficile");
-            _highscore.Add(3, "Retour <=");
+            _highscoreMenu.Add(0, "Facile");
+            _highscoreMenu.Add(1, "Moyen");
+            _highscoreMenu.Add(2, "Difficile");
+            _highscoreMenu.Add(3, "Retour <=");
         }
 
         private void DefineDetailHighscoreMenu()
         {
             _detailHighscore.Add(0, "Retour <=");
+        }
+        private void DefineHowToPlayMenu()
+        {
+            _howToPlay.Add(0, "Retour <=");
         }
         /*
             private void DefinePauseMenu()
@@ -129,7 +159,10 @@ namespace X_CodeTris_Alexandre_King
                 Console.Write("DB");
                 Console.ForegroundColor = ConsoleColor.White;
             }
-
+            if (_currentMenu == "howToPlay")
+            {
+                ShowHowToPlayMenu();
+            }
 
             _xPosMenuOption = new int[menu.Count];
             _menuTopStart = Console.WindowHeight / 2 - menu.Count;
@@ -229,6 +262,16 @@ namespace X_CodeTris_Alexandre_King
             Console.Write(movementArrow);            
         }
 
+        private void ShowHowToPlayMenu()
+        {
+            int count = 0;
+            foreach (string howToPlayInstruction in _howToPlayMessage)
+            {
+                Console.SetCursorPosition(Console.WindowWidth/2-howToPlayInstruction.Length/2,Console.WindowHeight/4+count);
+                Console.Write(howToPlayInstruction);
+                count++;
+            }
+        }
         
 
         public Dictionary<int, string> GetMainMenu()
@@ -247,11 +290,15 @@ namespace X_CodeTris_Alexandre_King
             }*/
         public Dictionary<int, string> GetHighscoreMenu()
         {
-            return _highscore;
+            return _highscoreMenu;
         }
         public Dictionary<int, string> GetDetailHighscoreMenu()
         {
             return _detailHighscore;
+        }
+        public Dictionary<int, string> GetHowToPlayMenu()
+        {
+            return _howToPlay;
         }
 
         public int GetMenuTopStart()
@@ -385,6 +432,10 @@ namespace X_CodeTris_Alexandre_King
                         Console.Clear();
                         CallHighscoreMenu();
                         return 2;
+                    case 3:
+                        Console.Clear();
+                        CallHowToPlayMenu();
+                        return 3;
                 }
             }
             return -1;
@@ -490,6 +541,18 @@ namespace X_CodeTris_Alexandre_King
                 CallHighscoreMenu();
                 return 0;
             }            
+            return -1;
+        }
+
+        public int HowToPlayMenuEnter(int menuOptionValue)
+        {
+            int lastIndex = GetHowToPlayMenu().Last().Key;
+            if (menuOptionValue == lastIndex)
+            {
+                Console.Clear();
+                CallMainMenu();
+                return 0;
+            }
             return -1;
         }
     }
