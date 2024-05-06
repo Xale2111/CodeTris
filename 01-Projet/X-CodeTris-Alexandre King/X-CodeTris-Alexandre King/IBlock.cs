@@ -41,15 +41,28 @@ namespace X_CodeTris_Alexandre_King
         }
         override protected void DefineOccupation()
         {
-            _occupation = new bool[4, 4];
-
-            for (int j = 0; j < _height; j++)
+            _occupation = new bool[OCCUPATION_SIZE, OCCUPATION_SIZE];
+            switch (_currentState)
             {
-                for (int i = 0; i < _width; i++)
-                {
-                    _occupation[i, j] = true;
-                }
-            }                                    
+                case 0:
+                    _occupation[0, 0] = true;
+                    _occupation[0, 1] = true;
+                    _occupation[0, 2] = true;
+                    _occupation[0, 3] = true;
+                    _width = 1;
+                    _height = 4;
+                    break;
+                case 1:
+                    _occupation[0, 0] = true;
+                    _occupation[1, 0] = true;
+                    _occupation[2, 0] = true;
+                    _occupation[3, 0] = true;
+                    _width = 4;
+                    _height = 1;
+                    break;                
+                default:
+                    break;
+            }
         }
     }
 }

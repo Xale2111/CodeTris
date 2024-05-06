@@ -71,20 +71,19 @@ namespace X_CodeTris_Alexandre_King
             DefineOccupation();
         }
 
-        public void ChangeState()
+        public void ChangeState(int nextState)
         {
-            if (_currentState== _allStates.Count()-1)
+            if (_currentState+nextState >_allStates.Count()-1)
             {
                 _currentState = 0;
             }
-            else
+            else if (_currentState+nextState <0)
             {
-                _currentState++;
+                _currentState = _allStates.Count()-1;
             }
-            int newWidth = _height;
-            int newHeight = _width;
-            _width = newWidth;
-            _height = newHeight;
+            else{
+                _currentState += nextState;
+            }            
             DefineOccupation();
             TempDebug();
         }

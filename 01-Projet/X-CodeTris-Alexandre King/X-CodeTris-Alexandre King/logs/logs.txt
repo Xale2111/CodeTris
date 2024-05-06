@@ -441,3 +441,90 @@ DATE 				|LEVEL 		|ERROR
 06.05.2024 09:09:39		INFO		Database opened successfully
 06.05.2024 09:11:35		INFO		Database opened successfully
 06.05.2024 09:14:31		INFO		Database opened successfully
+06.05.2024 09:40:28		INFO		Database opened successfully
+06.05.2024 09:41:44		INFO		Database opened successfully
+06.05.2024 09:52:24		INFO		Database opened successfully
+06.05.2024 09:52:32		INFO		Database opened successfully
+06.05.2024 09:54:12		INFO		Database opened successfully
+06.05.2024 10:10:36		INFO		Database opened successfully
+06.05.2024 10:18:26		INFO		Database opened successfully
+06.05.2024 10:19:26		INFO		Database opened successfully
+06.05.2024 10:21:07		INFO		Database opened successfully
+06.05.2024 10:25:34		INFO		Database opened successfully
+06.05.2024 10:26:11		INFO		Database opened successfully
+06.05.2024 10:27:01		INFO		Database opened successfully
+06.05.2024 10:28:26		INFO		Database opened successfully
+06.05.2024 10:36:18		INFO		Database opened successfully
+06.05.2024 10:37:56		INFO		Database opened successfully
+06.05.2024 10:39:22		INFO		Database opened successfully
+06.05.2024 10:42:04		INFO		Database opened successfully
+06.05.2024 10:43:21		INFO		Database opened successfully
+06.05.2024 10:54:38		INFO		Database opened successfully
+06.05.2024 10:55:23		INFO		Database opened successfully
+06.05.2024 10:56:50		INFO		Database opened successfully
+06.05.2024 10:57:22		INFO		Database opened successfully
+06.05.2024 10:58:50		INFO		Database opened successfully
+06.05.2024 10:59:30		INFO		Database opened successfully
+06.05.2024 11:02:08		INFO		Database opened successfully
+06.05.2024 11:05:31		INFO		Database opened successfully
+06.05.2024 11:06:15		INFO		Database opened successfully
+06.05.2024 11:08:26		INFO		Database opened successfully
+06.05.2024 11:21:49		INFO		Database opened successfully
+06.05.2024 11:34:51		INFO		Database opened successfully
+06.05.2024 11:35:08		INFO		Database opened successfully
+06.05.2024 11:35:26		INFO		Database opened successfully
+06.05.2024 11:41:08		INFO		Database opened successfully
+06.05.2024 11:41:24		INFO		Database opened successfully
+06.05.2024 11:41:50		INFO		Database opened successfully
+06.05.2024 11:42:50		INFO		Database opened successfully
+06.05.2024 11:43:14		INFO		Database opened successfully
+06.05.2024 11:45:45		INFO		Database opened successfully
+06.05.2024 11:47:21		INFO		Database opened successfully
+06.05.2024 11:48:18		INFO		Database opened successfully
+06.05.2024 12:00:13		INFO		Database opened successfully
+06.05.2024 12:04:31		INFO		Database opened successfully
+06.05.2024 13:20:18		ERROR		Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Unknown database 'db_codetris'
+06.05.2024 13:21:18		ERROR		Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Unknown database 'db_codetris'
+06.05.2024 13:22:13		ERROR		Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Unknown database 'db_codetris'
+06.05.2024 13:22:56		ERROR		Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Unknown database 'db_codetris'
+06.05.2024 13:24:43		ERROR		Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Unknown database 'db_codetris'
+06.05.2024 13:27:32		ERROR		Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Unknown database 'db_codetris'
+06.05.2024 13:27:44		ERROR		Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Unknown database 'db_codetris'
+06.05.2024 13:28:22		ERROR		Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Unknown database 'db_codetris'
+06.05.2024 13:29:22		ERROR		Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Unknown database 'db_codetris'
+06.05.2024 13:29:33		ERROR		Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Unknown database 'db_codetris'
+06.05.2024 13:30:03		ERROR		Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Unknown database 'db_codetris'
+06.05.2024 13:36:07		ERROR		Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Unknown database 'db_codetris'
+06.05.2024 13:37:06		ERROR		Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Unknown database 'db_codetris'
+06.05.2024 13:39:18		ERROR		Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Unknown database 'db_codetris'
+06.05.2024 13:44:50		ERROR		Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Unknown database 'db_codetris'
+06.05.2024 13:45:07		ERROR		Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Unknown database 'db_codetris'
+06.05.2024 13:45:32		ERROR		Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Unknown database 'db_codetris'
+06.05.2024 14:00:31		ERROR		Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Unknown database 'db_codetris'
+06.05.2024 14:15:33		ERROR		Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Unknown database 'db_codetris'
+06.05.2024 14:16:19		ERROR		Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Unknown database 'db_codetris'
+06.05.2024 14:16:50		ERROR		Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Unknown database 'db_codetris'
+06.05.2024 14:17:13		ERROR		Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Unknown database 'db_codetris'
+06.05.2024 14:20:51		ERROR		Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Unknown database 'db_codetris'
+06.05.2024 14:22:57		ERROR		Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Unknown database 'db_codetris'
+06.05.2024 14:31:40		ERROR		Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Unknown database 'db_codetris'
+06.05.2024 14:34:14		ERROR		Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Unknown database 'db_codetris'
+06.05.2024 14:35:00		ERROR		Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Unknown database 'db_codetris'
+06.05.2024 15:03:30		ERROR		Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Unknown database 'db_codetris'
+06.05.2024 15:09:36		ERROR		Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Unknown database 'db_codetris'
+06.05.2024 15:16:01		ERROR		Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Unknown database 'db_codetris'
+06.05.2024 15:16:36		ERROR		Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Unknown database 'db_codetris'
+06.05.2024 15:17:02		ERROR		Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Unknown database 'db_codetris'
+06.05.2024 15:17:16		ERROR		Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Unknown database 'db_codetris'
+06.05.2024 15:18:20		ERROR		Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Unknown database 'db_codetris'
+06.05.2024 15:24:35		ERROR		Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Unknown database 'db_codetris'
+06.05.2024 15:24:45		ERROR		Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Unknown database 'db_codetris'
+06.05.2024 15:26:42		ERROR		Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Unknown database 'db_codetris'
+06.05.2024 15:28:17		ERROR		Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Unknown database 'db_codetris'
+06.05.2024 15:29:14		ERROR		Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Unknown database 'db_codetris'
+06.05.2024 15:31:51		ERROR		Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Unknown database 'db_codetris'
+06.05.2024 15:32:04		ERROR		Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Unknown database 'db_codetris'
+06.05.2024 15:32:18		ERROR		Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Unknown database 'db_codetris'
+06.05.2024 15:34:51		ERROR		Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Unknown database 'db_codetris'
+06.05.2024 15:36:42		ERROR		Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Unknown database 'db_codetris'
+06.05.2024 15:37:34		ERROR		Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Unknown database 'db_codetris'

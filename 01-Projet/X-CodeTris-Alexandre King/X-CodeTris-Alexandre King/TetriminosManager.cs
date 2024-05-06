@@ -52,8 +52,8 @@ namespace X_CodeTris_Alexandre_King
 
         static private Tetriminos GetRandomTetriminos()
         {
-            //int tetriminos = _random.Next(TOTAL_TETRIMINOS);                                   
-            int tetriminos = 4;
+            int tetriminos = _random.Next(TOTAL_TETRIMINOS);                                   
+            //int tetriminos = 2;
             switch (tetriminos)
             {
                 case 0:
@@ -97,6 +97,11 @@ namespace X_CodeTris_Alexandre_King
             return _currentTetriminos.Height;
         }
 
+        static public string GetTetriminosName()
+        {
+            return _currentTetriminos.Name;
+        }
+
         static public bool HasACurrentTetriminos()
         {
             if (_currentTetriminos == null)
@@ -109,6 +114,11 @@ namespace X_CodeTris_Alexandre_King
             }
         }
 
+        static public void ResetTetriminos()
+        {
+            _currentTetriminos = null;
+        }
+
         static public void MoveTetriminos(int xPos, int yTopPos, int whereXpos, int whereYpos)
         {
             RemoveTetriminos(xPos,yTopPos);
@@ -118,7 +128,7 @@ namespace X_CodeTris_Alexandre_King
         static public void RotateTetriminos(int xPos, int yTopPos)
         { 
             RemoveTetriminos(xPos,yTopPos);
-            _currentTetriminos.ChangeState();            
+            _currentTetriminos.ChangeState(1);            
         }       
 
         static private void RemoveTetriminos(int xPos, int yTopPos)
@@ -156,6 +166,15 @@ namespace X_CodeTris_Alexandre_King
         static public bool[,] GetTetriminosOccupation()
         {
             bool[,] occupation = _currentTetriminos.Occupation;
+
+            return occupation;
+        }
+
+        static public bool[,] GetTetriminosRotationOccupation()
+        {
+            _currentTetriminos.ChangeState(1);
+            bool[,] occupation = _currentTetriminos.Occupation;
+            _currentTetriminos.ChangeState(-1);
 
             return occupation;
         }

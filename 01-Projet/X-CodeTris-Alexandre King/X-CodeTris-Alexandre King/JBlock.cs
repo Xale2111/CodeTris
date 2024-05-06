@@ -67,24 +67,32 @@ namespace X_CodeTris_Alexandre_King
                     _occupation[1, 1] = true;
                     _occupation[0, 2] = true;
                     _occupation[1, 2] = true;
+                    _width = 2;
+                    _height = 3;
                     break;
                 case 1:
                     _occupation[0, 0] = true;
                     _occupation[0, 1] = true;
                     _occupation[1, 1] = true;
                     _occupation[2, 1] = true;
+                    _width = 3;
+                    _height = 2;
                     break;
                 case 2:
                     _occupation[0, 0] = true;
                     _occupation[1, 0] = true;
                     _occupation[0, 1] = true;
                     _occupation[0, 2] = true;
+                    _width = 2;
+                    _height = 3;
                     break;
                 case 3:
                     _occupation[0, 0] = true;
                     _occupation[1, 0] = true;
                     _occupation[2, 0] = true;
                     _occupation[2, 1] = true;
+                    _width = 3;
+                    _height = 2;
                     break;
                 default:
                     break;
