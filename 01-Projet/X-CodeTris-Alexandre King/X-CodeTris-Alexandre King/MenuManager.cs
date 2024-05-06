@@ -328,6 +328,7 @@ namespace X_CodeTris_Alexandre_King
             Console.WriteLine(_optionMenu[positionValue]);
             Console.ForegroundColor = ConsoleColor.White;
             Console.SetCursorPosition(_xPosMenuOption[positionValue], GetMenuTopStart() + positionValue);
+            ExternalManager.StockOptionsOnChange();
 
         }
         public int GetDifficulty()
@@ -362,6 +363,8 @@ namespace X_CodeTris_Alexandre_King
             Console.WriteLine(_difficultyOptions[_currentDifficulty] + new string(' ', 10));
             Console.ForegroundColor = ConsoleColor.White;
             Console.SetCursorPosition(_xPosMenuOption[positionValue], GetMenuTopStart() + positionValue);
+            ExternalManager.StockOptionsOnChange();
+
         }
 
         private void ChangePlayKeys(int positionValue)
@@ -381,8 +384,10 @@ namespace X_CodeTris_Alexandre_King
             Console.WriteLine(_keysOptions[_playKeys] + new string(' ', 10));
             Console.ForegroundColor = ConsoleColor.White;
             Console.SetCursorPosition(_xPosMenuOption[positionValue], GetMenuTopStart() + positionValue);
-        }                   
-        
+            ExternalManager.StockOptionsOnChange();
+
+        }
+
         static public bool GetSoundStatus()
         {
             return _soundIsOn;
