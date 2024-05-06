@@ -57,11 +57,18 @@ namespace X_CodeTris_Alexandre_King
             get { return _allStates; }            
         }
 
-        protected bool[,] _occupation = new bool[4,4]; //Sort of grid where every instance of any piece can be drawn.
+        protected const int OCCUPATION_SIZE = 4;
+
+        protected bool[,] _occupation = new bool[OCCUPATION_SIZE, OCCUPATION_SIZE]; //Sort of grid where every instance of any piece can be drawn.
                                                        //This will be used to know what are the occupied case of the play grid
         public bool[,] Occupation
         {
             get { return _occupation; }
+        }
+
+        public Tetriminos()
+        {
+            DefineOccupation();
         }
 
         public void ChangeState()
@@ -84,7 +91,7 @@ namespace X_CodeTris_Alexandre_King
         protected virtual void DefineOccupation(){}
 
         private void TempDebug()
-        {
+        {/*
             for (int j = 0; j < 4; j++)
             {
                 for (int i = 0; i < 4; i++)
@@ -101,7 +108,7 @@ namespace X_CodeTris_Alexandre_King
                 Debug.WriteLine("");
 
             }
-            Debug.WriteLine("--------------------------");
+            Debug.WriteLine("--------------------------");*/
 
         }
 

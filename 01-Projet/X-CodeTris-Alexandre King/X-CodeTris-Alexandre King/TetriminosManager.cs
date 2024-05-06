@@ -80,14 +80,23 @@ namespace X_CodeTris_Alexandre_King
             return new OBlock();
         }
 
-        static public int GetCurrentTetriminosWidth()
+        static public int GetCurrentTetriminosVisualWidth()
         {
             return _currentTetriminos.Width*2;
         }
-        static public int GetCurrentTetriminosHeight()
+        static public int GetCurrentTetriminosVisualHeight()
         {
             return _currentTetriminos.Height*2;
         }
+        static public int GetCurrentTetriminosWidth()
+        {
+            return _currentTetriminos.Width;
+        }
+        static public int GetCurrentTetriminosHeight()
+        {
+            return _currentTetriminos.Height;
+        }
+
         static public bool HasACurrentTetriminos()
         {
             if (_currentTetriminos == null)
@@ -144,6 +153,11 @@ namespace X_CodeTris_Alexandre_King
             }
         }
 
+        static public bool[,] GetTetriminosOccupation()
+        {
+            bool[,] occupation = _currentTetriminos.Occupation;
 
+            return occupation;
+        }
     }
 }

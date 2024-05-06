@@ -59,7 +59,7 @@ namespace X_CodeTris_Alexandre_King
 
         override protected void DefineOccupation()
         {
-            _occupation = new bool[4,4];
+            _occupation = new bool[OCCUPATION_SIZE, OCCUPATION_SIZE];
             switch (_currentState)
             {
                 case 0:
