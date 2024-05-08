@@ -137,6 +137,7 @@ namespace X_CodeTris_Alexandre_King
 
             while (_inGame)
             {
+                Thread.Sleep(25);
                 if (_instructionsTetriminos.Count > 0)
                 {
                     bool isPlaced = false;
@@ -341,23 +342,87 @@ namespace X_CodeTris_Alexandre_King
                     {
                         if (touchedBottom)
                         {
-                            _playZone[_playZoneTetriminosXPos + i, _playZoneTetriminosYPos + j] = PLACED_CASE_CODE;                                                        
+                            _playZone[_playZoneTetriminosXPos + i, _playZoneTetriminosYPos + j] = PLACED_CASE_CODE;                            
                         }
                         else
                         {
                             _playZone[_playZoneTetriminosXPos+i, _playZoneTetriminosYPos+j] = FALLING_CASE_CODE;                            
                         }
                     }                    
-                    else 
+                    /*else 
                     {
                         if (_playZone[_playZoneTetriminosXPos + i, _playZoneTetriminosYPos + j] != PLACED_CASE_CODE 
                             || _playZone[_playZoneTetriminosXPos + i, _playZoneTetriminosYPos + j] != BLOCKED_CASE_CODE)
                         { 
                             _playZone[_playZoneTetriminosXPos + i, _playZoneTetriminosYPos + j] = EMPTY_CASE_CODE;
                         }
+                    }*/
+                }
+            }
+            if (touchedBottom)
+            {
+                TempDebug();
+                List<int> lanes = FindCompletedLane();
+                if (lanes.Count > 0)
+                {
+                    for (int k = 0; k < lanes.Count; k++)
+                    {
+                        RemoveLane(lanes[k]);
+                    }
+                    MoveLanesVisually(lanes.Count);
+                }
+                TempDebug();
+            }
+        }
+
+        private List<int> FindCompletedLane()
+        {
+            List<int> completedLanes = new List<int>();
+            for (int j = 0; j < PLAY_ZONE_HEIGHT/2; j++)
+            {
+                bool laneIsCompleted = false;
+                for (int i = 0; i < PLAY_ZONE_WIDTH/2; i++)
+                {
+                    if (_playZone[i,j] == PLACED_CASE_CODE)
+                    {
+                        laneIsCompleted = true;
+                    }
+                    else
+                    {
+                        laneIsCompleted = false;
+                        break;
                     }
                 }
+                if (laneIsCompleted)
+                {
+                    completedLanes.Add(j);
+                }
+            }
+            return completedLanes;
+        }
+
+        private void RemoveLane(int fullLane)
+        {
+            //à gérer
+            for (int i = 0; i < PLAY_ZONE_WIDTH/2; i++)
+            {
+                _playZone[i, fullLane] = EMPTY_CASE_CODE;
+            }
+            for (int j = 0; j < fullLane-1; j++)
+            {                
+                for (int i = 0; i < PLAY_ZONE_WIDTH / 2; i++)
+                {
+                    if (_playZone[i, j] == PLACED_CASE_CODE && _playZone[i, j + 1] != BLOCKED_CASE_CODE)
+                    {
+                        _playZone[i, j + 1] = _playZone[i, j];
+                        _playZone[i, j] = EMPTY_CASE_CODE;
+                    }
+                }                
             }            
+        }
+        private void MoveLanesVisually(int dropDownBy)
+        { 
+            //moveBufferArea (faire attention en cas de déplacement de la pièce actuelle (3 move buffer area autour de la pièce?)
         }
 
         private void ClearPlayZoneFromFalling()
@@ -403,17 +468,36 @@ namespace X_CodeTris_Alexandre_King
                         }
                         else
                         {
-                            if (_playZoneTetriminosXPos - i - wantedXPos >0)
-                            {                            
-                                if (_playZone[_playZoneTetriminosXPos + i + wantedXPos, _playZoneTetriminosYPos + j] == PLACED_CASE_CODE
-                                    || _playZone[_playZoneTetriminosXPos + i + wantedXPos, _playZoneTetriminosYPos + j] == BLOCKED_CASE_CODE)
+                            if (wantedXPos == -1)
+                            {
+                                if (_playZoneTetriminosXPos - i + wantedXPos >= 0)
                                 {
-                                    canMoveToWantedPosition = false;
-                                    return canMoveToWantedPosition;
+                                    if (_playZone[_playZoneTetriminosXPos + i + wantedXPos, _playZoneTetriminosYPos + j] == PLACED_CASE_CODE
+                                        || _playZone[_playZoneTetriminosXPos + i + wantedXPos, _playZoneTetriminosYPos + j] == BLOCKED_CASE_CODE)
+                                    {
+                                        canMoveToWantedPosition = false;
+                                        return canMoveToWantedPosition;
+                                    }
+                                    else
+                                    {
+                                        canMoveToWantedPosition = true;
+                                    }
                                 }
-                                else
+                            }
+                            else
+                            {
+                                if (_playZoneTetriminosXPos + i + wantedXPos < PLAY_ZONE_WIDTH/2-1)
                                 {
-                                    canMoveToWantedPosition = true;
+                                    if (_playZone[_playZoneTetriminosXPos + i + wantedXPos, _playZoneTetriminosYPos + j] == PLACED_CASE_CODE
+                                       || _playZone[_playZoneTetriminosXPos + i + wantedXPos, _playZoneTetriminosYPos + j] == BLOCKED_CASE_CODE)
+                                    {
+                                        canMoveToWantedPosition = false;
+                                        return canMoveToWantedPosition;
+                                    }
+                                    else
+                                    {
+                                        canMoveToWantedPosition = true;
+                                    }
                                 }
                             }
                         }
