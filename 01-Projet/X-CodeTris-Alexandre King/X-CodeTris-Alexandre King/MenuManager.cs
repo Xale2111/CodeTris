@@ -6,6 +6,7 @@ namespace X_CodeTris_Alexandre_King
 {
     public class MenuManager
     {
+        //Each menu, Dictionary to know the position in the options and to have the name of the option
         Dictionary<int, string> _mainMenu = new Dictionary<int, string>();
         Dictionary<int, string> _optionMenu = new Dictionary<int, string>();
         Dictionary<int, string> _highscoreMenu = new Dictionary<int, string>();
@@ -13,9 +14,11 @@ namespace X_CodeTris_Alexandre_King
         Dictionary<int, string> _howToPlay = new Dictionary<int, string>();
         Dictionary<int, string> _pauseMenu = new Dictionary<int, string>();
 
+        //Options possibilities 
         string[] _difficultyOptions = new string[3] { "Facile", "Moyen", "Difficile" };
         string[] _keysOptions = new string[2] { "WASD", "Flèches" };
 
+        //Text in the How To Play menu
         string[] _howToPlayMessage = new string[13]
         {
         "Comment Jouer ?",
@@ -34,16 +37,20 @@ namespace X_CodeTris_Alexandre_King
         };
 
                
-
-        int[] _xPosMenuOption;
+        
+        int[] _xPosMenuOption;          //position x of each option 
         static bool _soundIsOn = false;
         static int _currentDifficulty;
         static int _playKeys = 0;
 
+        //Start position of the menu
         int _menuTopStart;
 
         string _currentMenu;
 
+        /// <summary>
+        /// Constructor of the menu manager
+        /// </summary>
         public MenuManager()
         {
             _soundIsOn = ExternalManager.GetSoundStatusAtStart();

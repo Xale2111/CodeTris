@@ -34,7 +34,7 @@ namespace X_CodeTris_Alexandre_King
 
         bool _inGame = false;
         bool _canSpawnNew = true;
-        int _frameTiming = 200;
+        int _frameTiming = 180;
         int _frameBeforeNew = 2;
         int _moveYCapacity = 1;
         int _moveXCapacity = 1;
@@ -47,10 +47,7 @@ namespace X_CodeTris_Alexandre_King
         ConsoleKey _moveDown;
         ConsoleKey _rotate;
         ConsoleKey _dropDown;
-        ConsoleKeyInfo _pressedKey;
-        int _maxInput = 10;
-        int _numberOfPlayerInput;
-        bool _maxInputReached;
+        ConsoleKeyInfo _pressedKey;        
 
         const int EMPTY_CASE_CODE = 0;
         const int FALLING_CASE_CODE = 1;
@@ -102,8 +99,7 @@ namespace X_CodeTris_Alexandre_King
             _numberOfRightAnswer = 0;
             _numberOfWrongAnswer = 0;
             _inGame = false;
-            _pressedKey = default(ConsoleKeyInfo);                       
-            _numberOfPlayerInput = 0;
+            _pressedKey = default(ConsoleKeyInfo);                                   
 
         }
         private void DrawPlayArea()
@@ -129,29 +125,12 @@ namespace X_CodeTris_Alexandre_King
         {
             Thread playerInput = new Thread(ManagePlayerInput);
             playerInput.Start();
-            _allThreads.Add(playerInput);
-
-            Thread limitInput = new Thread(LimitInput);
-            limitInput.Start();
-            _allThreads.Add(limitInput);
+            _allThreads.Add(playerInput);            
 
             Thread tetriminosManagement = new Thread(ManageTetriminos);
             tetriminosManagement.Start();
             _allThreads.Add(tetriminosManagement);
-        }
-
-        private void LimitInput()
-        {
-            while (_inGame)
-            {
-                if (_maxInputReached)
-                {
-                    Thread.Sleep(_frameTiming * 2);
-                    _numberOfPlayerInput = 0;
-                    _maxInputReached = false;
-                }
-            }
-        }
+        }        
 
         private void ManageTetriminos()
         {
@@ -257,7 +236,11 @@ namespace X_CodeTris_Alexandre_King
                         _canSpawnNew = false;
                     }
                     UpdateTetriminosOccupation(isPlaced);
-                    _instructionsTetriminos.RemoveAt(0);
+                    //Check again before removing if there is more then 1 element (Using a Thread is the problem)
+                    if (_instructionsTetriminos.Count() >0)
+                    {
+                        _instructionsTetriminos.RemoveAt(0);
+                    }
                 }
             }
         }
@@ -276,11 +259,7 @@ namespace X_CodeTris_Alexandre_King
 
                 Thread.Sleep(_frameTiming);
 
-                if (_canSpawnNew)
-                {
-                    TetriminosManager.ResetTetriminos();
-                    _canSpawnNew = false;
-                }
+                
                 if (TetriminosManager.HasACurrentTetriminos())
                 {                    
                     if (_currentTetriminosYPos < PLAY_ZONE_Y_POS + PLAY_ZONE_HEIGHT - TetriminosManager.GetCurrentTetriminosVisualHeight())
@@ -297,8 +276,9 @@ namespace X_CodeTris_Alexandre_King
                         }
                     }
                 }
-                else
-                {              
+                if (_canSpawnNew)
+                {
+                    _canSpawnNew = false;              
                     _instructionsTetriminos.Clear();                    
                     TetriminosManager.DefineNewTetriminos();
                     DrawNewTetriminos();
@@ -515,15 +495,7 @@ namespace X_CodeTris_Alexandre_King
                 }
                 else if (_pressedKey.Key == _rotate)
                 {
-                    if (_numberOfPlayerInput < _maxInput)
-                    {
-                        _numberOfPlayerInput++;
-                        _instructionsTetriminos.Add(ROTATE_INSTRUCTION);
-                    }
-                    else
-                    {
-                        _maxInputReached = true;
-                    }
+                        _instructionsTetriminos.Add(ROTATE_INSTRUCTION);                    
                 }
 
                 _pressedKey = default(ConsoleKeyInfo);

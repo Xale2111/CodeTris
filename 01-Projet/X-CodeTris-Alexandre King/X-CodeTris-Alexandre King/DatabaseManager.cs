@@ -7,17 +7,20 @@ namespace X_CodeTris_Alexandre_King
 {
     static public class DatabaseManager
     {
-
-        static private bool _dbState;
-        static private int userId;
-        static private string userName;
-        static private string difficulty;
+        //Variables 
+        static private bool _dbState;           //state of the DB, true => DB is working fine, false => DB is connected
+        static private int _userId;             //User ID
+        static private string _userName;        //User name
+        static private string _difficulty;
+        static bool _hasConfiguration = false;
+        static private MySqlConnection _connection;
 
         //user Table infos
         const string USER_TABLE = "`t_user`";
         const string USER_ID_FIELD = "`idUser`";
         const string NICKNAME_FIELD = "`nickname`";
         const string USER_CREATION_DATE_FIELD = "`creationDate`";
+
 
         //game table infos
         const string GAME_TABLE = "`t_game`";
@@ -33,35 +36,38 @@ namespace X_CodeTris_Alexandre_King
         const string DIFFICULTY_LEVEL_FIELD = "`level`";        
 
         //DB variables (from the config.ini file)
-        static Dictionary<string, string> dbConfigurationInfos = new Dictionary<string, string>()
-        {
+        static Dictionary<string, string> _dbConfigurationInfos = new Dictionary<string, string>()
+        {            
             {"server", ""},
             {"database", ""},
             {"uid", ""},
             {"password", ""},                   
         };       
-
-        static bool hasConfiguration = false;
-
-        static private MySql.Data.MySqlClient.MySqlConnection _connection;
-
+       
+        
+        /// <summary>
+        /// Will get the raw infos from the config.ini file via the external manager and then set the variable for the connection
+        /// </summary>
         static public void ConfigureDBInfos()
         {
             string rawInfos = ExternalManager.GetDBConfiguration();
             if (rawInfos != string.Empty)
             {
-                for (int i = 0; i < dbConfigurationInfos.Count(); i++)
+                for (int i = 0; i < _dbConfigurationInfos.Count(); i++)
                 {
-                    dbConfigurationInfos[dbConfigurationInfos.ElementAt(i).Key] = rawInfos.Split(';')[i].Split('=')[1].Trim();
+                    _dbConfigurationInfos[_dbConfigurationInfos.ElementAt(i).Key] = rawInfos.Split(';')[i].Split('=')[1].Trim();
                 }
-                hasConfiguration = true;                
+                _hasConfiguration = true;                
             }
         }
 
+        /// <summary>
+        /// Open the Database to establish a connection with it
+        /// </summary>
         static public void OpenDB()
         {
             //récup infos depuis config.ini
-            if (!hasConfiguration)
+            if (!_hasConfiguration)
             {
                 ExternalManager.LogError("config.ini file isn't correctly configured. Configuration infos hasn't been found !");
                 _dbState = false;
@@ -70,7 +76,7 @@ namespace X_CodeTris_Alexandre_King
             {
 
                 string connectionString;
-                connectionString = "SERVER=" + dbConfigurationInfos["server"] + ";" + "DATABASE=" + dbConfigurationInfos["database"] + ";" + "UID=" + dbConfigurationInfos["uid"] + ";" + "PASSWORD=" + dbConfigurationInfos["password"] + ";";
+                connectionString = "SERVER=" + _dbConfigurationInfos["server"] + ";" + "DATABASE=" + _dbConfigurationInfos["database"] + ";" + "UID=" + _dbConfigurationInfos["uid"] + ";" + "PASSWORD=" + _dbConfigurationInfos["password"] + ";";
                 _connection = new MySqlConnection(connectionString);
                 try
                 {
@@ -86,27 +92,36 @@ namespace X_CodeTris_Alexandre_King
             }
         }
 
+        /// <summary>
+        /// Get the current state of the DB
+        /// </summary>
+        /// <returns>state of the DB, true = Connected, working fine / false = Not connected</returns>
         static public bool GetDBState()
         {
             return _dbState;
         }
 
+        /// <summary>
+        /// Checks if the current name for the player exist or not in the DB
+        /// </summary>
+        /// <param name="playerName">name that needs to be checked</param>
+        /// <returns>True = name exists, false = name doesn't exists</returns>
         static public bool DoesPlayerNameExist(string playerName)
         {
             try
             {
-                MySql.Data.MySqlClient.MySqlCommand com = _connection.CreateCommand();
+                MySqlCommand com = _connection.CreateCommand();
 
                 com.CommandType = System.Data.CommandType.Text;
                 com.CommandText = "SELECT * FROM t_user where nickname = '" + playerName + "';";
-                MySql.Data.MySqlClient.MySqlDataReader reader = com.ExecuteReader();
+                MySqlDataReader reader = com.ExecuteReader();
 
                 if (reader.HasRows)
                 {
                     while (reader.Read())
                     {
-                        userId = reader.GetInt32(0);
-                        userName = reader.GetString(1);
+                        _userId = reader.GetInt32(0);
+                        _userName = reader.GetString(1);
                     }
                     reader.Close();
                 }
@@ -119,6 +134,11 @@ namespace X_CodeTris_Alexandre_King
             }
         }
 
+        /// <summary>
+        /// Stock the player in the Database
+        /// </summary>
+        /// <param name="playerName">Name that will be stock</param>
+        /// <returns>True = Name has been inserted successfully, False = Name hasn't been inserted (Check logs to see what happened)</returns>
         static public bool StockPlayer(string playerName)
         {
             OpenDB();
@@ -140,7 +160,12 @@ namespace X_CodeTris_Alexandre_King
 
             _connection.Close();
         }
-
+        /// <summary>
+        /// Stock the player's game in the DB
+        /// </summary>
+        /// <param name="score">final score</param>
+        /// <param name="difficulty">game difficulty</param>
+        /// <returns>True = Game has been inserted successfully, False = Game hasn't been inserted</returns>
         static public bool StockGame(int score, int difficulty)
         {
             OpenDB();
@@ -164,7 +189,10 @@ namespace X_CodeTris_Alexandre_King
             _connection.Close();
         }
 
-
+        /// <summary>
+        /// Find the Player ID with his name
+        /// </summary>
+        /// <returns>Player ID</returns>
         static private int FindPlayerIDWithName()
         {
             int userID = -1;
@@ -193,7 +221,11 @@ namespace X_CodeTris_Alexandre_King
 
             return userID;
         }
-
+        /// <summary>
+        /// Find the player name with his ID
+        /// </summary>
+        /// <param name="id">Player ID</param>
+        /// <returns>Player name</returns>
         static private string FindPlayerNameWithID(int id)
         {
             OpenDB();
@@ -222,7 +254,11 @@ namespace X_CodeTris_Alexandre_King
             _connection.Close();
             return userName;
         }
-
+        /// <summary>
+        /// Find the Difficulty ID with the difficulty level
+        /// </summary>
+        /// <param name="level">difficulty level</param>
+        /// <returns>Difficulty ID</returns>
         static private int FindDifficultyIDWithLevel(int level)
         {
             OpenDB();
@@ -252,7 +288,10 @@ namespace X_CodeTris_Alexandre_King
             return difficultyID;
         }
 
-
+        /// <summary>
+        /// Format the Date to correspond to the needed format for the DB (Needs to be YYYY-MM-DD)
+        /// </summary>
+        /// <returns>Correct date format</returns>
         static private string FormatDate()
         {
             string date = string.Empty;
@@ -266,6 +305,12 @@ namespace X_CodeTris_Alexandre_King
             return date;
         }
 
+        /// <summary>
+        /// Get the highscores of a specific difficulty
+        /// </summary>
+        /// <param name="difficulty">Difficulty to filter</param>
+        /// <returns>A list of Tuple<string,int,string> Each Tuple is a highscore, 
+        /// The tuple is used to have the nickname (1st string), the score (2nd string) and the date of the record (3thd string)</returns>
         static public List<Tuple<string, int, string>> GetHighScores(int difficulty)
         {
             List<Tuple<string, int, string>> highscores = new List<Tuple<string, int, string>>();

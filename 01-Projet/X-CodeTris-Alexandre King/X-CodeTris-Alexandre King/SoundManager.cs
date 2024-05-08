@@ -9,19 +9,24 @@ namespace X_CodeTris_Alexandre_King
 {
     static public class SoundManager
     {
+        //Variables
         static SoundPlayer _soundPlayer = new SoundPlayer();
-        static string _musicPath = "../../music/";
-        
+        static string _musicPath = "../../music/";        
         static string _tetrisSongFile = "TetrisSong.wav";
-        //string _QVGDMFile = "TetrisSong.wav"; //musique de qui veut gagner des millions
-        //static string _tetrisSongFile = "temp.wav";
+        //string _QVGDMFile = "TetrisSong.wav"; //musique de qui veut gagner des millions        
 
+        /// <summary>
+        /// Play the Tetris theme song
+        /// </summary>
         static public void PlayTetrisThemeSong()
         {
             _soundPlayer.SoundLocation = _musicPath + _tetrisSongFile;
             _soundPlayer.PlayLooping();
         }
 
+        /// <summary>
+        /// Stops the music
+        /// </summary>
         static public void StopMusic()
         {
             _soundPlayer.Stop();

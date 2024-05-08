@@ -26,28 +26,42 @@ namespace X_CodeTris_Alexandre_King
         static Random _rand = new Random();
         const int _numberOfName = 50;
 
-
-        static bool _soundStatus;
-        static int _difficultyStatus;
-        static int _keysStatus;
+        //Variables of the status of the parameters and the player's name
+        static bool _soundState;
+        static int _difficultyState;
+        static int _keysState;
         static string _playerName;
 
-
+        /// <summary>
+        /// Get the sound state when starting the game
+        /// </summary>
+        /// <returns>True = sound is on, False = sound is off</returns>
         static public bool GetSoundStatusAtStart()
         {
-            return _soundStatus;
+            return _soundState;
         }
 
+        /// <summary>
+        /// Get the Difficulty level when lauching the game
+        /// </summary>
+        /// <returns>level of difficulty</returns>
         static public int GetDifficultyAtStart()
         {
-            return _difficultyStatus;
+            return _difficultyState;
         }
 
+        /// <summary>
+        /// Get the playing keys when lauching the game
+        /// </summary>
+        /// <returns>Id of the keys (0 = WASD, 1=Arrows, in case more are added, it's an integrer)</returns>
         static public int GetKeysAtStart()
         {
-            return _keysStatus;
+            return _keysState;
         }
-
+        /// <summary>
+        /// Get the raw content of the config.ini file for the DB
+        /// </summary>
+        /// <returns>raw content of the config.ini file</returns>
         static public string GetDBConfiguration()
         {
             string rawFile = String.Empty;            
@@ -57,7 +71,9 @@ namespace X_CodeTris_Alexandre_King
             }
             return rawFile;
         }
-
+        /// <summary>
+        /// Makes sure the logs file exists
+        /// </summary>
         static public void LogFile()
         {
             if (!Directory.Exists(LOGS_DIR_PATH))
@@ -71,7 +87,9 @@ namespace X_CodeTris_Alexandre_King
             }
         }
 
-
+        /// <summary>
+        /// Loads the informations (parameters, playername, etc...). If the file doesn't exist will set parameters to Default (refer to SetDefaultParameters function)
+        /// </summary>
         static public void LoadInformations()
         {
             string parameters = string.Empty;
@@ -121,14 +139,18 @@ namespace X_CodeTris_Alexandre_King
             }
 
             _playerName = name;
-            _soundStatus = sound;
-            _difficultyStatus = difficulty;
-            _keysStatus = keys;
+            _soundState = sound;
+            _difficultyState = difficulty;
+            _keysState = keys;
 
             StockInformations();
 
         }
-
+        /// <summary>
+        /// Stock some informations to a file. 
+        /// </summary>
+        /// <param name="informationsToStock">Informations to stock</param>
+        /// <param name="pathToStock">path of the file. Where the informations will be stocked</param>
         static private void StockInformations(string informationsToStock = "", string pathToStock = "")
         {
             string parameters = string.Empty;
@@ -149,7 +171,10 @@ namespace X_CodeTris_Alexandre_King
             }
             File.WriteAllText(PARAMS_FILE_PATH, parameters);
         }
-
+        /// <summary>
+        /// Set the parameters to default (those are set by hand in case there's a problem with a file)
+        /// </summary>
+        /// <returns></returns>
         static private string SetDefaultParameters()
         {
             string defaultParams;
@@ -158,14 +183,22 @@ namespace X_CodeTris_Alexandre_King
             defaultParams += "keys = 0";
             return defaultParams;
         }
-
+        /// <summary>
+        /// Stock all parameters when one is change or when the games exit (ensure they will be the same next time the user use the program)
+        /// </summary>
         static public void StockOptionsOnChange()
         {
             StockInformations();
         }
 
+        /// <summary>
+        /// Create a nickname for the player if he doesn't have one
+        /// the nickname is a combination of an adjectiv, a animal and a random number from 0 to 99
+        /// </summary>
+        /// <returns>The player's name</returns>
         static private string CreatePlayerNickname()
         {
+            //first check if the name exist in DB or not (this does limits the amount of possible name, if more names needs to be added, add adjectiv and animal names) 
             string nickname = string.Empty;
             do
             {
@@ -184,11 +217,19 @@ namespace X_CodeTris_Alexandre_King
             return nickname;
         }
 
+        /// <summary>
+        /// Get the player name
+        /// </summary>
+        /// <returns>Player name</returns>
         static public string GetPlayerName()
         {
             return _playerName;
         }
 
+        /// <summary>
+        /// Log an error
+        /// </summary>
+        /// <param name="error">Error to log</param>
         static public void LogError(string error)
         {
             if (File.Exists(LOGS_DIR_PATH+ LOGS_FILE_PATH))
@@ -200,7 +241,11 @@ namespace X_CodeTris_Alexandre_King
                 }
             }
         }
-
+        /// <summary>
+        /// Log an info
+        /// An info can be something like good insertion in DB or connection to DB successfull
+        /// </summary>
+        /// <param name="info">info to log</param>
         static public void LogInfo(string info)
         {
             if (File.Exists(LOGS_DIR_PATH + LOGS_FILE_PATH))

@@ -52,22 +52,26 @@ namespace X_CodeTris_Alexandre_King
             int cursorLeftPos;
 
             MenuManagement();
+            //Should'nt technically do this line in the program 
             Console.ReadLine();
 
-
+            ///Manage the menus and how the player moves across each menu
             void MenuManagement()
             {
                 do
                 {                    
-
+                    //set the cursor to the first option of the menu
                     if (menuSelector == 0)
                     {
                         cursorLeftPos = menuManager.GetMenuOptionPos()[menuSelector];
                         Console.SetCursorPosition(cursorLeftPos, menuTop);
                     }
+                    //read the given key 
                     ConsoleKeyInfo keyInfo = Console.ReadKey();
+                    //Depending on which key the user pressed, do something different 
                     switch (keyInfo.Key)
                     {
+                        //go to the next option
                         case ConsoleKey.DownArrow:
                             if (menuSelector < lastIndexMenu)
                             {
@@ -84,6 +88,7 @@ namespace X_CodeTris_Alexandre_King
                             Console.Write(">");
                             Console.SetCursorPosition(cursorLeftPos, Console.CursorTop);
                             break;
+                            //Go to the previous option
                         case ConsoleKey.UpArrow:
                             if (menuSelector > 0)
                             {
@@ -103,6 +108,7 @@ namespace X_CodeTris_Alexandre_King
                             break;
 
                         //ENTER
+                        //Depending on the selected option of the current menu, will do something different
                         case ConsoleKey.Enter:
                             switch (menuManager.GetCurrentMenu())
                             {
@@ -131,7 +137,7 @@ namespace X_CodeTris_Alexandre_King
                             break;
 
                         default:
-                            
+                            //by default, will place the cursor back to the correct position
                             Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
                             Console.Write(">");
                             Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
@@ -143,38 +149,45 @@ namespace X_CodeTris_Alexandre_King
                 } while (inMenu);
             }
 
+            ///Manage the main menu when the ENTER key is pressed
             void ManageMainMenuEnter()
             {
+                //depending on the selection, will go something different
                 switch (menuManager.MainMenuEnter(menuSelector))
                 {
+                    //start the game
                     case 0:
                         inMenu = false;
                         gameManager.NewGame();
-
                         break;
+                    //Go to the option menu
                     case 1:
                         lastIndexMenu = menuManager.GetOptionMenu().Last().Key;
                         menuTop = menuManager.GetMenuTopStart();
                         menuSelector = 0;
                         break;
+                    //Go to the highscore menu
                     case 2:
                         lastIndexMenu = menuManager.GetHighscoreMenu().Last().Key;
                         menuTop = menuManager.GetMenuTopStart();
                         menuSelector = 0;
                         break;
+                    //go to the How to play menu
                     case 3:                        
                         lastIndexMenu = menuManager.GetHowToPlayMenu().Last().Key;
                         menuTop = menuManager.GetMenuTopStart();
                         menuSelector = 0;
                         break;
-
+                    //Exit isn't written here because it escapes the program
                 }
             }
 
+            ///Manage the option menu when the ENTER key is pressed
             void ManageOptionMenuEnter()
-            {
+            {                
                 switch (menuManager.OptionMenuEnter(menuSelector))
                 {
+                    //Case 0 to 2 is manage via the menu manager
                     case 0: 
                         menuSelector = 0;
                         break;    
@@ -184,6 +197,7 @@ namespace X_CodeTris_Alexandre_King
                     case 2:
                         menuSelector = 2;
                         break;
+                    //Go back to the main menu
                     case 3:
                         lastIndexMenu = menuManager.GetMainMenu().Last().Key;
                         menuTop = menuManager.GetMenuTopStart();
@@ -193,15 +207,18 @@ namespace X_CodeTris_Alexandre_King
                 }
             }
             
+            ///Manage the Highscore menu when the ENTER key is pressed
             void ManageHighscoreMenuEnter()
             {
                 switch (menuManager.HighscoreMenuEnter(menuSelector))
-                {                    
+                {                   
+                    //go back to the main menu
                     case 3:
                         lastIndexMenu = menuManager.GetMainMenu().Last().Key;
                         menuTop = menuManager.GetMenuTopStart();
                         menuSelector = 0;
                         break;
+                    //Will show a details highscore menu
                     default:
                         lastIndexMenu = menuManager.GetDetailHighscoreMenu().Last().Key;
                         menuTop = menuManager.GetMenuTopStart();
@@ -210,6 +227,7 @@ namespace X_CodeTris_Alexandre_King
                 }
             }
 
+            ///Manage the details highscore menu when the ENTER key is pressed
             void ManageDetailsHighscoreMenuEnter()
             {
                 switch (menuManager.DetailHighscoreMenuEnter(menuSelector))
@@ -223,6 +241,7 @@ namespace X_CodeTris_Alexandre_King
                 }
             }
 
+            ///Manage the How to play menu when the ENTER key is pressed
             void ManageHowToPlayMenuEnter()
             {
                 switch (menuManager.HowToPlayMenuEnter(menuSelector))
