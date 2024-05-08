@@ -23,6 +23,9 @@ namespace X_CodeTris_Alexandre_King
         [DllImport("kernel32.dll", ExactSpelling = true)]
         private static extern IntPtr GetConsoleWindow();
 
+        /// <summary>
+        /// Remove the maximize button and the possibility to resize to console
+        /// </summary>
         public static void DeleteResizeMenu()
         {
             IntPtr handle = GetConsoleWindow();

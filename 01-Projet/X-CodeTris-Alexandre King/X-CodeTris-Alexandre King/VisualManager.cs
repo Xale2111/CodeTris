@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace X_CodeTris_Alexandre_King
 {
+    /// <summary>
+    /// Manage some visual part of the program
+    /// </summary>
     static class VisualManager
     {
+        //Title of the main menu
         static string[] _visualTitle = new string[7]
             {
                 " ░▒▓██████▓▒░ ░▒▓██████▓▒░░▒▓███████▓▒░░▒▓████████▓▒░▒▓████████▓▒░▒▓███████▓▒░░▒▓█▓▒░░▒▓███████▓▒░ ",
@@ -122,6 +126,9 @@ namespace X_CodeTris_Alexandre_King
                 "████████"
             };
 
+        /// <summary>
+        /// Add all the visual to the Main menu (The title and all the giant tetriminos)
+        /// </summary>
         static public void AddVisualToMainMenu()
         {
             int topVisualStartPosition = 8;
@@ -205,6 +212,10 @@ namespace X_CodeTris_Alexandre_King
 
         }
 
+        /// <summary>
+        /// Set the text color to the wanted color
+        /// </summary>
+        /// <param name="color">wanted text color</param>
         static public void SetTextColor(string color)
         {
             switch (color.ToLower())
@@ -250,7 +261,10 @@ namespace X_CodeTris_Alexandre_King
                     break;
             }
         }
-
+        /// <summary>
+        /// Set the background color to the wanted color
+        /// </summary>
+        /// <param name="color">wanted background color</param>
         static public void SetBackgroundColor(string color)
         {
             switch (color.ToLower())

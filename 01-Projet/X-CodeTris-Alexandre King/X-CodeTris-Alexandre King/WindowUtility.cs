@@ -17,6 +17,10 @@ namespace X_CodeTris_Alexandre_King
         const uint SWP_NOSIZE = 0x0001;
         const uint SWP_NOZORDER = 0x0004;            
 
+        /// <summary>
+        /// Move the window to the top left corner
+        /// </summary>
+        /// <exception cref="Exception"></exception>
         public static void MoveWindowToTopLeftCorner()
         {
             IntPtr window = Process.GetCurrentProcess().MainWindowHandle;
