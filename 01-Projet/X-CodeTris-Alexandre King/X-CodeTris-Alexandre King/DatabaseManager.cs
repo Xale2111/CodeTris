@@ -25,15 +25,24 @@ namespace X_CodeTris_Alexandre_King
         //game table infos
         const string GAME_TABLE = "`t_game`";
         const string SCORE_FIELD = "`score`";
-        const string GAME_DATE_FIELD = "`gameDate`";
-        const string FK_USER_FIELD = "`fkUser`";
-        const string FK_DIFFICULTY_FIELD = "`fkDifficulty`";
+        const string GAME_DATE_FIELD = "`gameDate`";       
 
         //difficulty table infos
         const string DIFFICULTY_TABLE = "`t_difficulty`";
         const string DIFFICULTY_ID_FIELD = "`idDifficulty`";
         const string DIFFICULTY_NAME_FIELD = "`name`";
-        const string DIFFICULTY_LEVEL_FIELD = "`level`";        
+        const string DIFFICULTY_LEVEL_FIELD = "`level`";
+
+        //Questions table infos        
+        const string QUESTION_TABLE = "`t_question`";
+        const string QUESTION_ID_FIELD = "`idQuestion`";
+        const string QUESTION_FIELD = "`question`";
+        const string ANSWER_FIELD = "`answer`";
+
+        //General table infos
+        const string FK_USER_FIELD = "`fkUser`";
+        const string FK_DIFFICULTY_FIELD = "`fkDifficulty`";
+
 
         //DB variables (from the config.ini file)
         static Dictionary<string, string> _dbConfigurationInfos = new Dictionary<string, string>()
@@ -362,6 +371,49 @@ namespace X_CodeTris_Alexandre_King
 
             return highscores;
 
+        }
+        
+        static public List<Question> GetAllQuestionOfDifficulty(int difficulty)
+        {
+            int difficultyID = FindDifficultyIDWithLevel(difficulty);
+            _connection.Close();
+
+            string question = string.Empty;
+            string answer = string.Empty;
+            
+            List<Question> questions = new List<Question>();
+
+            OpenDB();
+            try
+            {                
+                MySql.Data.MySqlClient.MySqlCommand com = _connection.CreateCommand();
+
+                com.CommandType = System.Data.CommandType.Text;
+                com.CommandText = "SELECT * FROM " + QUESTION_TABLE + "WHERE fkDifficulty = " + difficultyID;
+
+                MySql.Data.MySqlClient.MySqlDataReader reader = com.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        question = reader.GetString(1);
+                        answer = reader.GetString(2);
+                        Question newQuestion = new Question(question,answer);
+                        questions.Add(newQuestion);
+                    }
+                    reader.Close();
+                }
+
+                ExternalManager.LogInfo("All question of difficulty "+ difficulty + " were selected.");                
+            }
+            catch (Exception e)
+            {
+                ExternalManager.LogError(e.Message);                
+            }
+
+            _connection.Close();
+            return questions;
         }
     }
 }

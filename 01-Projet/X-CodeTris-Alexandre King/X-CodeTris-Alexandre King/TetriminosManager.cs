@@ -63,8 +63,8 @@ namespace X_CodeTris_Alexandre_King
         /// <returns>a tetriminos (child of the Tetriminos class)</returns>
         static private Tetriminos GetRandomTetriminos()
         {
-            int tetriminos = _random.Next(TOTAL_TETRIMINOS);                                   
-            //int tetriminos = 1;
+            //int tetriminos = _random.Next(TOTAL_TETRIMINOS);                                   
+            int tetriminos = 1;
             switch (tetriminos)
             {
                 case 0:

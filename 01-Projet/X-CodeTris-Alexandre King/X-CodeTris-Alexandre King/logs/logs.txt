@@ -692,3 +692,26 @@ DATE 				|LEVEL 		|ERROR
 13.05.2024 14:15:19		ERROR		Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Unknown database 'db_codetris'
 13.05.2024 14:19:31		ERROR		Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Unknown database 'db_codetris'
 13.05.2024 14:20:27		ERROR		Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Unknown database 'db_codetris'
+13.05.2024 14:37:35		INFO		Database opened successfully
+13.05.2024 14:38:58		INFO		Database opened successfully
+13.05.2024 14:47:01		INFO		Database opened successfully
+13.05.2024 15:30:30		INFO		Database opened successfully
+13.05.2024 15:30:32		INFO		Database opened successfully
+13.05.2024 15:30:32		INFO		Database opened successfully
+13.05.2024 15:30:32		ERROR		There is already an open DataReader associated with this Connection which must be closed first.
+13.05.2024 15:32:40		INFO		Database opened successfully
+13.05.2024 15:32:49		INFO		Database opened successfully
+13.05.2024 15:32:55		INFO		Database opened successfully
+13.05.2024 15:33:19		INFO		Database opened successfully
+13.05.2024 15:33:28		INFO		Database opened successfully
+13.05.2024 15:33:30		INFO		Database opened successfully
+13.05.2024 15:34:14		INFO		All question of difficulty 0 were selected.
+13.05.2024 15:35:50		INFO		Database opened successfully
+13.05.2024 15:35:54		INFO		Database opened successfully
+13.05.2024 15:35:54		INFO		Database opened successfully
+13.05.2024 15:35:54		INFO		All question of difficulty 0 were selected.
+13.05.2024 15:38:00		INFO		Database opened successfully
+13.05.2024 15:38:13		INFO		Database opened successfully
+13.05.2024 15:38:14		INFO		Database opened successfully
+13.05.2024 15:38:14		INFO		Database opened successfully
+13.05.2024 15:38:14		INFO		All question of difficulty 0 were selected.

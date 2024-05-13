@@ -21,6 +21,13 @@ namespace X_CodeTris_Alexandre_King
         const string ROTATE_INSTRUCTION = "rotate";
         const string NATURAL_DOWN_INSTRUCTION = "naturalDown";
 
+        const int QUESTION_QUOTE_X_POS = 180;
+        const int QUESTION_QUOTE_Y_POS = 12;
+        const int QUESTION_ANSWER_X_POS = 180;
+        const int QUESTION_ANSWER_Y_POS = 16;
+
+        QuestionsManager questionsManager;
+
         //console coordonate
         int _currentTetriminosXPos;
         int _currentTetriminosYPos;
@@ -49,7 +56,9 @@ namespace X_CodeTris_Alexandre_King
         ConsoleKey _moveDown;
         ConsoleKey _rotate;
         ConsoleKey _dropDown;
-        ConsoleKeyInfo _pressedKey;        
+        ConsoleKeyInfo _pressedKey;
+
+        int _difficulty = 0;        
 
         const int EMPTY_CASE_CODE = 0;
         const int FALLING_CASE_CODE = 1;
@@ -69,6 +78,7 @@ namespace X_CodeTris_Alexandre_King
             ResetAll();
             DrawPlayArea();
             DefinePlayingKeys();
+            DefineDifficulty();
             StartGame();
         }
 
@@ -96,6 +106,29 @@ namespace X_CodeTris_Alexandre_King
                     break;
             }
             _dropDown = ConsoleKey.Spacebar;
+        }
+
+        private void DefineDifficulty()
+        {
+            _difficulty = MenuManager.GetDifficultyStatus();
+
+            switch (_difficulty)
+            {
+                case 0:
+                    _frameTiming = 250;
+                    break;
+                case 1:
+                    _frameTiming = 220;
+                    break;
+                case 2:
+                    _frameTiming = 180;
+                    break;
+                default:
+                    _frameTiming = 250;
+                    break;
+            }
+            questionsManager = new QuestionsManager(_difficulty);
+
         }
 
         private void ResetAll()
@@ -420,8 +453,7 @@ namespace X_CodeTris_Alexandre_King
                 }
             }
             if (touchedBottom)
-            {
-                TempDebugColor();
+            {                
                 List<int> lanes = FindCompletedLane();
                 int amountOfLanes = lanes.Count;
                 int laneToBlock = 0;
@@ -538,25 +570,31 @@ namespace X_CodeTris_Alexandre_King
 
         private int AskQuestions(int numberOfCompletedLines)
         {
+            Console.CursorVisible = true;
+            VisualManager.SetTextColor("white");
+            VisualManager.SetBackgroundColor("black");
+            Question currentQuestion = questionsManager.GetRandomQuestion();
             int wrongAnswer = 0;
             PauseGame();
             for (int i = 0; i < numberOfCompletedLines; i++)
             {
-                ShowQuestion();
-                if (!CheckAnswer(ManagePlayerAnswer()))
+                ShowQuestion(currentQuestion.Quote);
+                if (!CheckAnswer(ManagePlayerAnswer(),currentQuestion.Answer))
                 {
                     wrongAnswer++;
                 }                
                 
                 //Ask one question, wait for the result, next question
             }
-
+            Console.CursorVisible = false;
+            VisualManager.SetBackgroundColor("gray");
             return wrongAnswer;
         }
 
-        private void ShowQuestion()
-        { 
-            //Show Question
+        private void ShowQuestion(string quote)
+        {
+            Console.SetCursorPosition(QUESTION_QUOTE_X_POS,QUESTION_QUOTE_Y_POS);            
+            Console.Write(quote);
         }
 
         private string ManagePlayerAnswer()
@@ -564,13 +602,15 @@ namespace X_CodeTris_Alexandre_King
             //do while player didn't pressed ENTER
             do
             {
+                Console.SetCursorPosition(QUESTION_ANSWER_X_POS, QUESTION_ANSWER_Y_POS);
+                ConsoleKeyInfo keyInfo = Console.ReadKey();
 
             } while (true);
         }
 
-        private bool CheckAnswer(string givenAnswer)
+        private bool CheckAnswer(string givenAnswer,string correctAnswer)
         {
-            if (givenAnswer == "Good Answer")
+            if (givenAnswer.ToLower() == correctAnswer.ToLower())
             {
                 //Answer is correct
                 //Draw little cube next to the questio to indicate if the anser is true or not (red or green dot)
