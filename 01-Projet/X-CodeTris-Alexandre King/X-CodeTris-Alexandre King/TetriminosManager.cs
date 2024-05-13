@@ -64,7 +64,7 @@ namespace X_CodeTris_Alexandre_King
         static private Tetriminos GetRandomTetriminos()
         {
             int tetriminos = _random.Next(TOTAL_TETRIMINOS);                                   
-            //int tetriminos = 2;
+            //int tetriminos = 0;
             switch (tetriminos)
             {
                 case 0:

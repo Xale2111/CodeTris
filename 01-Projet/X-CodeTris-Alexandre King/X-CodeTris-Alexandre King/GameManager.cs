@@ -33,7 +33,9 @@ namespace X_CodeTris_Alexandre_King
         int _numberOfWrongAnswer = 0;
 
         bool _inGame = false;
+        bool _isPaused = false;
         bool _canSpawnNew = true;
+        bool _threadsStarted = false;
         int _frameTiming = 180;
         int _frameBeforeNew = 2;
         int _moveYCapacity = 1;
@@ -121,6 +123,35 @@ namespace X_CodeTris_Alexandre_King
             }
         }
 
+        private void PauseGame()
+        {
+            _inGame = false;
+            _instructionsTetriminos.Clear();
+            int totalThreads = _allThreads.Count();
+
+            for (int i = 0; i < totalThreads; i++)
+            {
+                try
+                {
+                    _allThreads[0].Abort();
+                    _allThreads.RemoveAt(0);
+                }
+                catch (Exception)
+                {
+                    _allThreads.Clear();
+                }
+            }
+            _threadsStarted = false;
+        }
+
+        private void ResumeGame()
+        {
+            _isPaused = false;
+            Thread.Sleep(1000);
+            _inGame = true;
+            
+        }
+
         private void StartAllThreads()
         {
             Thread playerInput = new Thread(ManagePlayerInput);
@@ -144,16 +175,11 @@ namespace X_CodeTris_Alexandre_King
                     switch (_instructionsTetriminos[0])
                     {
                         case DOWN_INSTRUCTION:
-                            if (CheckCanMoveInPlayZone(0, 1))
+                            if (CheckCanMoveInPlayZone(0, 1,true))
                             {
-                                TetriminosManager.MoveTetriminos(_currentTetriminosXPos, _currentTetriminosYPos, 0, 1);
-                                _currentTetriminosYPos += 2;
+                                TetriminosManager.MoveTetriminos(_currentTetriminosXPos, _currentTetriminosYPos, 0, _moveYCapacity);
                                 _playZoneTetriminosYPos += _moveYCapacity;
-                            }
-                            else
-                            {
-                                //wait for 2 frames if player give an input, else place 
-                                isPlaced = true;                                
+                                _currentTetriminosYPos += 2;
                             }
                             break;
                         case LEFT_INSTRUCTION:
@@ -162,12 +188,7 @@ namespace X_CodeTris_Alexandre_King
                                 TetriminosManager.MoveTetriminos(_currentTetriminosXPos, _currentTetriminosYPos, -1 * _moveXCapacity, 0);
                                 _currentTetriminosXPos -= 4;
                                 _playZoneTetriminosXPos -= _moveXCapacity;
-                            }
-                            else
-                            {
-                                isPlaced = true;                                
-                            }
-
+                            }                            
                             break;
                         case RIGHT_INSTRUCTION:
                             if (CheckCanMoveInPlayZone(1, 0))
@@ -175,11 +196,7 @@ namespace X_CodeTris_Alexandre_King
                                 TetriminosManager.MoveTetriminos(_currentTetriminosXPos, _currentTetriminosYPos, 1, 0);
                                 _currentTetriminosXPos += 4;
                                 _playZoneTetriminosXPos += _moveXCapacity;
-                            }
-                            else
-                            {
-                                isPlaced = true;                               
-                            }
+                            }                            
                             break;
                         case ROTATE_INSTRUCTION:
                             if (CheckCanRotateInPlayZone())
@@ -207,11 +224,7 @@ namespace X_CodeTris_Alexandre_King
                                     _currentTetriminosYPos -= 1;
                                     _playZoneTetriminosXPos -= _moveXCapacity;
                                 }
-                            }
-                            else
-                            {
-                                isPlaced = true;                                
-                            }
+                            }                            
                             break;
                         case NATURAL_DOWN_INSTRUCTION:
                             if (CheckCanMoveInPlayZone(0, 1))
@@ -227,15 +240,7 @@ namespace X_CodeTris_Alexandre_King
                             break;
                         default:
                             break;
-                    }
-                    if (isPlaced)
-                    {
-                        _canSpawnNew = true;
-                    }
-                    else
-                    {
-                        _canSpawnNew = false;
-                    }
+                    }                    
                     UpdateTetriminosOccupation(isPlaced);
                     //Check again before removing if there is more then 1 element (Using a Thread is the problem)
                     if (_instructionsTetriminos.Count() >0)
@@ -248,10 +253,7 @@ namespace X_CodeTris_Alexandre_King
 
         private void StartGame()
         {
-            _inGame = true;
-            //Thread to manage the user inputs
-            StartAllThreads();
-
+            _inGame = true;                        
 
             //count the frames after the tetriminos touched to bottom to let the player 2 frames of action
             int frameCounter = 0;
@@ -287,6 +289,11 @@ namespace X_CodeTris_Alexandre_King
                     _instructionsTetriminos.Add(NATURAL_DOWN_INSTRUCTION);
                 }
 
+                if (!_threadsStarted)
+                {
+                    StartAllThreads();
+                    _threadsStarted = true;
+                }
 
                 //TempDebug();
 
@@ -332,8 +339,10 @@ namespace X_CodeTris_Alexandre_King
 
         private void UpdateTetriminosOccupation(bool touchedBottom)
         {
+            bool tetriminosIsPlaced = false;
             ClearPlayZoneFromFalling();
 
+            
             for (int j = 0; j < TetriminosManager.GetCurrentTetriminosHeight(); j++)
             {
                 for (int i = 0; i < TetriminosManager.GetCurrentTetriminosWidth(); i++)
@@ -342,7 +351,8 @@ namespace X_CodeTris_Alexandre_King
                     {
                         if (touchedBottom)
                         {
-                            _playZone[_playZoneTetriminosXPos + i, _playZoneTetriminosYPos + j] = PLACED_CASE_CODE;                            
+                            _playZone[_playZoneTetriminosXPos + i, _playZoneTetriminosYPos + j] = PLACED_CASE_CODE;
+                            tetriminosIsPlaced = true;
                         }
                         else
                         {
@@ -363,15 +373,31 @@ namespace X_CodeTris_Alexandre_King
             {
                 TempDebug();
                 List<int> lanes = FindCompletedLane();
+                int amountOfLanes = lanes.Count;
+                int laneToRemove = AskQuestions(amountOfLanes);
+                for (int i = 0; i < laneToRemove; i++)
+                {
+
+                }
+                //ASK Questions (return number of correct answer
+                //Manage number of wrong question
                 if (lanes.Count > 0)
                 {
-                    for (int k = 0; k < lanes.Count; k++)
+                    for (int k = 0; k < amountOfLanes; k++)
                     {
                         RemoveLane(lanes[k]);
-                    }
-                    MoveLanesVisually(lanes.Count);
+                        TempDebug();
+                    }                    
+                    MoveLanesVisually(laneToRemove);
                 }
-                TempDebug();
+            }
+            if (tetriminosIsPlaced)
+            {
+                _canSpawnNew = true;
+            }
+            else
+            {
+                _canSpawnNew = false;
             }
         }
 
@@ -408,7 +434,7 @@ namespace X_CodeTris_Alexandre_King
             {
                 _playZone[i, fullLane] = EMPTY_CASE_CODE;
             }
-            for (int j = 0; j < fullLane-1; j++)
+            for (int j = fullLane - 1; j > 0; j--)
             {                
                 for (int i = 0; i < PLAY_ZONE_WIDTH / 2; i++)
                 {
@@ -421,9 +447,86 @@ namespace X_CodeTris_Alexandre_King
             }            
         }
         private void MoveLanesVisually(int dropDownBy)
-        { 
+        {
             //moveBufferArea (faire attention en cas de déplacement de la pièce actuelle (3 move buffer area autour de la pièce?)
+            int highestPoint = FindHighestPointOfPlayZone()*2;
+            int heightToMove = PLAY_ZONE_HEIGHT  - highestPoint-dropDownBy*2;
+            _playZoneTetriminosXPos = PLAY_ZONE_WIDTH / 4;
+            _playZoneTetriminosYPos = 0;
+            Console.MoveBufferArea(PLAY_ZONE_X_POS,PLAY_ZONE_Y_POS+highestPoint,PLAY_ZONE_WIDTH*2, heightToMove, PLAY_ZONE_X_POS, PLAY_ZONE_Y_POS + highestPoint+dropDownBy*2);           
         }
+
+        private int FindHighestPointOfPlayZone()
+        {
+            int highestPoint = PLAY_ZONE_HEIGHT/2-1;
+            for (int j = 0; j < PLAY_ZONE_HEIGHT/2; j++)
+            {
+                for (int i = 0; i < PLAY_ZONE_WIDTH / 2; i++)
+                {
+                    if (_playZone[i,j] == PLACED_CASE_CODE)
+                    {
+                        highestPoint = j - TetriminosManager.GetCurrentTetriminosHeight()*2;
+                        return highestPoint;
+                    }
+                }
+            }
+            return highestPoint;
+        }
+
+        private int AskQuestions(int numberOfCompletedLines)
+        {
+            int correctAnswer = 0;
+            PauseGame();
+            for (int i = 0; i < numberOfCompletedLines; i++)
+            {
+                ShowQuestion();
+                if (CheckAnswer(ManagePlayerAnswer()))
+                {
+                    correctAnswer++;
+                }                
+                
+                //Ask one question, wait for the result, next question
+            }
+
+            return correctAnswer;
+        }
+
+        private void ShowQuestion()
+        { 
+            //Show Question
+        }
+
+        private string ManagePlayerAnswer()
+        {
+            //do while player didn't pressed ENTER
+            do
+            {
+
+            } while (true);
+        }
+
+        private bool CheckAnswer(string givenAnswer)
+        {
+            if (givenAnswer == "Good Answer")
+            {
+                //Answer is correct
+                //Draw little cube next to the questio to indicate if the anser is true or not (red or green dot)
+                _numberOfRightAnswer++;
+                return true;
+            }
+            else
+            {
+                _numberOfWrongAnswer++;
+                ShowCorrectAnswer();
+                return false;
+            }
+        }
+
+        private void ShowCorrectAnswer()
+        {
+            //Write underneath the given answer the correct one
+        }
+
 
         private void ClearPlayZoneFromFalling()
         {
@@ -440,9 +543,16 @@ namespace X_CodeTris_Alexandre_King
             }
         }
 
-        private bool CheckCanMoveInPlayZone(int wantedXPos, int wantedYPos)
+        private bool CheckCanMoveInPlayZone(int wantedXPos, int wantedYPos, bool downInstruction = false)
         {
             bool canMoveToWantedPosition = false;
+            int countTrueStatement = 0;
+
+            int checkYPosValue = wantedYPos;
+            if (downInstruction)
+            {
+                checkYPosValue = wantedYPos+1;
+            }
 
             for (int j = 0; j < TetriminosManager.GetCurrentTetriminosHeight(); j++)
             {
@@ -450,10 +560,16 @@ namespace X_CodeTris_Alexandre_King
                 {
                     if (TetriminosManager.GetTetriminosOccupation()[i,j])
                     {
+                        if (countTrueStatement == 4)
+                        {
+                            canMoveToWantedPosition = true;
+                            return canMoveToWantedPosition;
+                        }
                         if (wantedXPos == 0)
                         {
-                            if (_playZoneTetriminosYPos + j + wantedYPos <PLAY_ZONE_HEIGHT/2)
-                            {                             
+
+                            if (_playZoneTetriminosYPos + j + wantedYPos < PLAY_ZONE_HEIGHT/2)
+                            {
                                 if (_playZone[_playZoneTetriminosXPos + i, _playZoneTetriminosYPos + j + wantedYPos] == PLACED_CASE_CODE
                                     || _playZone[_playZoneTetriminosXPos + i, _playZoneTetriminosYPos + j + wantedYPos] == BLOCKED_CASE_CODE)
                                 {
@@ -463,6 +579,7 @@ namespace X_CodeTris_Alexandre_King
                                 else
                                 {
                                     canMoveToWantedPosition = true;
+                                    countTrueStatement++;
                                 }
                             }
                         }
@@ -486,7 +603,7 @@ namespace X_CodeTris_Alexandre_King
                             }
                             else
                             {
-                                if (_playZoneTetriminosXPos + i + wantedXPos < PLAY_ZONE_WIDTH/2-1)
+                                if (_playZoneTetriminosXPos + i + wantedXPos < PLAY_ZONE_WIDTH / 2 - 1)
                                 {
                                     if (_playZone[_playZoneTetriminosXPos + i + wantedXPos, _playZoneTetriminosYPos + j] == PLACED_CASE_CODE
                                        || _playZone[_playZoneTetriminosXPos + i + wantedXPos, _playZoneTetriminosYPos + j] == BLOCKED_CASE_CODE)

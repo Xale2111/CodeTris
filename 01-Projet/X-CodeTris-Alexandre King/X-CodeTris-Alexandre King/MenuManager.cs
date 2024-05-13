@@ -534,7 +534,7 @@ namespace X_CodeTris_Alexandre_King
             {
                 Console.Clear();
                 CallMainMenu();
-                return 0;
+                return 3;
             }
             else
             {
