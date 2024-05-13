@@ -64,7 +64,7 @@ namespace X_CodeTris_Alexandre_King
         static private Tetriminos GetRandomTetriminos()
         {
             int tetriminos = _random.Next(TOTAL_TETRIMINOS);                                   
-            //int tetriminos = 0;
+            //int tetriminos = 1;
             switch (tetriminos)
             {
                 case 0:
@@ -131,6 +131,16 @@ namespace X_CodeTris_Alexandre_King
         {
             return _currentTetriminos.Name;
         }
+
+        /// <summary>
+        /// Get the tetriminos color
+        /// </summary>
+        /// <returns></returns>
+        static public string GetTetriminosColor()
+        {
+            return _currentTetriminos.Color;
+        }
+
         /// <summary>
         /// Check if a current tetriminios is define
         /// </summary>

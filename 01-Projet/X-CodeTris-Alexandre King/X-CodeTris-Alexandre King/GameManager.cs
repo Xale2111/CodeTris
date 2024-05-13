@@ -56,6 +56,9 @@ namespace X_CodeTris_Alexandre_King
         const int PLACED_CASE_CODE = 2;
         const int BLOCKED_CASE_CODE = 3;
 
+        string[,] _visualPlayZone = new string[PLAY_ZONE_WIDTH / 2, PLAY_ZONE_HEIGHT / 2]; //Matrix of the playzone visual
+
+
         int[,] _playZone = new int[PLAY_ZONE_WIDTH / 2, PLAY_ZONE_HEIGHT / 2]; //values divided by 2 because 1 "block" is 2X2 sized (Oblock is 4 "blocks" together)
                                                                                //0-> empty, 1-> occupied (current tetriminos),
                                                                                //2-> occupied (placed tetriminos),3->Blocked       
@@ -241,7 +244,7 @@ namespace X_CodeTris_Alexandre_King
                         default:
                             break;
                     }                    
-                    UpdateTetriminosOccupation(isPlaced);
+                    UpdateTetriminosOccupation(isPlaced);                   
                     //Check again before removing if there is more then 1 element (Using a Thread is the problem)
                     if (_instructionsTetriminos.Count() >0)
                     {
@@ -325,7 +328,58 @@ namespace X_CodeTris_Alexandre_King
             Debug.WriteLine("--------------------------");
         }
 
-           
+        private void TempDebugColor()
+        {
+            for (int j = 0; j < PLAY_ZONE_HEIGHT / 2; j++)
+            {
+                for (int i = 0; i < PLAY_ZONE_WIDTH / 2; i++)
+                {
+                    if (_visualPlayZone[i, j] == null)
+                    {
+                        _visualPlayZone[i, j] = string.Empty;
+                    }
+                    int numberOfTheColor = 0;
+                    switch (_visualPlayZone[i,j].ToLower())
+                    {
+                        case "green":
+                            numberOfTheColor = 1;
+                            break;
+                        case "red":
+                            numberOfTheColor = 2;
+                            break;
+                        case "magenta":
+                            numberOfTheColor = 3;
+                            break;
+                        case "dkyellow":
+                            numberOfTheColor = 4;
+                            break;
+                        case "cyan":
+                            numberOfTheColor = 5;
+                            break;
+                        case "yellow":
+                            numberOfTheColor = 6;
+                            break;
+                        case "blue":
+                            numberOfTheColor = 7;
+                            break;
+                        default:
+                            numberOfTheColor = 0;
+                            break;
+                    }
+                    if (numberOfTheColor != 0)
+                    {
+                        Debug.Write("["+numberOfTheColor+"]");
+                    }
+                    else
+                    {
+                        Debug.Write("[ ]");
+                    }
+                }
+                Debug.WriteLine("");
+
+            }
+            Debug.WriteLine("--------------------------");
+        }
 
         private void DrawNewTetriminos()
         {
@@ -353,42 +407,39 @@ namespace X_CodeTris_Alexandre_King
                         {
                             _playZone[_playZoneTetriminosXPos + i, _playZoneTetriminosYPos + j] = PLACED_CASE_CODE;
                             tetriminosIsPlaced = true;
+                            _instructionsTetriminos.Clear();
                         }
                         else
-                        {
+                        {                        
                             _playZone[_playZoneTetriminosXPos+i, _playZoneTetriminosYPos+j] = FALLING_CASE_CODE;                            
                         }
+
+                        _visualPlayZone[_playZoneTetriminosXPos + i, _playZoneTetriminosYPos + j] = TetriminosManager.GetTetriminosColor();
+
                     }                    
-                    /*else 
-                    {
-                        if (_playZone[_playZoneTetriminosXPos + i, _playZoneTetriminosYPos + j] != PLACED_CASE_CODE 
-                            || _playZone[_playZoneTetriminosXPos + i, _playZoneTetriminosYPos + j] != BLOCKED_CASE_CODE)
-                        { 
-                            _playZone[_playZoneTetriminosXPos + i, _playZoneTetriminosYPos + j] = EMPTY_CASE_CODE;
-                        }
-                    }*/
                 }
             }
             if (touchedBottom)
             {
-                TempDebug();
+                TempDebugColor();
                 List<int> lanes = FindCompletedLane();
                 int amountOfLanes = lanes.Count;
-                int laneToRemove = AskQuestions(amountOfLanes);
-                for (int i = 0; i < laneToRemove; i++)
-                {
-
-                }
+                int laneToBlock = 0;
                 //ASK Questions (return number of correct answer
                 //Manage number of wrong question
                 if (lanes.Count > 0)
                 {
+                    laneToBlock = AskQuestions(amountOfLanes);
+
                     for (int k = 0; k < amountOfLanes; k++)
                     {
-                        RemoveLane(lanes[k]);
-                        TempDebug();
+                        RemoveLane(lanes[k]);                        
                     }                    
-                    MoveLanesVisually(laneToRemove);
+                    MoveLanesVisually();
+                }
+                if (laneToBlock>0)
+                {
+                    //Block Lines
                 }
             }
             if (tetriminosIsPlaced)
@@ -433,6 +484,7 @@ namespace X_CodeTris_Alexandre_King
             for (int i = 0; i < PLAY_ZONE_WIDTH/2; i++)
             {
                 _playZone[i, fullLane] = EMPTY_CASE_CODE;
+                _visualPlayZone[i, fullLane] = string.Empty;
             }
             for (int j = fullLane - 1; j > 0; j--)
             {                
@@ -442,53 +494,64 @@ namespace X_CodeTris_Alexandre_King
                     {
                         _playZone[i, j + 1] = _playZone[i, j];
                         _playZone[i, j] = EMPTY_CASE_CODE;
+                        _visualPlayZone[i,j+1] = _visualPlayZone[i,j];
+                        _visualPlayZone[i,j] = string.Empty;
                     }
                 }                
             }            
         }
-        private void MoveLanesVisually(int dropDownBy)
-        {
-            //moveBufferArea (faire attention en cas de déplacement de la pièce actuelle (3 move buffer area autour de la pièce?)
-            int highestPoint = FindHighestPointOfPlayZone()*2;
-            int heightToMove = PLAY_ZONE_HEIGHT  - highestPoint-dropDownBy*2;
-            _playZoneTetriminosXPos = PLAY_ZONE_WIDTH / 4;
-            _playZoneTetriminosYPos = 0;
-            Console.MoveBufferArea(PLAY_ZONE_X_POS,PLAY_ZONE_Y_POS+highestPoint,PLAY_ZONE_WIDTH*2, heightToMove, PLAY_ZONE_X_POS, PLAY_ZONE_Y_POS + highestPoint+dropDownBy*2);           
+        private void MoveLanesVisually()
+        {            
+            ClearPlayZone();
+            RedrawEachTetriminos();
         }
 
-        private int FindHighestPointOfPlayZone()
+        private void RedrawEachTetriminos()
         {
-            int highestPoint = PLAY_ZONE_HEIGHT/2-1;
             for (int j = 0; j < PLAY_ZONE_HEIGHT/2; j++)
             {
-                for (int i = 0; i < PLAY_ZONE_WIDTH / 2; i++)
+                for (int i = 0; i < PLAY_ZONE_WIDTH /2; i++)
                 {
-                    if (_playZone[i,j] == PLACED_CASE_CODE)
+                    if (_visualPlayZone[i, j] != null && _visualPlayZone[i, j] != string.Empty)
                     {
-                        highestPoint = j - TetriminosManager.GetCurrentTetriminosHeight()*2;
-                        return highestPoint;
+                        VisualManager.SetTextColor(_visualPlayZone[i,j]);
+                        Console.SetCursorPosition(PLAY_ZONE_X_POS + i*4, PLAY_ZONE_Y_POS + j*2);
+                        Console.Write("████");
+                        Console.SetCursorPosition(PLAY_ZONE_X_POS + i*4, PLAY_ZONE_Y_POS + j*2+1);
+                        Console.Write("████");
                     }
                 }
             }
-            return highestPoint;
+        }
+
+        private void ClearPlayZone()
+        {
+            for (int j = 0; j < PLAY_ZONE_HEIGHT; j++)
+            {
+                for (int i = 0; i < PLAY_ZONE_WIDTH*2; i++)
+                {
+                    Console.SetCursorPosition(PLAY_ZONE_X_POS+i, PLAY_ZONE_Y_POS+j);
+                    Console.Write(" ");
+                }
+            }
         }
 
         private int AskQuestions(int numberOfCompletedLines)
         {
-            int correctAnswer = 0;
+            int wrongAnswer = 0;
             PauseGame();
             for (int i = 0; i < numberOfCompletedLines; i++)
             {
                 ShowQuestion();
-                if (CheckAnswer(ManagePlayerAnswer()))
+                if (!CheckAnswer(ManagePlayerAnswer()))
                 {
-                    correctAnswer++;
+                    wrongAnswer++;
                 }                
                 
                 //Ask one question, wait for the result, next question
             }
 
-            return correctAnswer;
+            return wrongAnswer;
         }
 
         private void ShowQuestion()
@@ -538,6 +601,7 @@ namespace X_CodeTris_Alexandre_King
                     if (_playZone[i,j] == 1)
                     {
                         _playZone[i, j] = 0;
+                        _visualPlayZone[i, j] = string.Empty;
                     }
                 }
             }
@@ -603,7 +667,7 @@ namespace X_CodeTris_Alexandre_King
                             }
                             else
                             {
-                                if (_playZoneTetriminosXPos + i + wantedXPos < PLAY_ZONE_WIDTH / 2 - 1)
+                                if (_playZoneTetriminosXPos + i + wantedXPos < PLAY_ZONE_WIDTH / 2)
                                 {
                                     if (_playZone[_playZoneTetriminosXPos + i + wantedXPos, _playZoneTetriminosYPos + j] == PLACED_CASE_CODE
                                        || _playZone[_playZoneTetriminosXPos + i + wantedXPos, _playZoneTetriminosYPos + j] == BLOCKED_CASE_CODE)
