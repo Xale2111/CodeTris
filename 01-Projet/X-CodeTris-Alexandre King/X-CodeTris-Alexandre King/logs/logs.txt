@@ -715,3 +715,718 @@ DATE 				|LEVEL 		|ERROR
 13.05.2024 15:38:14		INFO		Database opened successfully
 13.05.2024 15:38:14		INFO		Database opened successfully
 13.05.2024 15:38:14		INFO		All question of difficulty 0 were selected.
+15.05.2024 08:19:14		ERROR		Unable to connect to any of the specified MySQL hosts.
+15.05.2024 08:19:28		INFO		Database opened successfully
+15.05.2024 08:19:28		INFO		Database opened successfully
+15.05.2024 08:19:28		INFO		Database opened successfully
+15.05.2024 08:19:40		INFO		Database opened successfully
+15.05.2024 08:19:40		INFO		Database opened successfully
+15.05.2024 08:19:42		INFO		Database opened successfully
+15.05.2024 08:19:42		INFO		Database opened successfully
+15.05.2024 08:21:34		INFO		Database opened successfully
+15.05.2024 08:21:34		INFO		Database opened successfully
+15.05.2024 08:21:34		INFO		Database opened successfully
+15.05.2024 08:21:34		INFO		All question of difficulty 1 were selected.
+15.05.2024 08:21:42		INFO		Database opened successfully
+15.05.2024 08:21:44		INFO		Database opened successfully
+15.05.2024 08:21:44		INFO		Database opened successfully
+15.05.2024 08:21:44		INFO		All question of difficulty 0 were selected.
+15.05.2024 08:21:48		INFO		Database opened successfully
+15.05.2024 08:21:54		INFO		Database opened successfully
+15.05.2024 08:21:54		INFO		Database opened successfully
+15.05.2024 08:21:54		INFO		All question of difficulty 2 were selected.
+15.05.2024 08:22:13		INFO		Database opened successfully
+15.05.2024 08:22:24		INFO		Database opened successfully
+15.05.2024 08:22:24		INFO		Database opened successfully
+15.05.2024 08:22:24		INFO		All question of difficulty 1 were selected.
+15.05.2024 08:36:38		INFO		Database opened successfully
+15.05.2024 08:36:39		INFO		Database opened successfully
+15.05.2024 08:36:39		INFO		Database opened successfully
+15.05.2024 08:36:39		INFO		All question of difficulty 1 were selected.
+15.05.2024 08:37:07		INFO		Database opened successfully
+15.05.2024 08:37:08		INFO		Database opened successfully
+15.05.2024 08:37:08		INFO		Database opened successfully
+15.05.2024 08:37:08		INFO		All question of difficulty 0 were selected.
+15.05.2024 08:41:05		INFO		Database opened successfully
+15.05.2024 08:41:07		INFO		Database opened successfully
+15.05.2024 08:41:07		INFO		Database opened successfully
+15.05.2024 08:41:07		INFO		All question of difficulty 0 were selected.
+15.05.2024 08:41:30		INFO		Database opened successfully
+15.05.2024 08:41:36		INFO		Database opened successfully
+15.05.2024 08:41:36		INFO		Database opened successfully
+15.05.2024 08:41:36		INFO		All question of difficulty 0 were selected.
+15.05.2024 08:42:24		INFO		Database opened successfully
+15.05.2024 08:42:26		INFO		Database opened successfully
+15.05.2024 08:42:26		INFO		Database opened successfully
+15.05.2024 08:42:26		INFO		All question of difficulty 0 were selected.
+15.05.2024 08:43:09		INFO		Database opened successfully
+15.05.2024 08:43:10		INFO		Database opened successfully
+15.05.2024 08:43:10		INFO		Database opened successfully
+15.05.2024 08:43:10		INFO		All question of difficulty 0 were selected.
+15.05.2024 08:43:37		INFO		Database opened successfully
+15.05.2024 08:44:01		INFO		Database opened successfully
+15.05.2024 08:44:02		INFO		Database opened successfully
+15.05.2024 08:44:02		INFO		Database opened successfully
+15.05.2024 08:44:03		INFO		All question of difficulty 0 were selected.
+15.05.2024 08:44:52		INFO		Database opened successfully
+15.05.2024 08:44:53		INFO		Database opened successfully
+15.05.2024 08:44:53		INFO		Database opened successfully
+15.05.2024 08:44:53		INFO		All question of difficulty 0 were selected.
+15.05.2024 08:45:22		INFO		Database opened successfully
+15.05.2024 08:45:22		INFO		Database opened successfully
+15.05.2024 08:45:22		INFO		Database opened successfully
+15.05.2024 08:45:22		INFO		All question of difficulty 0 were selected.
+15.05.2024 08:45:37		INFO		Database opened successfully
+15.05.2024 08:45:39		INFO		Database opened successfully
+15.05.2024 08:45:39		INFO		Database opened successfully
+15.05.2024 08:45:39		INFO		All question of difficulty 0 were selected.
+15.05.2024 08:46:41		INFO		Database opened successfully
+15.05.2024 08:46:47		INFO		Database opened successfully
+15.05.2024 08:46:47		INFO		Database opened successfully
+15.05.2024 08:46:47		INFO		All question of difficulty 1 were selected.
+15.05.2024 08:48:16		INFO		Database opened successfully
+15.05.2024 08:48:20		INFO		Database opened successfully
+15.05.2024 08:48:21		INFO		Database opened successfully
+15.05.2024 08:48:21		INFO		All question of difficulty 1 were selected.
+15.05.2024 08:48:45		INFO		Database opened successfully
+15.05.2024 08:48:48		INFO		Database opened successfully
+15.05.2024 08:48:48		INFO		Database opened successfully
+15.05.2024 08:48:48		INFO		All question of difficulty 1 were selected.
+15.05.2024 08:58:33		INFO		Database opened successfully
+15.05.2024 08:58:34		INFO		Database opened successfully
+15.05.2024 08:58:34		INFO		Database opened successfully
+15.05.2024 08:58:34		INFO		All question of difficulty 0 were selected.
+15.05.2024 09:00:21		INFO		Database opened successfully
+15.05.2024 09:00:22		INFO		Database opened successfully
+15.05.2024 09:00:22		INFO		Database opened successfully
+15.05.2024 09:00:22		INFO		All question of difficulty 0 were selected.
+15.05.2024 09:00:56		INFO		Database opened successfully
+15.05.2024 09:00:57		INFO		Database opened successfully
+15.05.2024 09:00:57		INFO		Database opened successfully
+15.05.2024 09:00:57		INFO		All question of difficulty 0 were selected.
+15.05.2024 09:01:18		INFO		Database opened successfully
+15.05.2024 09:01:19		INFO		Database opened successfully
+15.05.2024 09:01:19		INFO		Database opened successfully
+15.05.2024 09:01:19		INFO		All question of difficulty 0 were selected.
+15.05.2024 09:01:32		INFO		Database opened successfully
+15.05.2024 09:01:33		INFO		Database opened successfully
+15.05.2024 09:01:33		INFO		Database opened successfully
+15.05.2024 09:01:33		INFO		All question of difficulty 0 were selected.
+15.05.2024 09:02:01		INFO		Database opened successfully
+15.05.2024 09:02:02		INFO		Database opened successfully
+15.05.2024 09:02:02		INFO		Database opened successfully
+15.05.2024 09:02:02		INFO		All question of difficulty 0 were selected.
+15.05.2024 09:05:58		INFO		Database opened successfully
+15.05.2024 09:05:59		INFO		Database opened successfully
+15.05.2024 09:05:59		INFO		Database opened successfully
+15.05.2024 09:05:59		INFO		All question of difficulty 0 were selected.
+15.05.2024 09:07:19		INFO		Database opened successfully
+15.05.2024 09:07:20		INFO		Database opened successfully
+15.05.2024 09:07:20		INFO		Database opened successfully
+15.05.2024 09:07:20		INFO		All question of difficulty 0 were selected.
+15.05.2024 09:14:57		INFO		Database opened successfully
+15.05.2024 09:14:58		INFO		Database opened successfully
+15.05.2024 09:14:59		INFO		Database opened successfully
+15.05.2024 09:14:59		INFO		All question of difficulty 0 were selected.
+15.05.2024 09:15:29		INFO		Database opened successfully
+15.05.2024 09:15:31		INFO		Database opened successfully
+15.05.2024 09:15:31		INFO		Database opened successfully
+15.05.2024 09:15:31		INFO		All question of difficulty 0 were selected.
+15.05.2024 09:16:14		INFO		Database opened successfully
+15.05.2024 09:16:15		INFO		Database opened successfully
+15.05.2024 09:16:15		INFO		Database opened successfully
+15.05.2024 09:16:15		INFO		All question of difficulty 0 were selected.
+15.05.2024 09:16:25		INFO		Database opened successfully
+15.05.2024 09:16:26		INFO		Database opened successfully
+15.05.2024 09:16:26		INFO		Database opened successfully
+15.05.2024 09:16:26		INFO		All question of difficulty 0 were selected.
+15.05.2024 09:18:47		INFO		Database opened successfully
+15.05.2024 09:18:49		INFO		Database opened successfully
+15.05.2024 09:18:49		INFO		Database opened successfully
+15.05.2024 09:18:49		INFO		All question of difficulty 0 were selected.
+15.05.2024 09:22:39		INFO		Database opened successfully
+15.05.2024 09:22:40		INFO		Database opened successfully
+15.05.2024 09:22:40		INFO		Database opened successfully
+15.05.2024 09:22:40		ERROR		Le processus ne peut pas accéder au fichier 'D:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\logs\logs.txt', car il est en cours d'utilisation par un autre processus.
+15.05.2024 09:27:20		INFO		Database opened successfully
+15.05.2024 09:27:21		INFO		Database opened successfully
+15.05.2024 09:27:21		INFO		Database opened successfully
+15.05.2024 09:27:21		INFO		All question of difficulty 0 were selected.
+15.05.2024 09:28:37		INFO		Database opened successfully
+15.05.2024 09:28:38		INFO		Database opened successfully
+15.05.2024 09:28:38		INFO		Database opened successfully
+15.05.2024 09:28:38		INFO		All question of difficulty 0 were selected.
+15.05.2024 09:29:06		INFO		Database opened successfully
+15.05.2024 09:29:12		INFO		Database opened successfully
+15.05.2024 09:29:12		INFO		Database opened successfully
+15.05.2024 09:29:12		INFO		All question of difficulty 0 were selected.
+15.05.2024 09:30:08		INFO		Database opened successfully
+15.05.2024 09:30:16		INFO		Database opened successfully
+15.05.2024 09:30:16		INFO		Database opened successfully
+15.05.2024 09:30:16		INFO		All question of difficulty 0 were selected.
+15.05.2024 09:31:37		INFO		Database opened successfully
+15.05.2024 09:31:44		INFO		Database opened successfully
+15.05.2024 09:31:44		INFO		Database opened successfully
+15.05.2024 09:31:44		INFO		All question of difficulty 0 were selected.
+15.05.2024 09:32:52		INFO		Database opened successfully
+15.05.2024 09:32:54		INFO		Database opened successfully
+15.05.2024 09:32:54		INFO		Database opened successfully
+15.05.2024 09:32:54		INFO		All question of difficulty 0 were selected.
+15.05.2024 09:33:42		INFO		Database opened successfully
+15.05.2024 09:33:48		INFO		Database opened successfully
+15.05.2024 09:33:48		INFO		Database opened successfully
+15.05.2024 09:33:48		INFO		All question of difficulty 0 were selected.
+15.05.2024 09:34:31		INFO		Database opened successfully
+15.05.2024 09:34:33		INFO		Database opened successfully
+15.05.2024 09:34:33		INFO		Database opened successfully
+15.05.2024 09:34:33		INFO		All question of difficulty 0 were selected.
+15.05.2024 09:34:44		INFO		Database opened successfully
+15.05.2024 09:34:45		INFO		Database opened successfully
+15.05.2024 09:34:45		INFO		Database opened successfully
+15.05.2024 09:34:45		INFO		All question of difficulty 0 were selected.
+15.05.2024 09:35:15		INFO		Database opened successfully
+15.05.2024 09:35:16		INFO		Database opened successfully
+15.05.2024 09:35:16		INFO		Database opened successfully
+15.05.2024 09:35:16		INFO		All question of difficulty 0 were selected.
+15.05.2024 09:35:20		INFO		Database opened successfully
+15.05.2024 09:35:21		INFO		Database opened successfully
+15.05.2024 09:35:21		INFO		Database opened successfully
+15.05.2024 09:35:21		INFO		All question of difficulty 0 were selected.
+15.05.2024 09:35:41		INFO		Database opened successfully
+15.05.2024 09:35:41		INFO		Database opened successfully
+15.05.2024 09:35:41		INFO		Database opened successfully
+15.05.2024 09:35:41		INFO		All question of difficulty 0 were selected.
+15.05.2024 09:56:09		INFO		Database opened successfully
+15.05.2024 09:56:10		INFO		Database opened successfully
+15.05.2024 09:56:10		INFO		Database opened successfully
+15.05.2024 09:56:10		INFO		All question of difficulty 0 were selected.
+15.05.2024 09:56:51		INFO		Database opened successfully
+15.05.2024 09:56:51		INFO		Database opened successfully
+15.05.2024 09:56:51		INFO		Database opened successfully
+15.05.2024 09:56:51		INFO		All question of difficulty 0 were selected.
+15.05.2024 09:58:54		INFO		Database opened successfully
+15.05.2024 09:58:55		INFO		Database opened successfully
+15.05.2024 09:58:55		INFO		Database opened successfully
+15.05.2024 09:58:55		INFO		All question of difficulty 0 were selected.
+15.05.2024 10:00:53		INFO		Database opened successfully
+15.05.2024 10:00:54		INFO		Database opened successfully
+15.05.2024 10:00:54		INFO		Database opened successfully
+15.05.2024 10:00:54		INFO		All question of difficulty 0 were selected.
+15.05.2024 10:01:28		INFO		Database opened successfully
+15.05.2024 10:01:33		INFO		Database opened successfully
+15.05.2024 10:01:33		INFO		Database opened successfully
+15.05.2024 10:01:33		INFO		All question of difficulty 0 were selected.
+15.05.2024 10:01:51		INFO		Database opened successfully
+15.05.2024 10:01:52		INFO		Database opened successfully
+15.05.2024 10:01:52		INFO		Database opened successfully
+15.05.2024 10:01:52		INFO		All question of difficulty 0 were selected.
+15.05.2024 10:14:41		INFO		Database opened successfully
+15.05.2024 10:14:41		INFO		Database opened successfully
+15.05.2024 10:14:41		INFO		Database opened successfully
+15.05.2024 10:14:41		INFO		All question of difficulty 0 were selected.
+15.05.2024 10:16:57		INFO		Database opened successfully
+15.05.2024 10:16:59		INFO		Database opened successfully
+15.05.2024 10:16:59		INFO		Database opened successfully
+15.05.2024 10:16:59		INFO		All question of difficulty 0 were selected.
+15.05.2024 10:18:06		INFO		Database opened successfully
+15.05.2024 10:18:11		INFO		Database opened successfully
+15.05.2024 10:18:11		INFO		Database opened successfully
+15.05.2024 10:18:11		INFO		All question of difficulty 1 were selected.
+15.05.2024 10:18:35		INFO		Database opened successfully
+15.05.2024 10:18:36		INFO		Database opened successfully
+15.05.2024 10:18:36		INFO		Database opened successfully
+15.05.2024 10:18:36		INFO		All question of difficulty 1 were selected.
+15.05.2024 10:19:38		INFO		Database opened successfully
+15.05.2024 10:19:40		INFO		Database opened successfully
+15.05.2024 10:19:40		INFO		Database opened successfully
+15.05.2024 10:19:40		INFO		All question of difficulty 0 were selected.
+15.05.2024 10:20:04		INFO		Database opened successfully
+15.05.2024 10:21:10		INFO		Database opened successfully
+15.05.2024 10:21:36		INFO		Database opened successfully
+15.05.2024 10:21:39		INFO		Database opened successfully
+15.05.2024 10:21:39		INFO		Database opened successfully
+15.05.2024 10:21:39		INFO		All question of difficulty 1 were selected.
+15.05.2024 10:22:06		INFO		Database opened successfully
+15.05.2024 10:24:06		INFO		Database opened successfully
+15.05.2024 10:24:06		INFO		Database opened successfully
+15.05.2024 10:24:06		INFO		All question of difficulty 1 were selected.
+15.05.2024 10:24:15		INFO		Database opened successfully
+15.05.2024 10:25:00		INFO		Database opened successfully
+15.05.2024 10:25:10		INFO		Database opened successfully
+15.05.2024 10:25:10		INFO		Database opened successfully
+15.05.2024 10:25:10		INFO		All question of difficulty 1 were selected.
+15.05.2024 10:25:14		INFO		Database opened successfully
+15.05.2024 10:25:20		INFO		Database opened successfully
+15.05.2024 10:25:20		INFO		Database opened successfully
+15.05.2024 10:25:20		INFO		All question of difficulty 0 were selected.
+15.05.2024 10:25:26		INFO		Database opened successfully
+15.05.2024 10:25:31		INFO		Database opened successfully
+15.05.2024 10:25:31		INFO		Database opened successfully
+15.05.2024 10:25:31		INFO		All question of difficulty 2 were selected.
+15.05.2024 10:25:37		INFO		Database opened successfully
+15.05.2024 10:25:38		INFO		Database opened successfully
+15.05.2024 10:25:38		INFO		Database opened successfully
+15.05.2024 10:25:38		INFO		All question of difficulty 2 were selected.
+15.05.2024 10:25:43		INFO		Database opened successfully
+15.05.2024 10:25:43		INFO		Database opened successfully
+15.05.2024 10:25:43		INFO		Database opened successfully
+15.05.2024 10:25:43		INFO		All question of difficulty 2 were selected.
+15.05.2024 10:25:46		INFO		Database opened successfully
+15.05.2024 10:25:47		INFO		Database opened successfully
+15.05.2024 10:25:47		INFO		Database opened successfully
+15.05.2024 10:25:47		INFO		All question of difficulty 2 were selected.
+15.05.2024 10:25:49		INFO		Database opened successfully
+15.05.2024 10:25:50		INFO		Database opened successfully
+15.05.2024 10:25:50		INFO		Database opened successfully
+15.05.2024 10:25:50		INFO		All question of difficulty 2 were selected.
+15.05.2024 10:25:54		INFO		Database opened successfully
+15.05.2024 10:25:54		INFO		Database opened successfully
+15.05.2024 10:25:54		INFO		Database opened successfully
+15.05.2024 10:25:54		INFO		All question of difficulty 2 were selected.
+15.05.2024 10:25:56		INFO		Database opened successfully
+15.05.2024 10:25:57		INFO		Database opened successfully
+15.05.2024 10:25:57		INFO		Database opened successfully
+15.05.2024 10:25:57		INFO		All question of difficulty 2 were selected.
+15.05.2024 10:25:59		INFO		Database opened successfully
+15.05.2024 10:25:59		INFO		Database opened successfully
+15.05.2024 10:25:59		INFO		Database opened successfully
+15.05.2024 10:25:59		INFO		All question of difficulty 2 were selected.
+15.05.2024 10:26:01		INFO		Database opened successfully
+15.05.2024 10:26:02		INFO		Database opened successfully
+15.05.2024 10:26:02		INFO		Database opened successfully
+15.05.2024 10:26:02		INFO		All question of difficulty 2 were selected.
+15.05.2024 10:26:04		INFO		Database opened successfully
+15.05.2024 10:26:05		INFO		Database opened successfully
+15.05.2024 10:26:05		INFO		Database opened successfully
+15.05.2024 10:26:05		INFO		All question of difficulty 2 were selected.
+15.05.2024 10:26:08		INFO		Database opened successfully
+15.05.2024 10:26:09		INFO		Database opened successfully
+15.05.2024 10:26:09		INFO		Database opened successfully
+15.05.2024 10:26:09		INFO		All question of difficulty 2 were selected.
+15.05.2024 10:26:28		INFO		Database opened successfully
+15.05.2024 10:26:33		INFO		Database opened successfully
+15.05.2024 10:26:33		INFO		Database opened successfully
+15.05.2024 10:26:39		INFO		All question of difficulty 2 were selected.
+15.05.2024 10:27:41		INFO		Database opened successfully
+15.05.2024 10:27:47		INFO		Database opened successfully
+15.05.2024 10:27:47		INFO		Database opened successfully
+15.05.2024 10:27:47		INFO		All question of difficulty 2 were selected.
+15.05.2024 10:29:02		INFO		Database opened successfully
+15.05.2024 10:29:08		INFO		Database opened successfully
+15.05.2024 10:29:08		INFO		Database opened successfully
+15.05.2024 10:29:08		INFO		All question of difficulty 1 were selected.
+15.05.2024 10:29:13		INFO		Database opened successfully
+15.05.2024 10:29:13		INFO		Database opened successfully
+15.05.2024 10:29:13		INFO		Database opened successfully
+15.05.2024 10:29:13		INFO		All question of difficulty 1 were selected.
+15.05.2024 10:29:16		INFO		Database opened successfully
+15.05.2024 10:29:17		INFO		Database opened successfully
+15.05.2024 10:29:17		INFO		Database opened successfully
+15.05.2024 10:29:17		INFO		All question of difficulty 1 were selected.
+15.05.2024 10:29:20		INFO		Database opened successfully
+15.05.2024 10:29:21		INFO		Database opened successfully
+15.05.2024 10:29:21		INFO		Database opened successfully
+15.05.2024 10:29:21		INFO		All question of difficulty 1 were selected.
+15.05.2024 10:29:24		INFO		Database opened successfully
+15.05.2024 10:29:25		INFO		Database opened successfully
+15.05.2024 10:29:25		INFO		Database opened successfully
+15.05.2024 10:29:25		INFO		All question of difficulty 1 were selected.
+15.05.2024 10:29:27		INFO		Database opened successfully
+15.05.2024 10:29:27		INFO		Database opened successfully
+15.05.2024 10:29:27		INFO		Database opened successfully
+15.05.2024 10:29:27		INFO		All question of difficulty 1 were selected.
+15.05.2024 10:29:30		INFO		Database opened successfully
+15.05.2024 10:29:30		INFO		Database opened successfully
+15.05.2024 10:29:30		INFO		Database opened successfully
+15.05.2024 10:29:30		INFO		All question of difficulty 1 were selected.
+15.05.2024 10:29:32		INFO		Database opened successfully
+15.05.2024 10:29:33		INFO		Database opened successfully
+15.05.2024 10:29:33		INFO		Database opened successfully
+15.05.2024 10:29:33		INFO		All question of difficulty 1 were selected.
+15.05.2024 10:29:35		INFO		Database opened successfully
+15.05.2024 10:29:36		INFO		Database opened successfully
+15.05.2024 10:29:36		INFO		Database opened successfully
+15.05.2024 10:29:36		INFO		All question of difficulty 1 were selected.
+15.05.2024 10:29:38		INFO		Database opened successfully
+15.05.2024 10:29:39		INFO		Database opened successfully
+15.05.2024 10:29:39		INFO		Database opened successfully
+15.05.2024 10:29:39		INFO		All question of difficulty 1 were selected.
+15.05.2024 10:29:41		INFO		Database opened successfully
+15.05.2024 10:29:42		INFO		Database opened successfully
+15.05.2024 10:29:42		INFO		Database opened successfully
+15.05.2024 10:29:42		INFO		All question of difficulty 1 were selected.
+15.05.2024 10:29:44		INFO		Database opened successfully
+15.05.2024 10:29:44		INFO		Database opened successfully
+15.05.2024 10:29:44		INFO		Database opened successfully
+15.05.2024 10:29:44		INFO		All question of difficulty 1 were selected.
+15.05.2024 10:29:48		INFO		Database opened successfully
+15.05.2024 10:29:49		INFO		Database opened successfully
+15.05.2024 10:29:49		INFO		Database opened successfully
+15.05.2024 10:29:49		INFO		All question of difficulty 1 were selected.
+15.05.2024 10:29:51		INFO		Database opened successfully
+15.05.2024 10:29:53		INFO		Database opened successfully
+15.05.2024 10:29:53		INFO		Database opened successfully
+15.05.2024 10:29:53		INFO		All question of difficulty 1 were selected.
+15.05.2024 10:29:55		INFO		Database opened successfully
+15.05.2024 10:29:56		INFO		Database opened successfully
+15.05.2024 10:29:56		INFO		Database opened successfully
+15.05.2024 10:29:56		INFO		All question of difficulty 1 were selected.
+15.05.2024 10:29:58		INFO		Database opened successfully
+15.05.2024 10:29:58		INFO		Database opened successfully
+15.05.2024 10:29:59		INFO		Database opened successfully
+15.05.2024 10:29:59		INFO		All question of difficulty 1 were selected.
+15.05.2024 10:30:01		INFO		Database opened successfully
+15.05.2024 10:30:01		INFO		Database opened successfully
+15.05.2024 10:30:01		INFO		Database opened successfully
+15.05.2024 10:30:01		INFO		All question of difficulty 1 were selected.
+15.05.2024 10:30:03		INFO		Database opened successfully
+15.05.2024 10:30:04		INFO		Database opened successfully
+15.05.2024 10:30:04		INFO		Database opened successfully
+15.05.2024 10:30:04		INFO		All question of difficulty 1 were selected.
+15.05.2024 10:30:07		INFO		Database opened successfully
+15.05.2024 10:30:07		INFO		Database opened successfully
+15.05.2024 10:30:07		INFO		Database opened successfully
+15.05.2024 10:30:07		INFO		All question of difficulty 1 were selected.
+15.05.2024 10:35:48		INFO		Database opened successfully
+15.05.2024 10:35:49		INFO		Database opened successfully
+15.05.2024 10:35:49		INFO		Database opened successfully
+15.05.2024 10:35:49		INFO		All question of difficulty 1 were selected.
+15.05.2024 10:36:41		INFO		Database opened successfully
+15.05.2024 10:36:41		INFO		Database opened successfully
+15.05.2024 10:36:42		INFO		Database opened successfully
+15.05.2024 10:36:42		INFO		All question of difficulty 1 were selected.
+15.05.2024 10:38:09		INFO		Database opened successfully
+15.05.2024 10:38:41		INFO		Database opened successfully
+15.05.2024 10:38:41		INFO		Database opened successfully
+15.05.2024 10:38:41		INFO		All question of difficulty 1 were selected.
+15.05.2024 10:38:49		INFO		Database opened successfully
+15.05.2024 10:38:50		INFO		Database opened successfully
+15.05.2024 10:38:50		INFO		Database opened successfully
+15.05.2024 10:38:50		INFO		All question of difficulty 1 were selected.
+15.05.2024 10:40:17		INFO		Database opened successfully
+15.05.2024 10:40:19		INFO		Database opened successfully
+15.05.2024 10:40:19		INFO		Database opened successfully
+15.05.2024 10:40:19		INFO		All question of difficulty 1 were selected.
+15.05.2024 10:43:08		INFO		Database opened successfully
+15.05.2024 10:43:09		INFO		Database opened successfully
+15.05.2024 10:43:09		INFO		Database opened successfully
+15.05.2024 10:43:10		INFO		All question of difficulty 1 were selected.
+15.05.2024 10:46:12		INFO		Database opened successfully
+15.05.2024 10:46:13		INFO		Database opened successfully
+15.05.2024 10:46:13		INFO		Database opened successfully
+15.05.2024 10:46:13		INFO		All question of difficulty 1 were selected.
+15.05.2024 10:46:54		INFO		Database opened successfully
+15.05.2024 10:46:55		INFO		Database opened successfully
+15.05.2024 10:46:55		INFO		Database opened successfully
+15.05.2024 10:46:55		INFO		All question of difficulty 1 were selected.
+15.05.2024 10:47:14		INFO		Database opened successfully
+15.05.2024 10:47:42		INFO		Database opened successfully
+15.05.2024 10:47:42		INFO		Database opened successfully
+15.05.2024 10:47:42		INFO		All question of difficulty 1 were selected.
+15.05.2024 10:48:49		INFO		Database opened successfully
+15.05.2024 10:48:51		INFO		Database opened successfully
+15.05.2024 10:48:51		INFO		Database opened successfully
+15.05.2024 10:48:51		INFO		All question of difficulty 1 were selected.
+15.05.2024 10:55:39		INFO		Database opened successfully
+15.05.2024 10:55:40		INFO		Database opened successfully
+15.05.2024 10:55:40		INFO		Database opened successfully
+15.05.2024 10:55:40		INFO		All question of difficulty 1 were selected.
+15.05.2024 10:57:37		INFO		Database opened successfully
+15.05.2024 10:57:38		INFO		Database opened successfully
+15.05.2024 10:57:38		INFO		Database opened successfully
+15.05.2024 10:57:38		INFO		All question of difficulty 1 were selected.
+15.05.2024 10:59:47		INFO		Database opened successfully
+15.05.2024 10:59:48		INFO		Database opened successfully
+15.05.2024 10:59:48		INFO		Database opened successfully
+15.05.2024 10:59:48		INFO		All question of difficulty 1 were selected.
+15.05.2024 11:01:28		INFO		Database opened successfully
+15.05.2024 11:01:30		INFO		Database opened successfully
+15.05.2024 11:01:30		INFO		Database opened successfully
+15.05.2024 11:01:30		INFO		All question of difficulty 1 were selected.
+15.05.2024 11:02:13		INFO		Database opened successfully
+15.05.2024 11:02:13		INFO		Database opened successfully
+15.05.2024 11:02:13		INFO		Database opened successfully
+15.05.2024 11:02:13		INFO		All question of difficulty 1 were selected.
+15.05.2024 11:09:00		INFO		Database opened successfully
+15.05.2024 11:09:00		INFO		Database opened successfully
+15.05.2024 11:09:00		INFO		Database opened successfully
+15.05.2024 11:09:00		INFO		All question of difficulty 1 were selected.
+15.05.2024 11:09:18		INFO		Database opened successfully
+15.05.2024 11:09:19		INFO		Database opened successfully
+15.05.2024 11:09:19		INFO		Database opened successfully
+15.05.2024 11:09:19		INFO		All question of difficulty 1 were selected.
+15.05.2024 11:13:23		INFO		Database opened successfully
+15.05.2024 11:13:49		INFO		Database opened successfully
+15.05.2024 11:14:00		INFO		Database opened successfully
+15.05.2024 11:14:16		INFO		Database opened successfully
+15.05.2024 11:15:59		INFO		Database opened successfully
+15.05.2024 11:16:13		INFO		Database opened successfully
+15.05.2024 11:16:26		INFO		Database opened successfully
+15.05.2024 11:16:27		INFO		Database opened successfully
+15.05.2024 11:16:27		INFO		Database opened successfully
+15.05.2024 11:16:27		INFO		All question of difficulty 1 were selected.
+15.05.2024 11:16:36		INFO		Database opened successfully
+15.05.2024 11:16:36		INFO		Database opened successfully
+15.05.2024 11:16:36		INFO		Database opened successfully
+15.05.2024 11:16:36		INFO		All question of difficulty 1 were selected.
+15.05.2024 11:17:12		INFO		Database opened successfully
+15.05.2024 11:17:13		INFO		Database opened successfully
+15.05.2024 11:17:13		INFO		Database opened successfully
+15.05.2024 11:17:13		INFO		All question of difficulty 1 were selected.
+15.05.2024 11:18:35		INFO		Database opened successfully
+15.05.2024 11:18:36		INFO		Database opened successfully
+15.05.2024 11:18:36		INFO		Database opened successfully
+15.05.2024 11:18:36		INFO		All question of difficulty 1 were selected.
+15.05.2024 11:18:58		INFO		Database opened successfully
+15.05.2024 11:18:59		INFO		Database opened successfully
+15.05.2024 11:18:59		INFO		Database opened successfully
+15.05.2024 11:18:59		INFO		All question of difficulty 1 were selected.
+15.05.2024 11:19:31		INFO		Database opened successfully
+15.05.2024 11:19:32		INFO		Database opened successfully
+15.05.2024 11:19:32		INFO		Database opened successfully
+15.05.2024 11:19:32		INFO		All question of difficulty 1 were selected.
+15.05.2024 11:20:33		INFO		Database opened successfully
+15.05.2024 11:20:34		INFO		Database opened successfully
+15.05.2024 11:20:34		INFO		Database opened successfully
+15.05.2024 11:20:34		INFO		All question of difficulty 1 were selected.
+15.05.2024 11:23:42		INFO		Database opened successfully
+15.05.2024 11:23:43		INFO		Database opened successfully
+15.05.2024 11:23:43		INFO		Database opened successfully
+15.05.2024 11:23:43		INFO		All question of difficulty 1 were selected.
+15.05.2024 11:24:26		INFO		Database opened successfully
+15.05.2024 11:24:40		INFO		Database opened successfully
+15.05.2024 11:24:40		INFO		Database opened successfully
+15.05.2024 11:24:40		INFO		All question of difficulty 2 were selected.
+15.05.2024 11:25:17		INFO		Database opened successfully
+15.05.2024 11:25:18		INFO		Database opened successfully
+15.05.2024 11:25:18		INFO		Database opened successfully
+15.05.2024 11:25:18		INFO		All question of difficulty 2 were selected.
+15.05.2024 13:11:43		INFO		Database opened successfully
+15.05.2024 13:12:00		INFO		Database opened successfully
+15.05.2024 13:12:00		INFO		Database opened successfully
+15.05.2024 13:12:00		INFO		All question of difficulty 2 were selected.
+15.05.2024 13:14:24		INFO		Database opened successfully
+15.05.2024 13:14:25		INFO		Database opened successfully
+15.05.2024 13:14:25		INFO		Database opened successfully
+15.05.2024 13:14:25		INFO		All question of difficulty 2 were selected.
+15.05.2024 13:18:41		INFO		Database opened successfully
+15.05.2024 13:19:15		INFO		Database opened successfully
+15.05.2024 13:22:55		INFO		Database opened successfully
+15.05.2024 13:22:56		INFO		Database opened successfully
+15.05.2024 13:22:56		INFO		Database opened successfully
+15.05.2024 13:22:56		INFO		All question of difficulty 2 were selected.
+15.05.2024 13:25:09		INFO		Database opened successfully
+15.05.2024 13:25:10		INFO		Database opened successfully
+15.05.2024 13:25:10		INFO		Database opened successfully
+15.05.2024 13:25:10		INFO		All question of difficulty 2 were selected.
+15.05.2024 13:25:33		INFO		Database opened successfully
+15.05.2024 13:25:35		INFO		Database opened successfully
+15.05.2024 13:25:35		INFO		Database opened successfully
+15.05.2024 13:25:35		INFO		All question of difficulty 2 were selected.
+15.05.2024 13:26:26		INFO		Database opened successfully
+15.05.2024 13:26:28		INFO		Database opened successfully
+15.05.2024 13:26:28		INFO		Database opened successfully
+15.05.2024 13:26:28		INFO		All question of difficulty 2 were selected.
+15.05.2024 13:28:24		INFO		Database opened successfully
+15.05.2024 13:28:25		INFO		Database opened successfully
+15.05.2024 13:28:25		INFO		Database opened successfully
+15.05.2024 13:28:25		INFO		All question of difficulty 2 were selected.
+15.05.2024 13:29:41		INFO		Database opened successfully
+15.05.2024 13:29:43		INFO		Database opened successfully
+15.05.2024 13:29:43		INFO		Database opened successfully
+15.05.2024 13:29:43		INFO		All question of difficulty 2 were selected.
+15.05.2024 13:30:23		INFO		Database opened successfully
+15.05.2024 13:30:24		INFO		Database opened successfully
+15.05.2024 13:30:24		INFO		Database opened successfully
+15.05.2024 13:30:24		INFO		All question of difficulty 2 were selected.
+15.05.2024 13:32:30		INFO		Database opened successfully
+15.05.2024 13:32:31		INFO		Database opened successfully
+15.05.2024 13:32:31		INFO		Database opened successfully
+15.05.2024 13:32:31		INFO		All question of difficulty 2 were selected.
+15.05.2024 13:34:16		INFO		Database opened successfully
+15.05.2024 13:34:17		INFO		Database opened successfully
+15.05.2024 13:34:17		INFO		Database opened successfully
+15.05.2024 13:34:17		INFO		All question of difficulty 2 were selected.
+15.05.2024 13:34:39		INFO		Database opened successfully
+15.05.2024 13:34:40		INFO		Database opened successfully
+15.05.2024 13:34:40		INFO		Database opened successfully
+15.05.2024 13:34:40		INFO		All question of difficulty 2 were selected.
+15.05.2024 13:35:43		INFO		Database opened successfully
+15.05.2024 13:35:45		INFO		Database opened successfully
+15.05.2024 13:35:45		INFO		Database opened successfully
+15.05.2024 13:35:45		INFO		All question of difficulty 2 were selected.
+15.05.2024 13:42:30		INFO		Database opened successfully
+15.05.2024 13:42:32		INFO		Database opened successfully
+15.05.2024 13:42:32		INFO		Database opened successfully
+15.05.2024 13:42:32		INFO		All question of difficulty 2 were selected.
+15.05.2024 13:44:57		INFO		Database opened successfully
+15.05.2024 13:45:09		INFO		Database opened successfully
+15.05.2024 13:45:09		INFO		Database opened successfully
+15.05.2024 13:45:09		INFO		All question of difficulty 2 were selected.
+15.05.2024 13:46:35		INFO		Database opened successfully
+15.05.2024 13:47:00		INFO		Database opened successfully
+15.05.2024 13:47:00		INFO		Database opened successfully
+15.05.2024 13:47:00		ERROR		Le processus ne peut pas accéder au fichier 'D:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\logs\logs.txt', car il est en cours d'utilisation par un autre processus.
+15.05.2024 13:49:26		INFO		Database opened successfully
+15.05.2024 13:49:27		INFO		Database opened successfully
+15.05.2024 13:49:27		INFO		Database opened successfully
+15.05.2024 13:49:27		INFO		All question of difficulty 2 were selected.
+15.05.2024 13:51:04		INFO		Database opened successfully
+15.05.2024 13:51:35		INFO		Database opened successfully
+15.05.2024 13:51:35		INFO		Database opened successfully
+15.05.2024 13:51:35		INFO		All question of difficulty 2 were selected.
+15.05.2024 13:52:23		INFO		Database opened successfully
+15.05.2024 13:52:24		INFO		Database opened successfully
+15.05.2024 13:52:24		INFO		Database opened successfully
+15.05.2024 13:52:24		INFO		All question of difficulty 2 were selected.
+15.05.2024 13:53:55		INFO		Database opened successfully
+15.05.2024 13:53:56		INFO		Database opened successfully
+15.05.2024 13:53:56		INFO		Database opened successfully
+15.05.2024 13:53:56		INFO		All question of difficulty 2 were selected.
+15.05.2024 13:55:08		INFO		Database opened successfully
+15.05.2024 13:55:09		INFO		Database opened successfully
+15.05.2024 13:55:09		INFO		Database opened successfully
+15.05.2024 13:55:09		INFO		All question of difficulty 2 were selected.
+15.05.2024 13:56:38		INFO		Database opened successfully
+15.05.2024 13:56:41		INFO		Database opened successfully
+15.05.2024 13:56:41		INFO		Database opened successfully
+15.05.2024 13:56:41		INFO		All question of difficulty 2 were selected.
+15.05.2024 13:58:03		INFO		Database opened successfully
+15.05.2024 13:58:18		INFO		Database opened successfully
+15.05.2024 13:58:18		INFO		Database opened successfully
+15.05.2024 13:58:18		INFO		All question of difficulty 2 were selected.
+15.05.2024 14:02:52		INFO		Database opened successfully
+15.05.2024 14:02:59		INFO		Database opened successfully
+15.05.2024 14:02:59		INFO		Database opened successfully
+15.05.2024 14:02:59		INFO		All question of difficulty 2 were selected.
+15.05.2024 14:05:25		INFO		Database opened successfully
+15.05.2024 14:05:27		INFO		Database opened successfully
+15.05.2024 14:05:27		INFO		Database opened successfully
+15.05.2024 14:05:27		INFO		All question of difficulty 2 were selected.
+15.05.2024 14:06:20		INFO		Database opened successfully
+15.05.2024 14:06:21		INFO		Database opened successfully
+15.05.2024 14:06:21		INFO		Database opened successfully
+15.05.2024 14:06:21		INFO		All question of difficulty 2 were selected.
+15.05.2024 14:08:17		INFO		Database opened successfully
+15.05.2024 14:08:18		INFO		Database opened successfully
+15.05.2024 14:08:18		INFO		Database opened successfully
+15.05.2024 14:08:18		INFO		All question of difficulty 2 were selected.
+15.05.2024 14:15:24		INFO		Database opened successfully
+15.05.2024 14:15:27		INFO		Database opened successfully
+15.05.2024 14:15:27		INFO		Database opened successfully
+15.05.2024 14:15:27		INFO		All question of difficulty 2 were selected.
+15.05.2024 14:17:57		INFO		Database opened successfully
+15.05.2024 14:18:05		INFO		Database opened successfully
+15.05.2024 14:18:05		INFO		Database opened successfully
+15.05.2024 14:18:05		INFO		All question of difficulty 2 were selected.
+15.05.2024 14:22:55		INFO		Database opened successfully
+15.05.2024 14:22:57		INFO		Database opened successfully
+15.05.2024 14:22:57		INFO		Database opened successfully
+15.05.2024 14:22:57		INFO		All question of difficulty 2 were selected.
+15.05.2024 14:24:38		INFO		Database opened successfully
+15.05.2024 14:24:48		INFO		Database opened successfully
+15.05.2024 14:24:48		INFO		Database opened successfully
+15.05.2024 14:24:48		INFO		All question of difficulty 2 were selected.
+15.05.2024 14:26:35		INFO		Database opened successfully
+15.05.2024 14:26:37		INFO		Database opened successfully
+15.05.2024 14:26:37		INFO		Database opened successfully
+15.05.2024 14:26:37		INFO		All question of difficulty 2 were selected.
+15.05.2024 14:30:05		INFO		Database opened successfully
+15.05.2024 14:30:06		INFO		Database opened successfully
+15.05.2024 14:30:06		INFO		Database opened successfully
+15.05.2024 14:30:06		INFO		All question of difficulty 2 were selected.
+15.05.2024 14:35:55		INFO		Database opened successfully
+15.05.2024 14:35:56		INFO		Database opened successfully
+15.05.2024 14:35:56		INFO		Database opened successfully
+15.05.2024 14:35:56		INFO		All question of difficulty 2 were selected.
+15.05.2024 14:42:20		INFO		Database opened successfully
+15.05.2024 14:42:27		INFO		Database opened successfully
+15.05.2024 14:42:28		INFO		Database opened successfully
+15.05.2024 14:42:28		INFO		Database opened successfully
+15.05.2024 14:42:28		INFO		All question of difficulty 2 were selected.
+15.05.2024 14:50:37		INFO		Database opened successfully
+15.05.2024 14:50:40		INFO		Database opened successfully
+15.05.2024 14:50:40		INFO		Database opened successfully
+15.05.2024 14:50:40		INFO		All question of difficulty 2 were selected.
+15.05.2024 14:52:38		INFO		Database opened successfully
+15.05.2024 14:52:43		INFO		Database opened successfully
+15.05.2024 14:52:43		INFO		Database opened successfully
+15.05.2024 14:52:43		INFO		All question of difficulty 2 were selected.
+15.05.2024 15:05:38		INFO		Database opened successfully
+15.05.2024 15:05:39		INFO		Database opened successfully
+15.05.2024 15:05:39		INFO		Database opened successfully
+15.05.2024 15:05:39		INFO		All question of difficulty 2 were selected.
+15.05.2024 15:12:30		INFO		Database opened successfully
+15.05.2024 15:12:34		INFO		Database opened successfully
+15.05.2024 15:12:34		INFO		Database opened successfully
+15.05.2024 15:12:34		INFO		All question of difficulty 2 were selected.
+15.05.2024 15:13:03		INFO		Database opened successfully
+15.05.2024 15:13:04		INFO		Database opened successfully
+15.05.2024 15:13:04		INFO		Database opened successfully
+15.05.2024 15:13:04		INFO		All question of difficulty 2 were selected.
+15.05.2024 15:17:42		INFO		Database opened successfully
+15.05.2024 15:17:43		INFO		Database opened successfully
+15.05.2024 15:17:43		INFO		Database opened successfully
+15.05.2024 15:17:43		INFO		All question of difficulty 2 were selected.
+15.05.2024 15:18:33		INFO		Database opened successfully
+15.05.2024 15:18:35		INFO		Database opened successfully
+15.05.2024 15:18:35		INFO		Database opened successfully
+15.05.2024 15:18:35		INFO		All question of difficulty 2 were selected.
+15.05.2024 15:19:20		INFO		Database opened successfully
+15.05.2024 15:19:21		INFO		Database opened successfully
+15.05.2024 15:19:21		INFO		Database opened successfully
+15.05.2024 15:19:21		INFO		All question of difficulty 2 were selected.
+15.05.2024 15:20:14		INFO		Database opened successfully
+15.05.2024 15:20:20		INFO		Database opened successfully
+15.05.2024 15:20:20		INFO		Database opened successfully
+15.05.2024 15:20:20		INFO		All question of difficulty 2 were selected.
+15.05.2024 15:24:41		INFO		Database opened successfully
+15.05.2024 15:24:43		INFO		Database opened successfully
+15.05.2024 15:24:43		INFO		Database opened successfully
+15.05.2024 15:24:43		INFO		All question of difficulty 2 were selected.
+15.05.2024 15:25:46		INFO		Database opened successfully
+15.05.2024 15:27:51		INFO		Database opened successfully
+15.05.2024 15:27:51		INFO		Database opened successfully
+15.05.2024 15:27:51		INFO		Database opened successfully
+15.05.2024 15:27:51		INFO		All question of difficulty 2 were selected.
+15.05.2024 15:28:52		INFO		Database opened successfully
+15.05.2024 15:28:54		INFO		Database opened successfully
+15.05.2024 15:28:54		INFO		Database opened successfully
+15.05.2024 15:28:54		INFO		All question of difficulty 2 were selected.
+15.05.2024 15:30:22		INFO		Database opened successfully
+15.05.2024 15:30:57		INFO		Database opened successfully
+15.05.2024 15:32:05		INFO		Database opened successfully
+15.05.2024 15:32:05		INFO		Database opened successfully
+15.05.2024 15:32:05		INFO		All question of difficulty 2 were selected.
+15.05.2024 15:35:31		INFO		Database opened successfully
+15.05.2024 15:35:33		INFO		Database opened successfully
+15.05.2024 15:35:33		INFO		Database opened successfully
+15.05.2024 15:35:33		INFO		All question of difficulty 2 were selected.
+15.05.2024 15:39:32		INFO		Database opened successfully
+15.05.2024 15:39:33		INFO		Database opened successfully
+15.05.2024 15:39:33		INFO		Database opened successfully
+15.05.2024 15:39:33		ERROR		Le processus ne peut pas accéder au fichier 'D:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\logs\logs.txt', car il est en cours d'utilisation par un autre processus.
+15.05.2024 15:49:34		INFO		Database opened successfully
+15.05.2024 15:49:37		INFO		Database opened successfully
+15.05.2024 15:49:37		INFO		Database opened successfully
+15.05.2024 15:49:37		INFO		All question of difficulty 2 were selected.
+15.05.2024 15:51:41		INFO		Database opened successfully
+15.05.2024 15:51:42		INFO		Database opened successfully
+15.05.2024 15:51:42		INFO		Database opened successfully
+15.05.2024 15:51:42		INFO		All question of difficulty 2 were selected.
+15.05.2024 15:55:04		INFO		Database opened successfully
+15.05.2024 15:55:05		INFO		Database opened successfully
+15.05.2024 15:55:05		INFO		Database opened successfully
+15.05.2024 15:55:05		INFO		All question of difficulty 2 were selected.
+15.05.2024 15:55:43		INFO		Database opened successfully
+15.05.2024 15:55:46		INFO		Database opened successfully
+15.05.2024 15:55:46		INFO		Database opened successfully
+15.05.2024 15:55:46		INFO		All question of difficulty 2 were selected.
+15.05.2024 15:56:56		INFO		Database opened successfully
+15.05.2024 15:56:57		INFO		Database opened successfully
+15.05.2024 15:56:57		INFO		Database opened successfully
+15.05.2024 15:56:57		INFO		All question of difficulty 2 were selected.
+15.05.2024 16:00:39		INFO		Database opened successfully
+15.05.2024 16:00:40		INFO		Database opened successfully
+15.05.2024 16:00:40		INFO		Database opened successfully
+15.05.2024 16:00:40		INFO		All question of difficulty 2 were selected.

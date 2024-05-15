@@ -13,13 +13,22 @@ namespace X_CodeTris_Alexandre_King
         const int TOTAL_TETRIMINOS = 7;         //Total of tetriminos
         static Random _random = new Random();
         static Tetriminos _currentTetriminos;                
+        static Tetriminos _nextTetriminos;                
         
         /// <summary>
         /// Define a new tetriminos
         /// </summary>
         static public void DefineNewTetriminos()
         {
-            _currentTetriminos = GetRandomTetriminos();            
+            if (_nextTetriminos == null)
+            {
+                _currentTetriminos = GetRandomTetriminos();
+            }
+            else
+            {
+                _currentTetriminos = _nextTetriminos;
+            }
+            _nextTetriminos = GetRandomTetriminos();
         }
 
         /// <summary>
@@ -27,7 +36,7 @@ namespace X_CodeTris_Alexandre_King
         /// </summary>
         /// <param name="xPos">X position of where to start drawing</param>
         /// <param name="yTopPos">Y position of where to start drawing</param>
-        static public void DrawTetriminos(int xPos, int yTopPos)
+        static public void DrawCurrentTetriminos(int xPos, int yTopPos)
         {
             int yPos = yTopPos;
             int multiplySpaces = 0;
@@ -58,13 +67,48 @@ namespace X_CodeTris_Alexandre_King
         }
 
         /// <summary>
+        /// Draw the next tetriminos
+        /// </summary>
+        /// <param name="xPos">X position of where to start drawing</param>
+        /// <param name="yTopPos">Y position of where to start drawing</param>
+        static public void DrawNextTetriminos(int xPos, int yTopPos)
+        {
+            int yPos = yTopPos;
+            int multiplySpaces = 0;
+
+            VisualManager.SetTextColor(_nextTetriminos.Color);
+            foreach (string spriteLine in _nextTetriminos.AllStates[_nextTetriminos.CurrentState])
+            {
+                string newSpriteLine = spriteLine;
+                if (spriteLine.Contains("!!"))
+                {
+                    while (newSpriteLine.Contains("!!"))
+                    {
+                        multiplySpaces++;
+                        newSpriteLine = newSpriteLine.Remove(0, 2);
+                    }
+                    Console.SetCursorPosition(xPos + (4 * multiplySpaces), yPos);
+                    Console.Write(newSpriteLine);
+                    multiplySpaces = 0;
+
+                }
+                else
+                {
+                    Console.SetCursorPosition(xPos, yPos);
+                    Console.Write(spriteLine);
+                }
+                yPos++;
+            }
+        }
+
+        /// <summary>
         /// Get a random tetriminos
         /// </summary>
         /// <returns>a tetriminos (child of the Tetriminos class)</returns>
         static private Tetriminos GetRandomTetriminos()
         {
-            //int tetriminos = _random.Next(TOTAL_TETRIMINOS);                                   
-            int tetriminos = 1;
+            int tetriminos = _random.Next(TOTAL_TETRIMINOS);                                   
+            //int tetriminos = 1;
             switch (tetriminos)
             {
                 case 0:
@@ -123,6 +167,22 @@ namespace X_CodeTris_Alexandre_King
         {
             return _currentTetriminos.Height;
         }
+
+        /// Get the real widht of the tetriminos
+        /// </summary>
+        /// <returns>real width</returns>
+        static public int GetNextTetriminosWidth()
+        {
+            return _nextTetriminos.Width*2;
+        }
+        /// <summary>
+        /// Get the real height of the tetriminos
+        /// </summary>
+        /// <returns>real height</returns>
+        static public int GetNextTetriminosHeight()
+        {
+            return _nextTetriminos.Height*2;
+        }
         /// <summary>
         /// Get the tetriminos Name
         /// </summary>
@@ -175,7 +235,7 @@ namespace X_CodeTris_Alexandre_King
         static public void MoveTetriminos(int xPos, int yTopPos, int whereXpos, int whereYpos)
         {
             RemoveTetriminos(xPos,yTopPos);
-            DrawTetriminos(xPos+ (whereXpos*4), yTopPos+ (whereYpos*2));
+            DrawCurrentTetriminos(xPos+ (whereXpos*4), yTopPos+ (whereYpos*2));
         }
 
         /// <summary>

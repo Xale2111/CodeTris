@@ -158,7 +158,8 @@ namespace X_CodeTris_Alexandre_King
                     //start the game
                     case 0:
                         inMenu = false;
-                        gameManager.NewGame();
+                        int temp = gameManager.NewGame();
+                        Console.WriteLine(temp);
                         break;
                     //Go to the option menu
                     case 1:

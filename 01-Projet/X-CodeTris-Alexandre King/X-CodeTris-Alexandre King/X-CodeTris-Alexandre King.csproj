@@ -102,6 +102,7 @@
     <Compile Include="IBlock.cs" />
     <Compile Include="JBlock.cs" />
     <Compile Include="LBlock.cs" />
+    <Compile Include="LevenshteinDistance.cs" />
     <Compile Include="MenuManager.cs" />
     <Compile Include="OBlock.cs" />
     <Compile Include="Program.cs" />

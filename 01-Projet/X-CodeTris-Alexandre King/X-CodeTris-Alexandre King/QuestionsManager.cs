@@ -27,10 +27,13 @@ namespace X_CodeTris_Alexandre_King
         {
             if (_allQuestions.Count == 0)
             {
-                _allQuestions = _usedQuestions;
+                foreach (Question usedQuestion in _usedQuestions)
+                {
+                    _allQuestions.Add(usedQuestion);
+                }
                 _usedQuestions.Clear();
             }
-            int currentQuestionID = random.Next(_allQuestions.Count);
+            int currentQuestionID = random.Next(_allQuestions.Count);            
             Question question = _allQuestions[currentQuestionID];
             _usedQuestions.Add(question);
             _allQuestions.RemoveAt(currentQuestionID);

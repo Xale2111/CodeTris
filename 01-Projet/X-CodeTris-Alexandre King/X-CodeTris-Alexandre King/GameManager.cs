@@ -14,6 +14,10 @@ namespace X_CodeTris_Alexandre_King
         const int PLAY_ZONE_HEIGHT = 48;
         const int PLAY_ZONE_X_POS = 60;
         const int PLAY_ZONE_Y_POS = 8;
+        const int NEXT_TETRIMINOS_X_POS = 10;
+        const int NEXT_TETRIMINOS_Y_POS = 8;
+        const int NEXT_TETRIMINOS_SIZE = 20;
+
 
         const string DOWN_INSTRUCTION = "down";
         const string LEFT_INSTRUCTION = "left";
@@ -24,7 +28,9 @@ namespace X_CodeTris_Alexandre_King
         const int QUESTION_QUOTE_X_POS = 180;
         const int QUESTION_QUOTE_Y_POS = 12;
         const int QUESTION_ANSWER_X_POS = 180;
-        const int QUESTION_ANSWER_Y_POS = 16;
+        const int MAX_STRING_LENGTH = 50;
+        int _questionAnswerPosY = 14;
+        int _correctAnswerPosY = 16;
 
         QuestionsManager questionsManager;
 
@@ -38,12 +44,14 @@ namespace X_CodeTris_Alexandre_King
         
         int _numberOfRightAnswer = 0;
         int _numberOfWrongAnswer = 0;
+        int _totalBlockedLane = 0;
 
         bool _inGame = false;
+        bool _gameOver = false;
         bool _isPaused = false;
         bool _canSpawnNew = true;
         bool _threadsStarted = false;
-        int _frameTiming = 180;
+        int _frameTiming;
         int _frameBeforeNew = 2;
         int _moveYCapacity = 1;
         int _moveXCapacity = 1;
@@ -58,7 +66,10 @@ namespace X_CodeTris_Alexandre_King
         ConsoleKey _dropDown;
         ConsoleKeyInfo _pressedKey;
 
-        int _difficulty = 0;        
+        int _difficulty = 0;
+        const int EASY_FRAME_TIMING = 250;
+        const int MEDIUM_FRAME_TIMING = 220;
+        const int HARD_FRAME_TIMING = 180;
 
         const int EMPTY_CASE_CODE = 0;
         const int FALLING_CASE_CODE = 1;
@@ -68,19 +79,20 @@ namespace X_CodeTris_Alexandre_King
         string[,] _visualPlayZone = new string[PLAY_ZONE_WIDTH / 2, PLAY_ZONE_HEIGHT / 2]; //Matrix of the playzone visual
 
 
-        int[,] _playZone = new int[PLAY_ZONE_WIDTH / 2, PLAY_ZONE_HEIGHT / 2]; //values divided by 2 because 1 "block" is 2X2 sized (Oblock is 4 "blocks" together)
+        int[,] _playZone = new int[PLAY_ZONE_WIDTH / 2+1, PLAY_ZONE_HEIGHT / 2+1]; //values divided by 2 because 1 "block" is 2X2 sized (Oblock is 4 "blocks" together)
                                                                                //0-> empty, 1-> occupied (current tetriminos),
                                                                                //2-> occupied (placed tetriminos),3->Blocked       
                                                                                //Refer to the aboves const
-        public void NewGame()
+        public int NewGame()
         {
             Console.Clear();
             ResetAll();
             DrawPlayArea();
+            DrawNextTetriminosArea();
             DefinePlayingKeys();
             DefineDifficulty();
-            StartGame();
-        }
+            return StartGame();
+        }       
 
         private void DefinePlayingKeys()
         {
@@ -115,16 +127,16 @@ namespace X_CodeTris_Alexandre_King
             switch (_difficulty)
             {
                 case 0:
-                    _frameTiming = 250;
+                    _frameTiming = EASY_FRAME_TIMING;
                     break;
                 case 1:
-                    _frameTiming = 220;
+                    _frameTiming = MEDIUM_FRAME_TIMING;
                     break;
                 case 2:
-                    _frameTiming = 180;
+                    _frameTiming = HARD_FRAME_TIMING;
                     break;
                 default:
-                    _frameTiming = 250;
+                    _frameTiming = EASY_FRAME_TIMING;
                     break;
             }
             questionsManager = new QuestionsManager(_difficulty);
@@ -133,13 +145,29 @@ namespace X_CodeTris_Alexandre_King
 
         private void ResetAll()
         {
-            _playZone = new int[PLAY_ZONE_WIDTH / 2, PLAY_ZONE_HEIGHT / 2];
+            _playZone = new int[PLAY_ZONE_WIDTH / 2 + 1, PLAY_ZONE_HEIGHT / 2 + 1];
             _numberOfRightAnswer = 0;
             _numberOfWrongAnswer = 0;
             _inGame = false;
             _pressedKey = default(ConsoleKeyInfo);                                   
 
         }
+
+        private void DrawNextTetriminosArea()
+        {
+            int yPos = NEXT_TETRIMINOS_Y_POS;
+            for (int j = 0; j < NEXT_TETRIMINOS_SIZE/2; j++)
+            {
+                Console.SetCursorPosition(NEXT_TETRIMINOS_X_POS, yPos);
+                for (int i = 0; i < NEXT_TETRIMINOS_SIZE; i++)
+                {
+                    VisualManager.SetBackgroundColor("gray");
+                    Console.Write(" ");
+                }
+                yPos++;
+            }
+        }
+
         private void DrawPlayArea()
         {
             int xPos = PLAY_ZONE_X_POS;
@@ -157,34 +185,28 @@ namespace X_CodeTris_Alexandre_King
                 xPos = PLAY_ZONE_X_POS;
                 yPos++;
             }
+
+            for (int i = 0; i < PLAY_ZONE_HEIGHT / 2+1; i++)
+            {
+                _playZone[PLAY_ZONE_WIDTH / 2, i] = BLOCKED_CASE_CODE;
+            }
+            for (int i = 0; i < PLAY_ZONE_WIDTH / 2 + 1; i++)
+            {
+                _playZone[i, PLAY_ZONE_HEIGHT/2] = BLOCKED_CASE_CODE;
+            }            
         }
 
         private void PauseGame()
         {
-            _inGame = false;
+            _isPaused = true;               
             _instructionsTetriminos.Clear();
-            int totalThreads = _allThreads.Count();
-
-            for (int i = 0; i < totalThreads; i++)
-            {
-                try
-                {
-                    _allThreads[0].Abort();
-                    _allThreads.RemoveAt(0);
-                }
-                catch (Exception)
-                {
-                    _allThreads.Clear();
-                }
-            }
-            _threadsStarted = false;
+                
         }
 
         private void ResumeGame()
         {
             _isPaused = false;
-            Thread.Sleep(1000);
-            _inGame = true;
+            Thread.Sleep(1000);            
             
         }
 
@@ -204,139 +226,145 @@ namespace X_CodeTris_Alexandre_King
 
             while (_inGame)
             {
-                Thread.Sleep(25);
-                if (_instructionsTetriminos.Count > 0)
+                if (!_isPaused)
                 {
-                    bool isPlaced = false;
-                    switch (_instructionsTetriminos[0])
+                    Thread.Sleep(25);
+                    if (_instructionsTetriminos.Count > 0)
                     {
-                        case DOWN_INSTRUCTION:
-                            if (CheckCanMoveInPlayZone(0, 1,true))
-                            {
-                                TetriminosManager.MoveTetriminos(_currentTetriminosXPos, _currentTetriminosYPos, 0, _moveYCapacity);
-                                _playZoneTetriminosYPos += _moveYCapacity;
-                                _currentTetriminosYPos += 2;
-                            }
-                            break;
-                        case LEFT_INSTRUCTION:
-                            if (CheckCanMoveInPlayZone(-1, 0))
-                            {
-                                TetriminosManager.MoveTetriminos(_currentTetriminosXPos, _currentTetriminosYPos, -1 * _moveXCapacity, 0);
-                                _currentTetriminosXPos -= 4;
-                                _playZoneTetriminosXPos -= _moveXCapacity;
-                            }                            
-                            break;
-                        case RIGHT_INSTRUCTION:
-                            if (CheckCanMoveInPlayZone(1, 0))
-                            {
-                                TetriminosManager.MoveTetriminos(_currentTetriminosXPos, _currentTetriminosYPos, 1, 0);
-                                _currentTetriminosXPos += 4;
-                                _playZoneTetriminosXPos += _moveXCapacity;
-                            }                            
-                            break;
-                        case ROTATE_INSTRUCTION:
-                            if (CheckCanRotateInPlayZone())
-                            {
-                                TetriminosManager.RotateTetriminos(_currentTetriminosXPos, _currentTetriminosYPos);
-                                if (_currentTetriminosXPos + TetriminosManager.GetCurrentTetriminosVisualWidth() * 2 < PLAY_ZONE_X_POS + PLAY_ZONE_WIDTH * 2)
+                        bool isPlaced = false;
+                        switch (_instructionsTetriminos[0])
+                        {
+                            case DOWN_INSTRUCTION:
+                                if (CheckCanMoveInPlayZone(0, 1, true))
                                 {
-                                    TetriminosManager.DrawTetriminos(_currentTetriminosXPos, _currentTetriminosYPos);
+                                    TetriminosManager.MoveTetriminos(_currentTetriminosXPos, _currentTetriminosYPos, 0, _moveYCapacity);
+                                    _playZoneTetriminosYPos += _moveYCapacity;
+                                    _currentTetriminosYPos += 2;
                                 }
-                                else
+                                break;
+                            case LEFT_INSTRUCTION:
+                                if (CheckCanMoveInPlayZone(-1, 0))
                                 {
-                                    TetriminosManager.DrawTetriminos(_currentTetriminosXPos - 4, _currentTetriminosYPos);
+                                    TetriminosManager.MoveTetriminos(_currentTetriminosXPos, _currentTetriminosYPos, -1 * _moveXCapacity, 0);
                                     _currentTetriminosXPos -= 4;
                                     _playZoneTetriminosXPos -= _moveXCapacity;
                                 }
-                                //TODO : Check if when rotating on the ground, the tetriminos glitch under the ground
-                                if (_currentTetriminosYPos+TetriminosManager.GetCurrentTetriminosHeight()<PLAY_ZONE_Y_POS+PLAY_ZONE_HEIGHT)
+                                break;
+                            case RIGHT_INSTRUCTION:
+                                if (CheckCanMoveInPlayZone(1, 0))
                                 {
-                                    TetriminosManager.DrawTetriminos(_currentTetriminosXPos, _currentTetriminosYPos);
+                                    TetriminosManager.MoveTetriminos(_currentTetriminosXPos, _currentTetriminosYPos, 1, 0);
+                                    _currentTetriminosXPos += 4;
+                                    _playZoneTetriminosXPos += _moveXCapacity;
+                                }
+                                break;
+                            case ROTATE_INSTRUCTION:
+                                if (CheckCanRotateInPlayZone())
+                                {
+                                    TetriminosManager.RotateTetriminos(_currentTetriminosXPos, _currentTetriminosYPos);
+                                    if (_currentTetriminosXPos + TetriminosManager.GetCurrentTetriminosVisualWidth() * 2 < PLAY_ZONE_X_POS + PLAY_ZONE_WIDTH * 2)
+                                    {
+                                        TetriminosManager.DrawCurrentTetriminos(_currentTetriminosXPos, _currentTetriminosYPos);
+                                    }
+                                    else
+                                    {
+                                        TetriminosManager.DrawCurrentTetriminos(_currentTetriminosXPos - 4, _currentTetriminosYPos);
+                                        _currentTetriminosXPos -= 4;
+                                        _playZoneTetriminosXPos -= _moveXCapacity;
+                                    }
+                                    //TODO : Check if when rotating on the ground, the tetriminos glitch under the ground
+                                    if (_currentTetriminosYPos + TetriminosManager.GetCurrentTetriminosHeight() < PLAY_ZONE_Y_POS + PLAY_ZONE_HEIGHT)
+                                    {
+                                        TetriminosManager.DrawCurrentTetriminos(_currentTetriminosXPos, _currentTetriminosYPos);
 
+                                    }
+                                    else
+                                    {
+                                        TetriminosManager.DrawCurrentTetriminos(_currentTetriminosXPos, _currentTetriminosYPos - 1);
+                                        _currentTetriminosYPos -= 1;
+                                        _playZoneTetriminosXPos -= _moveXCapacity;
+                                    }
+                                }
+                                break;
+                            case NATURAL_DOWN_INSTRUCTION:
+                                if (CheckCanMoveInPlayZone(0, 1))
+                                {
+                                    TetriminosManager.MoveTetriminos(_currentTetriminosXPos, _currentTetriminosYPos, 0, _moveYCapacity);
+                                    _playZoneTetriminosYPos += _moveYCapacity;
+                                    _currentTetriminosYPos += 2;
                                 }
                                 else
                                 {
-                                    TetriminosManager.DrawTetriminos(_currentTetriminosXPos, _currentTetriminosYPos-1);
-                                    _currentTetriminosYPos -= 1;
-                                    _playZoneTetriminosXPos -= _moveXCapacity;
+                                    isPlaced = true;
                                 }
-                            }                            
-                            break;
-                        case NATURAL_DOWN_INSTRUCTION:
-                            if (CheckCanMoveInPlayZone(0, 1))
-                            {
-                                TetriminosManager.MoveTetriminos(_currentTetriminosXPos, _currentTetriminosYPos, 0, _moveYCapacity);
-                                _playZoneTetriminosYPos += _moveYCapacity;
-                                _currentTetriminosYPos += 2;
-                            }
-                            else
-                            {
-                                isPlaced = true;                                
-                            }
-                            break;
-                        default:
-                            break;
-                    }                    
-                    UpdateTetriminosOccupation(isPlaced);                   
-                    //Check again before removing if there is more then 1 element (Using a Thread is the problem)
-                    if (_instructionsTetriminos.Count() >0)
-                    {
-                        _instructionsTetriminos.RemoveAt(0);
+                                break;
+                            default:
+                                break;
+                        }
+                        UpdateTetriminosOccupation(isPlaced);
+                        //Check again before removing if there is more then 1 element (Using a Thread is the problem)
+                        if (_instructionsTetriminos.Count() > 0)
+                        {
+                            _instructionsTetriminos.RemoveAt(0);
+                        }
                     }
                 }
             }
         }
 
-        private void StartGame()
+        private int StartGame()
         {
-            _inGame = true;                        
-
+            _inGame = true;            
             //count the frames after the tetriminos touched to bottom to let the player 2 frames of action
             int frameCounter = 0;
             while (_inGame)
             {
 
-                Thread.Sleep(_frameTiming);
+                if (_gameOver)
+                {
+                    return 0;
+                }
 
-                
-                if (TetriminosManager.HasACurrentTetriminos())
-                {                    
-                    if (_currentTetriminosYPos < PLAY_ZONE_Y_POS + PLAY_ZONE_HEIGHT - TetriminosManager.GetCurrentTetriminosVisualHeight())
-                    {                                                
-                        _instructionsTetriminos.Add(NATURAL_DOWN_INSTRUCTION);                        
-                    }
-                    else
+                if (!_isPaused)
+                {                
+                    Thread.Sleep(_frameTiming);
+
+                    if (TetriminosManager.HasACurrentTetriminos())
                     {
-                        frameCounter++;
-                        if (frameCounter > _frameBeforeNew)
-                        {                            
-                            UpdateTetriminosOccupation(true);
-                            frameCounter = 0;
+                        if (_currentTetriminosYPos < PLAY_ZONE_Y_POS + PLAY_ZONE_HEIGHT - TetriminosManager.GetCurrentTetriminosVisualHeight())
+                        {
+                            _instructionsTetriminos.Add(NATURAL_DOWN_INSTRUCTION);
+                        }
+                        else
+                        {
+                            frameCounter++;
+                            if (frameCounter > _frameBeforeNew)
+                            {
+                                UpdateTetriminosOccupation(true);
+                                frameCounter = 0;
+                            }
                         }
                     }
-                }
-                if (_canSpawnNew)
-                {
-                    _canSpawnNew = false;              
-                    _instructionsTetriminos.Clear();                    
-                    TetriminosManager.DefineNewTetriminos();
-                    DrawNewTetriminos();
-                    UpdateTetriminosOccupation(false);
-                    _instructionsTetriminos.Add(NATURAL_DOWN_INSTRUCTION);
-                }
+                    if (_canSpawnNew)
+                    {
+                        _canSpawnNew = false;
+                        _instructionsTetriminos.Clear();
+                        TetriminosManager.DefineNewTetriminos();
+                        DrawNewTetriminos();
+                        DrawNextTetriminos();
+                        UpdateTetriminosOccupation(false);
+                        _instructionsTetriminos.Add(NATURAL_DOWN_INSTRUCTION);
+                    }
 
-                if (!_threadsStarted)
-                {
-                    StartAllThreads();
-                    _threadsStarted = true;
+                    if (!_threadsStarted)
+                    {
+                        StartAllThreads();
+                        _threadsStarted = true;
+                    }
                 }
-
-                //TempDebug();
-
-                //Can spawn new tetrominos ? 
-                //--> Yes, spawn the one in the "next piece" case
-                //--> No, Move the current one by one
             }
+            return -1;
+
         }
 
         private void TempDebug()
@@ -395,6 +423,9 @@ namespace X_CodeTris_Alexandre_King
                         case "blue":
                             numberOfTheColor = 7;
                             break;
+                        case "dkgray":
+                            numberOfTheColor = 8;
+                            break;
                         default:
                             numberOfTheColor = 0;
                             break;
@@ -421,7 +452,22 @@ namespace X_CodeTris_Alexandre_King
             _currentTetriminosYPos = PLAY_ZONE_Y_POS;
             _playZoneTetriminosXPos = PLAY_ZONE_WIDTH / 4;
             _playZoneTetriminosYPos = 0;
-            TetriminosManager.DrawTetriminos(_currentTetriminosXPos, _currentTetriminosYPos);
+            TetriminosManager.DrawCurrentTetriminos(_currentTetriminosXPos, _currentTetriminosYPos);
+        }
+
+        private void DrawNextTetriminos()
+        {
+            int yPos = NEXT_TETRIMINOS_Y_POS;
+            for (int j = 0; j < NEXT_TETRIMINOS_SIZE / 2; j++)
+            {
+                Console.SetCursorPosition(NEXT_TETRIMINOS_X_POS, yPos);
+                for (int i = 0; i < NEXT_TETRIMINOS_SIZE; i++)
+                {                    
+                    Console.Write(" ");
+                }
+                yPos++;
+            }
+            TetriminosManager.DrawNextTetriminos(NEXT_TETRIMINOS_X_POS + NEXT_TETRIMINOS_SIZE / 2-TetriminosManager.GetNextTetriminosWidth(), NEXT_TETRIMINOS_Y_POS+NEXT_TETRIMINOS_SIZE/4-TetriminosManager.GetNextTetriminosHeight()/2);
         }
 
         private void UpdateTetriminosOccupation(bool touchedBottom)
@@ -434,23 +480,32 @@ namespace X_CodeTris_Alexandre_King
             {
                 for (int i = 0; i < TetriminosManager.GetCurrentTetriminosWidth(); i++)
                 {
-                    if (TetriminosManager.GetTetriminosOccupation()[i,j])
-                    {
-                        if (touchedBottom)
+                    try
+                    {                    
+                        if (TetriminosManager.GetTetriminosOccupation()[i, j])
                         {
-                            _playZone[_playZoneTetriminosXPos + i, _playZoneTetriminosYPos + j] = PLACED_CASE_CODE;
-                            tetriminosIsPlaced = true;
-                            _instructionsTetriminos.Clear();
-                        }
-                        else
-                        {                        
-                            _playZone[_playZoneTetriminosXPos+i, _playZoneTetriminosYPos+j] = FALLING_CASE_CODE;                            
-                        }
+                            if (touchedBottom)
+                            {
+                                _playZone[_playZoneTetriminosXPos + i, _playZoneTetriminosYPos + j] = PLACED_CASE_CODE;
+                                tetriminosIsPlaced = true;
+                                _instructionsTetriminos.Clear();
+                            }
+                            else
+                            {
+                                _playZone[_playZoneTetriminosXPos + i, _playZoneTetriminosYPos + j] = FALLING_CASE_CODE;
+                            }
 
-                        _visualPlayZone[_playZoneTetriminosXPos + i, _playZoneTetriminosYPos + j] = TetriminosManager.GetTetriminosColor();
+                            _visualPlayZone[_playZoneTetriminosXPos + i, _playZoneTetriminosYPos + j] = TetriminosManager.GetTetriminosColor();
 
-                    }                    
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.Print(e.Message);
+                        //Reverse Rotation                        
+                    }
                 }
+
             }
             if (touchedBottom)
             {                
@@ -460,18 +515,26 @@ namespace X_CodeTris_Alexandre_King
                 //ASK Questions (return number of correct answer
                 //Manage number of wrong question
                 if (lanes.Count > 0)
-                {
-                    laneToBlock = AskQuestions(amountOfLanes);
-
-                    for (int k = 0; k < amountOfLanes; k++)
+                {                   
+                    PauseGame();                    
+                    laneToBlock = AskQuestions(amountOfLanes);                    
+                    for (int k = 0; k < amountOfLanes-laneToBlock; k++)
                     {
                         RemoveLane(lanes[k]);                        
                     }                    
                     MoveLanesVisually();
-                }
-                if (laneToBlock>0)
-                {
-                    //Block Lines
+                    if (laneToBlock>0)
+                    {
+                        TempDebug();
+                        for (int i = 0; i < laneToBlock; i++)
+                        {
+                            BlockLane();
+                        }
+                        TempDebugColor();
+                        TempDebug();
+                    }
+
+                    ResumeGame();
                 }
             }
             if (tetriminosIsPlaced)
@@ -511,8 +574,7 @@ namespace X_CodeTris_Alexandre_King
         }
 
         private void RemoveLane(int fullLane)
-        {
-            //à gérer
+        {            
             for (int i = 0; i < PLAY_ZONE_WIDTH/2; i++)
             {
                 _playZone[i, fullLane] = EMPTY_CASE_CODE;
@@ -536,6 +598,40 @@ namespace X_CodeTris_Alexandre_King
         {            
             ClearPlayZone();
             RedrawEachTetriminos();
+        }
+        private void BlockLane()
+        {
+            int lastBlockLane = 24;
+            _totalBlockedLane++;
+            for (int i = 0; i < PLAY_ZONE_HEIGHT/2; i++)
+            {
+                if (_playZone[0,i] == BLOCKED_CASE_CODE)
+                {
+                    lastBlockLane = i;
+                    break;
+                }
+            }
+            for (int j = 0; j < _totalBlockedLane; j++)
+            {
+                for (int i = 0; i < PLAY_ZONE_WIDTH / 2; i++)
+                {
+                    _playZone[i, lastBlockLane - 1+j] = BLOCKED_CASE_CODE;
+                    _visualPlayZone[i, lastBlockLane - 1+j] = "dkgray";
+                }
+            }
+            VisuallyBlockLine(lastBlockLane + 1);
+        }
+        private void VisuallyBlockLine(int laneToBlock)
+        {
+            for (int j = 0; j < 2; j++)
+            {
+                Console.SetCursorPosition(PLAY_ZONE_X_POS,PLAY_ZONE_Y_POS/2+laneToBlock*2+j);
+                for (int i = 0; i < PLAY_ZONE_WIDTH; i++)
+                {
+                    VisualManager.SetTextColor("DKgray");
+                    Console.Write("██");
+                }
+            }
         }
 
         private void RedrawEachTetriminos()
@@ -573,17 +669,20 @@ namespace X_CodeTris_Alexandre_King
             Console.CursorVisible = true;
             VisualManager.SetTextColor("white");
             VisualManager.SetBackgroundColor("black");
-            Question currentQuestion = questionsManager.GetRandomQuestion();
-            int wrongAnswer = 0;
-            PauseGame();
+            int wrongAnswer = 0;            
             for (int i = 0; i < numberOfCompletedLines; i++)
-            {
+            {                
+                Question currentQuestion = questionsManager.GetRandomQuestion();
                 ShowQuestion(currentQuestion.Quote);
-                if (!CheckAnswer(ManagePlayerAnswer(),currentQuestion.Answer))
+                string playerAnswer = ManagePlayerAnswer();
+                if (!CheckAnswer(playerAnswer, currentQuestion.Answer))
                 {
                     wrongAnswer++;
+                    Thread.Sleep(2000);
                 }                
-                
+                ClearQuestionZone();                
+                _questionAnswerPosY = QUESTION_QUOTE_Y_POS + 2;
+                _correctAnswerPosY = _questionAnswerPosY + 2;
                 //Ask one question, wait for the result, next question
             }
             Console.CursorVisible = false;
@@ -591,42 +690,147 @@ namespace X_CodeTris_Alexandre_King
             return wrongAnswer;
         }
 
+        private void ClearQuestionZone()
+        {
+            for (int j = 0; j < _correctAnswerPosY+10; j++)
+            {
+                Console.SetCursorPosition(QUESTION_QUOTE_X_POS,QUESTION_QUOTE_Y_POS+j);
+                for (int i = 0; i < MAX_STRING_LENGTH+1; i++)
+                {
+                    Console.Write(" ");
+                }
+            }
+        }
+
         private void ShowQuestion(string quote)
         {
-            Console.SetCursorPosition(QUESTION_QUOTE_X_POS,QUESTION_QUOTE_Y_POS);            
-            Console.Write(quote);
+            string[] seperatedQuote = quote.Split(' ');
+            int numberOfSpaces = seperatedQuote.Count();
+            string partOfQuote = string.Empty;            
+            int count = 0;
+            for (int i = 0; i < numberOfSpaces; i++)
+            {
+                if (partOfQuote.Length + seperatedQuote[i].Length+1 <MAX_STRING_LENGTH)
+                {
+                    partOfQuote += seperatedQuote[i] + " ";
+                }
+                else
+                {
+                    Console.SetCursorPosition(QUESTION_QUOTE_X_POS, QUESTION_QUOTE_Y_POS+count);
+                    Console.Write(partOfQuote);
+                    count++;
+                    _questionAnswerPosY++;
+                    partOfQuote = seperatedQuote[i] +" ";
+                }
+            }
+            Console.SetCursorPosition(QUESTION_QUOTE_X_POS, QUESTION_QUOTE_Y_POS + count);
+            Console.Write(partOfQuote);            
         }
 
         private string ManagePlayerAnswer()
         {
+            string playerAnswer = string.Empty;
+            int moveDown = 1;
+            bool canWriteKey = false;
             //do while player didn't pressed ENTER
+            Console.SetCursorPosition(QUESTION_ANSWER_X_POS, _questionAnswerPosY);
             do
             {
-                Console.SetCursorPosition(QUESTION_ANSWER_X_POS, QUESTION_ANSWER_Y_POS);
-                ConsoleKeyInfo keyInfo = Console.ReadKey();
+                ConsoleKeyInfo keyInfo;
+                keyInfo = Console.ReadKey(true);
+                if (playerAnswer.Length%MAX_STRING_LENGTH==0 && playerAnswer.Length != 0)
+                {                    
+                    Console.SetCursorPosition(QUESTION_ANSWER_X_POS, _questionAnswerPosY);
+                    _correctAnswerPosY++;
+                    moveDown++;
+                }
+                switch (keyInfo.Key)
+                {
+                    case ConsoleKey.Spacebar:
+                        playerAnswer += " ";
+                        canWriteKey = true;
+                        break;
+                    case ConsoleKey.Backspace:
+                        if (playerAnswer.Length > 0)
+                        {
+                            Console.Write(" ");
+                            Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
+                            playerAnswer = playerAnswer.Remove(playerAnswer.Length - 1, 1);
+                        }
+                        else
+                        {                            
+                            Console.SetCursorPosition(Console.CursorLeft + 1, Console.CursorTop);
+                        }                        
+                        break;
+                    case ConsoleKey.Enter:
+                        return playerAnswer;                                                                
+
+                    default:
+                        if (keyInfo.KeyChar.ToString() != "\0")
+                        {
+                            playerAnswer += keyInfo.KeyChar;
+                            canWriteKey = true;
+                        }
+                        else
+                        {
+                            Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
+                        }
+
+                        break;
+                }
+                if (canWriteKey)
+                {
+                    Console.Write(keyInfo.KeyChar);
+                    canWriteKey = false;
+                }
 
             } while (true);
         }
 
         private bool CheckAnswer(string givenAnswer,string correctAnswer)
         {
-            if (givenAnswer.ToLower() == correctAnswer.ToLower())
+            decimal margin = correctAnswer.Length / 12;
+            int tolerance = Convert.ToInt32(Math.Floor(margin)*2);
+            if (LevenshteinDistance.GetDistance(givenAnswer.ToLower(),correctAnswer.ToLower())<=tolerance)
             {
-                //Answer is correct
-                //Draw little cube next to the questio to indicate if the anser is true or not (red or green dot)
+                //Show green dot
                 _numberOfRightAnswer++;
                 return true;
-            }
+            }            
             else
             {
+                //Show Red Dot
                 _numberOfWrongAnswer++;
-                ShowCorrectAnswer();
+                ShowCorrectAnswer(correctAnswer);
                 return false;
             }
         }
 
-        private void ShowCorrectAnswer()
+        private void ShowCorrectAnswer(string correctAnswer)
         {
+            string[] seperatedAnswer = correctAnswer.Split(' ');
+            int numberOfSpaces = seperatedAnswer.Count();
+            string partOfAnswer = string.Empty;
+            int count = 1;
+            Console.SetCursorPosition(QUESTION_QUOTE_X_POS, _correctAnswerPosY);
+            Console.WriteLine("La bonne réponse était :");
+
+            for (int i = 0; i < numberOfSpaces; i++)
+            {
+                if (partOfAnswer.Length + seperatedAnswer[i].Length + 1 < MAX_STRING_LENGTH)
+                {
+                    partOfAnswer += seperatedAnswer[i] + " ";
+                }
+                else
+                {
+                    Console.SetCursorPosition(QUESTION_QUOTE_X_POS, _correctAnswerPosY + count);
+                    Console.Write(partOfAnswer);
+                    count++;                    
+                    partOfAnswer = seperatedAnswer[i] + " ";
+                }
+            }
+            Console.SetCursorPosition(QUESTION_QUOTE_X_POS, _correctAnswerPosY + count);
+            Console.Write(partOfAnswer);
             //Write underneath the given answer the correct one
         }
 
@@ -663,7 +867,7 @@ namespace X_CodeTris_Alexandre_King
                 for (int i = 0; i < TetriminosManager.GetCurrentTetriminosWidth(); i++)
                 {
                     if (TetriminosManager.GetTetriminosOccupation()[i,j])
-                    {
+                    {                        
                         if (countTrueStatement == 4)
                         {
                             canMoveToWantedPosition = true;
@@ -672,7 +876,7 @@ namespace X_CodeTris_Alexandre_King
                         if (wantedXPos == 0)
                         {
 
-                            if (_playZoneTetriminosYPos + j + wantedYPos < PLAY_ZONE_HEIGHT/2)
+                            if (_playZoneTetriminosYPos + j + wantedYPos < PLAY_ZONE_HEIGHT/2+1)
                             {
                                 if (_playZone[_playZoneTetriminosXPos + i, _playZoneTetriminosYPos + j + wantedYPos] == PLACED_CASE_CODE
                                     || _playZone[_playZoneTetriminosXPos + i, _playZoneTetriminosYPos + j + wantedYPos] == BLOCKED_CASE_CODE)
@@ -707,7 +911,7 @@ namespace X_CodeTris_Alexandre_King
                             }
                             else
                             {
-                                if (_playZoneTetriminosXPos + i + wantedXPos < PLAY_ZONE_WIDTH / 2)
+                                if (_playZoneTetriminosXPos + i + wantedXPos < PLAY_ZONE_WIDTH / 2+1)
                                 {
                                     if (_playZone[_playZoneTetriminosXPos + i + wantedXPos, _playZoneTetriminosYPos + j] == PLACED_CASE_CODE
                                        || _playZone[_playZoneTetriminosXPos + i + wantedXPos, _playZoneTetriminosYPos + j] == BLOCKED_CASE_CODE)
@@ -725,14 +929,7 @@ namespace X_CodeTris_Alexandre_King
                     }
                 }
 
-            }
-            
-            //TO DO: Check if next movement will result in the current form (1) to collide with an other form (2 or 3)
-            //if no, canMoveToWantedPosition = true and the piece can move
-            //else, the piece can move in the wanted direction (canMoveToWantedPosition = false)
-            //Check the same for the rotation (Move the piece in the array BUT NOT visually, check, return result?)
-
-
+            }                        
             return canMoveToWantedPosition;
         }
 
@@ -773,39 +970,42 @@ namespace X_CodeTris_Alexandre_King
         {
             do
             {
-                _pressedKey = Console.ReadKey(true);                
-                //Can't use a switch because the case require to use a constant
-                //(currently using a variable incase player modify the wanted playing keys)
-                if (_pressedKey.Key == _moveLeft)
+                if (!_isPaused)
                 {
-                    if (_currentTetriminosXPos-_moveXCapacity*2 > PLAY_ZONE_X_POS)
+
+
+                    _pressedKey = Console.ReadKey(true);
+                    //Can't use a switch because the case require to use a constant
+                    //(currently using a variable incase player modify the wanted playing keys)
+                    if (_pressedKey.Key == _moveLeft)
                     {
-                        _instructionsTetriminos.Add(LEFT_INSTRUCTION);
+                        if (_currentTetriminosXPos - _moveXCapacity * 2 > PLAY_ZONE_X_POS)
+                        {
+                            _instructionsTetriminos.Add(LEFT_INSTRUCTION);
+                        }
                     }
-                }
-                else if (_pressedKey.Key == _moveRight)
-                {
-                    if (_currentTetriminosXPos + _moveXCapacity*2 + TetriminosManager.GetCurrentTetriminosVisualWidth() * 2 < PLAY_ZONE_X_POS + PLAY_ZONE_WIDTH * 2)
+                    else if (_pressedKey.Key == _moveRight)
                     {
-                        _instructionsTetriminos.Add(RIGHT_INSTRUCTION);
+                        if (_currentTetriminosXPos + _moveXCapacity * 2 + TetriminosManager.GetCurrentTetriminosVisualWidth() * 2 < PLAY_ZONE_X_POS + PLAY_ZONE_WIDTH * 2)
+                        {
+                            _instructionsTetriminos.Add(RIGHT_INSTRUCTION);
+                        }
                     }
-                }
-                else if (_pressedKey.Key == _moveDown)
-                {                    
-                    if (_currentTetriminosYPos + _moveYCapacity < PLAY_ZONE_Y_POS + PLAY_ZONE_HEIGHT - TetriminosManager.GetCurrentTetriminosVisualHeight())
-                    { 
+                    else if (_pressedKey.Key == _moveDown)
+                    {
+                        if (_currentTetriminosYPos + _moveYCapacity < PLAY_ZONE_Y_POS + PLAY_ZONE_HEIGHT - TetriminosManager.GetCurrentTetriminosVisualHeight())
+                        {
                             _instructionsTetriminos.Add(DOWN_INSTRUCTION);
+                        }
+
+                    }
+                    else if (_pressedKey.Key == _rotate)
+                    {
+                        _instructionsTetriminos.Add(ROTATE_INSTRUCTION);
                     }
 
+                    _pressedKey = default(ConsoleKeyInfo);
                 }
-                else if (_pressedKey.Key == _rotate)
-                {
-                        _instructionsTetriminos.Add(ROTATE_INSTRUCTION);                    
-                }
-
-                _pressedKey = default(ConsoleKeyInfo);
-
-
             } while (_inGame);
         }
     }

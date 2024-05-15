@@ -141,9 +141,7 @@ namespace X_CodeTris_Alexandre_King
             _playerName = name;
             _soundState = sound;
             _difficultyState = difficulty;
-            _keysState = keys;
-
-            StockInformations();
+            _keysState = keys;            
 
         }
         /// <summary>
