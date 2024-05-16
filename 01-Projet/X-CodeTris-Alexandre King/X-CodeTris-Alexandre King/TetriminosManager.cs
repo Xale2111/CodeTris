@@ -223,6 +223,7 @@ namespace X_CodeTris_Alexandre_King
         static public void ResetTetriminos()
         {
             _currentTetriminos = null;
+            _nextTetriminos = null;
         }
 
         /// <summary>

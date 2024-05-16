@@ -11,12 +11,13 @@ namespace X_CodeTris_Alexandre_King
     public class GameManager
     {
         const int PLAY_ZONE_WIDTH = 32;
-        const int PLAY_ZONE_HEIGHT = 48;
+        const int PLAY_ZONE_HEIGHT = 52;
         const int PLAY_ZONE_X_POS = 60;
         const int PLAY_ZONE_Y_POS = 8;
         const int NEXT_TETRIMINOS_X_POS = 10;
         const int NEXT_TETRIMINOS_Y_POS = 8;
         const int NEXT_TETRIMINOS_SIZE = 20;
+        const int MAX_HEIGHT_BEFORE_GAME_OVER = 10;
 
 
         const string DOWN_INSTRUCTION = "down";
@@ -32,6 +33,13 @@ namespace X_CodeTris_Alexandre_King
         int _questionAnswerPosY = 14;
         int _correctAnswerPosY = 16;
 
+        const int SCORE_X_POS = 10;
+        const int SCORE_Y_POS = 28;
+        const string SCORE_TEXT = "score : ";
+        double _score = 0;
+        double _completedLineMultiplycator = 1;
+        int _pointsToAdd = 0;
+
         QuestionsManager questionsManager;
 
         //console coordonate
@@ -41,14 +49,15 @@ namespace X_CodeTris_Alexandre_King
         //Bool Aray coordonate
         int _playZoneTetriminosXPos;
         int _playZoneTetriminosYPos;
-        
+
         int _numberOfRightAnswer = 0;
-        int _numberOfWrongAnswer = 0;
+        int _numberOfWrongAnswer = 0;        
         int _totalBlockedLane = 0;
 
         bool _inGame = false;
         bool _gameOver = false;
         bool _isPaused = false;
+        bool _isUpdating = false;
         bool _canSpawnNew = true;
         bool _threadsStarted = false;
         int _frameTiming;
@@ -56,7 +65,7 @@ namespace X_CodeTris_Alexandre_King
         int _moveYCapacity = 1;
         int _moveXCapacity = 1;
         List<string> _instructionsTetriminos = new List<string>();
-                
+
         List<Thread> _allThreads = new List<Thread>();
 
         ConsoleKey _moveLeft;
@@ -70,6 +79,9 @@ namespace X_CodeTris_Alexandre_King
         const int EASY_FRAME_TIMING = 250;
         const int MEDIUM_FRAME_TIMING = 220;
         const int HARD_FRAME_TIMING = 180;
+        const int EASY_ADD_POINTS = 50;
+        const int MEDIUM_ADD_POINTS = 100;
+        const int HARD_ADD_POINTS = 200;
 
         const int EMPTY_CASE_CODE = 0;
         const int FALLING_CASE_CODE = 1;
@@ -79,20 +91,24 @@ namespace X_CodeTris_Alexandre_King
         string[,] _visualPlayZone = new string[PLAY_ZONE_WIDTH / 2, PLAY_ZONE_HEIGHT / 2]; //Matrix of the playzone visual
 
 
-        int[,] _playZone = new int[PLAY_ZONE_WIDTH / 2+1, PLAY_ZONE_HEIGHT / 2+1]; //values divided by 2 because 1 "block" is 2X2 sized (Oblock is 4 "blocks" together)
-                                                                               //0-> empty, 1-> occupied (current tetriminos),
-                                                                               //2-> occupied (placed tetriminos),3->Blocked       
-                                                                               //Refer to the aboves const
+        int[,] _playZone = new int[PLAY_ZONE_WIDTH / 2 + 1, PLAY_ZONE_HEIGHT / 2 + 1]; //values divided by 2 because 1 "block" is 2X2 sized (Oblock is 4 "blocks" together)
+                                                                                       //0-> empty, 1-> occupied (current tetriminos),
+                                                                                       //2-> occupied (placed tetriminos),3->Blocked       
+                                                                                       //Refer to the aboves const
         public int NewGame()
         {
             Console.Clear();
             ResetAll();
             DrawPlayArea();
+            DrawGameOverArea();
             DrawNextTetriminosArea();
             DefinePlayingKeys();
             DefineDifficulty();
+            WriteScoreText();
+            WriteScore();
+            VisualManager.SetBackgroundColor("gray");
             return StartGame();
-        }       
+        }
 
         private void DefinePlayingKeys()
         {
@@ -128,15 +144,19 @@ namespace X_CodeTris_Alexandre_King
             {
                 case 0:
                     _frameTiming = EASY_FRAME_TIMING;
+                    _pointsToAdd = EASY_ADD_POINTS;
                     break;
                 case 1:
                     _frameTiming = MEDIUM_FRAME_TIMING;
+                    _pointsToAdd = MEDIUM_ADD_POINTS;
                     break;
                 case 2:
                     _frameTiming = HARD_FRAME_TIMING;
+                    _pointsToAdd = HARD_ADD_POINTS;
                     break;
                 default:
                     _frameTiming = EASY_FRAME_TIMING;
+                    _pointsToAdd = EASY_ADD_POINTS;
                     break;
             }
             questionsManager = new QuestionsManager(_difficulty);
@@ -148,15 +168,23 @@ namespace X_CodeTris_Alexandre_King
             _playZone = new int[PLAY_ZONE_WIDTH / 2 + 1, PLAY_ZONE_HEIGHT / 2 + 1];
             _numberOfRightAnswer = 0;
             _numberOfWrongAnswer = 0;
+            _instructionsTetriminos.Clear();            
+            _score = 0;
+            _gameOver = false;
+            _isUpdating = false;
             _inGame = false;
-            _pressedKey = default(ConsoleKeyInfo);                                   
+            _isPaused = false;
+            _canSpawnNew = true;
+            _threadsStarted = false;
+            _pressedKey = default(ConsoleKeyInfo);
+            TetriminosManager.ResetTetriminos();
 
         }
 
         private void DrawNextTetriminosArea()
         {
             int yPos = NEXT_TETRIMINOS_Y_POS;
-            for (int j = 0; j < NEXT_TETRIMINOS_SIZE/2; j++)
+            for (int j = 0; j < NEXT_TETRIMINOS_SIZE / 2; j++)
             {
                 Console.SetCursorPosition(NEXT_TETRIMINOS_X_POS, yPos);
                 for (int i = 0; i < NEXT_TETRIMINOS_SIZE; i++)
@@ -172,12 +200,12 @@ namespace X_CodeTris_Alexandre_King
         {
             int xPos = PLAY_ZONE_X_POS;
             int yPos = PLAY_ZONE_Y_POS;
-
+            
             VisualManager.SetBackgroundColor("gray");
             for (int j = 0; j < PLAY_ZONE_HEIGHT; j++)
             {
                 for (int i = 0; i < PLAY_ZONE_WIDTH; i++)
-                {
+                {                    
                     Console.SetCursorPosition(xPos, yPos);
                     Console.Write("  ");
                     xPos += 2;
@@ -186,40 +214,68 @@ namespace X_CodeTris_Alexandre_King
                 yPos++;
             }
 
-            for (int i = 0; i < PLAY_ZONE_HEIGHT / 2+1; i++)
+            for (int i = 0; i < PLAY_ZONE_HEIGHT / 2 + 1; i++)
             {
                 _playZone[PLAY_ZONE_WIDTH / 2, i] = BLOCKED_CASE_CODE;
             }
             for (int i = 0; i < PLAY_ZONE_WIDTH / 2 + 1; i++)
             {
-                _playZone[i, PLAY_ZONE_HEIGHT/2] = BLOCKED_CASE_CODE;
-            }            
+                _playZone[i, PLAY_ZONE_HEIGHT / 2] = BLOCKED_CASE_CODE;
+            }
+        }
+
+        private void DrawGameOverArea()
+        {
+            VisualManager.SetBackgroundColor("dkred");
+            for (int i = 0; i < PLAY_ZONE_WIDTH*2; i++)
+            {
+                Console.SetCursorPosition(PLAY_ZONE_X_POS+i, MAX_HEIGHT_BEFORE_GAME_OVER+PLAY_ZONE_Y_POS );
+                Console.Write(" ");                
+            }
+            VisualManager.SetBackgroundColor("gray");
         }
 
         private void PauseGame()
         {
-            _isPaused = true;               
             _instructionsTetriminos.Clear();
-                
+            _isPaused = true;
         }
 
         private void ResumeGame()
         {
             _isPaused = false;
-            Thread.Sleep(1000);            
-            
+            Thread.Sleep(1000);
+
+        }
+
+        private void StopAllThreads()
+        {
+            int totalThreads = _allThreads.Count();
+            for (int i = 0; i < totalThreads; i++)
+            {
+                try
+                {
+                    _allThreads[0].Abort();
+                    _allThreads.RemoveAt(0);
+                }
+                catch (Exception)
+                {
+                    _allThreads.Clear();
+                }
+
+            }
         }
 
         private void StartAllThreads()
         {
             Thread playerInput = new Thread(ManagePlayerInput);
             playerInput.Start();
-            _allThreads.Add(playerInput);            
+            _allThreads.Add(playerInput);
 
             Thread tetriminosManagement = new Thread(ManageTetriminos);
             tetriminosManagement.Start();
             _allThreads.Add(tetriminosManagement);
-        }        
+        }
 
         private void ManageTetriminos()
         {
@@ -228,7 +284,8 @@ namespace X_CodeTris_Alexandre_King
             {
                 if (!_isPaused)
                 {
-                    Thread.Sleep(25);
+                    //Thread to let a little timing before each instructions (This helps to limit visual bugs)
+                    Thread.Sleep(25);                    
                     if (_instructionsTetriminos.Count > 0)
                     {
                         bool isPlaced = false;
@@ -307,26 +364,68 @@ namespace X_CodeTris_Alexandre_King
                         {
                             _instructionsTetriminos.RemoveAt(0);
                         }
+                        if (_currentTetriminosYPos>MAX_HEIGHT_BEFORE_GAME_OVER+PLAY_ZONE_Y_POS)
+                        {
+                            DrawGameOverArea();
+                        }
                     }
                 }
             }
         }
 
+        private void CallGameOverScreen()
+        {
+            int yPosTest = 1;
+            string backMenu = "Appuyez sur une touche pour retourner au menu principal.";
+            string finalScoreText = "Votre score final est de " + _score + " points";
+            string questionsResult = "Vous avez répondu juste à " + _numberOfRightAnswer + " questions et faux à " + _numberOfWrongAnswer + " questions";
+            string finalPhrase = "N'hésitez pas à rejouer pour améliorer votre score !";
+            string tip = "Conseil : remplir plus de ligne à la fois vous donne plus de points";
+            string[] allPhrases = new string[4] { 
+            finalScoreText,questionsResult,finalPhrase,tip};
+            
+            VisualManager.SetTextColor("white");
+            VisualManager.SetBackgroundColor("black");
+            Console.Clear();
+            VisualManager.AddVisualToMainMenu();
+
+            foreach (string phrase in allPhrases)
+            {
+                Console.SetCursorPosition(Console.WindowWidth / 2 - phrase.Length / 2, Console.WindowHeight / 2 + yPosTest);
+                Console.Write(phrase);
+                yPosTest+=2;
+            }                        
+
+            DatabaseManager.StockGame(_score, MenuManager.GetDifficultyStatus()+1);
+
+            Console.SetCursorPosition(Console.WindowWidth / 2 - backMenu.Length / 2, Console.WindowHeight / 2 + yPosTest+3);
+            Console.Write(backMenu);
+
+            ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+            if (keyInfo != null)
+            {
+                Console.Clear();                
+            }
+        }
+
         private int StartGame()
         {
-            _inGame = true;            
+            _inGame = true;
             //count the frames after the tetriminos touched to bottom to let the player 2 frames of action
             int frameCounter = 0;
             while (_inGame)
             {
 
                 if (_gameOver)
-                {
+                {                    
+                    StopAllThreads();
+                    PauseGame();
+                    CallGameOverScreen();
                     return 0;
                 }
 
                 if (!_isPaused)
-                {                
+                {
                     Thread.Sleep(_frameTiming);
 
                     if (TetriminosManager.HasACurrentTetriminos())
@@ -400,7 +499,7 @@ namespace X_CodeTris_Alexandre_King
                         _visualPlayZone[i, j] = string.Empty;
                     }
                     int numberOfTheColor = 0;
-                    switch (_visualPlayZone[i,j].ToLower())
+                    switch (_visualPlayZone[i, j].ToLower())
                     {
                         case "green":
                             numberOfTheColor = 1;
@@ -432,7 +531,7 @@ namespace X_CodeTris_Alexandre_King
                     }
                     if (numberOfTheColor != 0)
                     {
-                        Debug.Write("["+numberOfTheColor+"]");
+                        Debug.Write("[" + numberOfTheColor + "]");
                     }
                     else
                     {
@@ -462,100 +561,108 @@ namespace X_CodeTris_Alexandre_King
             {
                 Console.SetCursorPosition(NEXT_TETRIMINOS_X_POS, yPos);
                 for (int i = 0; i < NEXT_TETRIMINOS_SIZE; i++)
-                {                    
+                {
                     Console.Write(" ");
                 }
                 yPos++;
             }
-            TetriminosManager.DrawNextTetriminos(NEXT_TETRIMINOS_X_POS + NEXT_TETRIMINOS_SIZE / 2-TetriminosManager.GetNextTetriminosWidth(), NEXT_TETRIMINOS_Y_POS+NEXT_TETRIMINOS_SIZE/4-TetriminosManager.GetNextTetriminosHeight()/2);
+            TetriminosManager.DrawNextTetriminos(NEXT_TETRIMINOS_X_POS + NEXT_TETRIMINOS_SIZE / 2 - TetriminosManager.GetNextTetriminosWidth(), NEXT_TETRIMINOS_Y_POS + NEXT_TETRIMINOS_SIZE / 4 - TetriminosManager.GetNextTetriminosHeight() / 2);
         }
 
         private void UpdateTetriminosOccupation(bool touchedBottom)
         {
-            bool tetriminosIsPlaced = false;
-            ClearPlayZoneFromFalling();
-
-            
-            for (int j = 0; j < TetriminosManager.GetCurrentTetriminosHeight(); j++)
+            if (!_isUpdating)
             {
-                for (int i = 0; i < TetriminosManager.GetCurrentTetriminosWidth(); i++)
+                _isUpdating = true;
+                bool tetriminosIsPlaced = false;
+                ClearPlayZoneFromFalling();
+
+
+                for (int j = 0; j < TetriminosManager.GetCurrentTetriminosHeight(); j++)
                 {
-                    try
-                    {                    
-                        if (TetriminosManager.GetTetriminosOccupation()[i, j])
+                    for (int i = 0; i < TetriminosManager.GetCurrentTetriminosWidth(); i++)
+                    {
+                        try
                         {
-                            if (touchedBottom)
+                            if (TetriminosManager.GetTetriminosOccupation()[i, j])
                             {
-                                _playZone[_playZoneTetriminosXPos + i, _playZoneTetriminosYPos + j] = PLACED_CASE_CODE;
-                                tetriminosIsPlaced = true;
-                                _instructionsTetriminos.Clear();
-                            }
-                            else
-                            {
-                                _playZone[_playZoneTetriminosXPos + i, _playZoneTetriminosYPos + j] = FALLING_CASE_CODE;
-                            }
+                                if (touchedBottom)
+                                {
+                                    _playZone[_playZoneTetriminosXPos + i, _playZoneTetriminosYPos + j] = PLACED_CASE_CODE;
+                                    tetriminosIsPlaced = true;
+                                    _instructionsTetriminos.Clear();
+                                    if (_currentTetriminosYPos<MAX_HEIGHT_BEFORE_GAME_OVER+PLAY_ZONE_Y_POS)
+                                    {
+                                        SoundManager.StopMusic();
+                                        _gameOver = true;
+                                    }
+                                }
+                                else
+                                {
+                                    _playZone[_playZoneTetriminosXPos + i, _playZoneTetriminosYPos + j] = FALLING_CASE_CODE;
+                                }
 
-                            _visualPlayZone[_playZoneTetriminosXPos + i, _playZoneTetriminosYPos + j] = TetriminosManager.GetTetriminosColor();
+                                _visualPlayZone[_playZoneTetriminosXPos + i, _playZoneTetriminosYPos + j] = TetriminosManager.GetTetriminosColor();
 
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            Debug.Print(e.Message);
+                            //Reverse Rotation                        
                         }
                     }
-                    catch (Exception e)
-                    {
-                        Debug.Print(e.Message);
-                        //Reverse Rotation                        
-                    }
-                }
 
-            }
-            if (touchedBottom)
-            {                
-                List<int> lanes = FindCompletedLane();
-                int amountOfLanes = lanes.Count;
-                int laneToBlock = 0;
-                //ASK Questions (return number of correct answer
-                //Manage number of wrong question
-                if (lanes.Count > 0)
-                {                   
-                    PauseGame();                    
-                    laneToBlock = AskQuestions(amountOfLanes);                    
-                    for (int k = 0; k < amountOfLanes-laneToBlock; k++)
+                }
+                if (touchedBottom)
+                {
+                    TempDebug();
+                    List<int> lanes = FindCompletedLane();
+                    int amountOfLanes = lanes.Count;
+                    int laneToBlock = 0;
+                    //ASK Questions (return number of correct answer
+                    //Manage number of wrong question
+                    if (lanes.Count > 0)
                     {
-                        RemoveLane(lanes[k]);                        
-                    }                    
-                    MoveLanesVisually();
-                    if (laneToBlock>0)
-                    {
-                        TempDebug();
-                        for (int i = 0; i < laneToBlock; i++)
+                        PauseGame();
+                        laneToBlock = AskQuestions(amountOfLanes);
+                        if (laneToBlock > 0)
                         {
-                            BlockLane();
+                            for (int i = 0; i < laneToBlock; i++)
+                            {
+                                BlockLane();
+                            }
                         }
-                        TempDebugColor();
+                        for (int k = 0; k < amountOfLanes; k++)
+                        {
+                            RemoveLane(lanes[k]);
+                        }
+                        MoveLanesVisually();
                         TempDebug();
+                        ResumeGame();
                     }
-
-                    ResumeGame();
                 }
-            }
-            if (tetriminosIsPlaced)
-            {
-                _canSpawnNew = true;
-            }
-            else
-            {
-                _canSpawnNew = false;
+                if (tetriminosIsPlaced)
+                {
+                    _canSpawnNew = true;
+                }
+                else
+                {
+                    _canSpawnNew = false;
+                }
+                _isUpdating = false;
             }
         }
 
         private List<int> FindCompletedLane()
         {
             List<int> completedLanes = new List<int>();
-            for (int j = 0; j < PLAY_ZONE_HEIGHT/2; j++)
+            for (int j = 0; j < PLAY_ZONE_HEIGHT / 2; j++)
             {
                 bool laneIsCompleted = false;
-                for (int i = 0; i < PLAY_ZONE_WIDTH/2; i++)
+                for (int i = 0; i < PLAY_ZONE_WIDTH / 2; i++)
                 {
-                    if (_playZone[i,j] == PLACED_CASE_CODE)
+                    if (_playZone[i, j] == PLACED_CASE_CODE)
                     {
                         laneIsCompleted = true;
                     }
@@ -574,43 +681,51 @@ namespace X_CodeTris_Alexandre_King
         }
 
         private void RemoveLane(int fullLane)
-        {            
-            for (int i = 0; i < PLAY_ZONE_WIDTH/2; i++)
+        {
+            for (int i = 0; i < PLAY_ZONE_WIDTH / 2; i++)
             {
                 _playZone[i, fullLane] = EMPTY_CASE_CODE;
                 _visualPlayZone[i, fullLane] = string.Empty;
             }
             for (int j = fullLane - 1; j > 0; j--)
-            {                
+            {
                 for (int i = 0; i < PLAY_ZONE_WIDTH / 2; i++)
                 {
                     if (_playZone[i, j] == PLACED_CASE_CODE && _playZone[i, j + 1] != BLOCKED_CASE_CODE)
                     {
                         _playZone[i, j + 1] = _playZone[i, j];
                         _playZone[i, j] = EMPTY_CASE_CODE;
-                        _visualPlayZone[i,j+1] = _visualPlayZone[i,j];
-                        _visualPlayZone[i,j] = string.Empty;
+                        _visualPlayZone[i, j + 1] = _visualPlayZone[i, j];
+                        _visualPlayZone[i, j] = string.Empty;
                     }
-                }                
-            }            
+                }
+            }
         }
         private void MoveLanesVisually()
-        {            
+        {
             ClearPlayZone();
             RedrawEachTetriminos();
         }
-        private void BlockLane()
+
+        private int FindLatestBlockedLane()
         {
-            int lastBlockLane = 24;
+            int lastBlockLane = PLAY_ZONE_HEIGHT / 2;
             _totalBlockedLane++;
-            for (int i = 0; i < PLAY_ZONE_HEIGHT/2; i++)
+            for (int i = 0; i < PLAY_ZONE_HEIGHT / 2; i++)
             {
-                if (_playZone[0,i] == BLOCKED_CASE_CODE)
+                if (_playZone[0, i] == BLOCKED_CASE_CODE)
                 {
                     lastBlockLane = i;
                     break;
                 }
             }
+
+            return lastBlockLane;
+        }
+        private void BlockLane()
+        {
+            int lastBlockLane = FindLatestBlockedLane();
+
             for (int j = 0; j < _totalBlockedLane; j++)
             {
                 for (int i = 0; i < PLAY_ZONE_WIDTH / 2; i++)
@@ -666,6 +781,26 @@ namespace X_CodeTris_Alexandre_King
 
         private int AskQuestions(int numberOfCompletedLines)
         {
+            if (MenuManager.GetSoundStatus())
+            {
+                SoundManager.PlaySuspenseSong();
+            }
+            switch (numberOfCompletedLines)
+            {
+                case 2:
+                    _completedLineMultiplycator = 1.25;
+                    break;
+                case 3:
+                    _completedLineMultiplycator = 1.5;
+                    break;
+                case 4:
+                    _completedLineMultiplycator = 2;
+                    break;
+                default:
+                    _completedLineMultiplycator = 1;
+                    break;
+            }
+
             Console.CursorVisible = true;
             VisualManager.SetTextColor("white");
             VisualManager.SetBackgroundColor("black");
@@ -677,9 +812,16 @@ namespace X_CodeTris_Alexandre_King
                 string playerAnswer = ManagePlayerAnswer();
                 if (!CheckAnswer(playerAnswer, currentQuestion.Answer))
                 {
-                    wrongAnswer++;
-                    Thread.Sleep(2000);
-                }                
+                    ShowQuestion(currentQuestion.Quote, "red");
+                    wrongAnswer++;                    
+                }
+                else
+                {
+                    ShowQuestion(currentQuestion.Quote, "green");
+                }
+                WriteScore();
+                Thread.Sleep(2000);
+
                 ClearQuestionZone();                
                 _questionAnswerPosY = QUESTION_QUOTE_Y_POS + 2;
                 _correctAnswerPosY = _questionAnswerPosY + 2;
@@ -687,11 +829,16 @@ namespace X_CodeTris_Alexandre_King
             }
             Console.CursorVisible = false;
             VisualManager.SetBackgroundColor("gray");
+            if (MenuManager.GetSoundStatus())
+            {
+                SoundManager.PlayTetrisThemeSong();
+            }
             return wrongAnswer;
         }
 
         private void ClearQuestionZone()
         {
+            VisualManager.SetBackgroundColor("black");
             for (int j = 0; j < _correctAnswerPosY+10; j++)
             {
                 Console.SetCursorPosition(QUESTION_QUOTE_X_POS,QUESTION_QUOTE_Y_POS+j);
@@ -702,8 +849,9 @@ namespace X_CodeTris_Alexandre_King
             }
         }
 
-        private void ShowQuestion(string quote)
+        private void ShowQuestion(string quote, string textColor = "white")
         {
+            VisualManager.SetTextColor(textColor);
             string[] seperatedQuote = quote.Split(' ');
             int numberOfSpaces = seperatedQuote.Count();
             string partOfQuote = string.Empty;            
@@ -724,7 +872,8 @@ namespace X_CodeTris_Alexandre_King
                 }
             }
             Console.SetCursorPosition(QUESTION_QUOTE_X_POS, QUESTION_QUOTE_Y_POS + count);
-            Console.Write(partOfQuote);            
+            Console.Write(partOfQuote);      
+            VisualManager.SetTextColor("white");
         }
 
         private string ManagePlayerAnswer()
@@ -786,19 +935,19 @@ namespace X_CodeTris_Alexandre_King
             int tolerance = Convert.ToInt32(Math.Floor(margin)*2);
             if (LevenshteinDistance.GetDistance(givenAnswer.ToLower(),correctAnswer.ToLower())<=tolerance)
             {
-                //Show green dot
+                //Show green dot                 
                 _numberOfRightAnswer++;
+                _score += _pointsToAdd * _completedLineMultiplycator;
                 return true;
             }            
             else
             {
-                //Show Red Dot
+                //Show Red Dot                
                 _numberOfWrongAnswer++;
                 ShowCorrectAnswer(correctAnswer);
                 return false;
             }
-        }
-
+        }        
         private void ShowCorrectAnswer(string correctAnswer)
         {
             string[] seperatedAnswer = correctAnswer.Split(' ');
@@ -842,6 +991,23 @@ namespace X_CodeTris_Alexandre_King
                     }
                 }
             }
+        }
+
+        private void WriteScoreText()
+        {
+            Console.SetCursorPosition(SCORE_X_POS,SCORE_Y_POS);
+            VisualManager.SetTextColor("white");
+            VisualManager.SetBackgroundColor("black");
+            Console.Write(SCORE_TEXT);            
+        }
+
+        private void WriteScore()
+        {
+            Console.SetCursorPosition(SCORE_X_POS+SCORE_TEXT.Length, SCORE_Y_POS);
+            VisualManager.SetTextColor("white");
+            VisualManager.SetBackgroundColor("black");
+            Console.Write(_score);
+            VisualManager.SetBackgroundColor("gray");
         }
 
         private bool CheckCanMoveInPlayZone(int wantedXPos, int wantedYPos, bool downInstruction = false)

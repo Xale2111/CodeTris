@@ -308,6 +308,9 @@ namespace X_CodeTris_Alexandre_King
                 case "dkblue":
                     Console.BackgroundColor = ConsoleColor.DarkBlue;
                     break;
+                case "dkred":
+                    Console.BackgroundColor = ConsoleColor.DarkRed;
+                    break;
                 default:
                     Console.BackgroundColor = ConsoleColor.White;
                     break;

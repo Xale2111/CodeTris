@@ -1,11 +1,6 @@
-D:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\obj\Debug\X-CodeTris-Alexandre King.csproj.AssemblyReference.cache
-D:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\obj\Debug\X-CodeTris-Alexandre King.csproj.SuggestedBindingRedirects.cache
-D:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\obj\Debug\X-CodeTris-Alexandre King.csproj.CoreCompileInputs.cache
 D:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\bin\Debug\X-CodeTris-Alexandre King.exe.config
 D:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\bin\Debug\X-CodeTris-Alexandre King.exe
 D:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\bin\Debug\X-CodeTris-Alexandre King.pdb
-D:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\obj\Debug\X-CodeTris-Alexandre King.exe
-D:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\obj\Debug\X-CodeTris-Alexandre King.pdb
 D:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\bin\Debug\BouncyCastle.Cryptography.dll
 D:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\bin\Debug\Google.Protobuf.dll
 D:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\bin\Debug\K4os.Compression.LZ4.dll
@@ -37,4 +32,9 @@ D:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-
 D:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\bin\Debug\System.Numerics.Vectors.xml
 D:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 D:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\bin\Debug\System.Threading.Tasks.Extensions.xml
+D:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\obj\Debug\X-CodeTris-Alexandre King.csproj.AssemblyReference.cache
+D:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\obj\Debug\X-CodeTris-Alexandre King.csproj.SuggestedBindingRedirects.cache
+D:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\obj\Debug\X-CodeTris-Alexandre King.csproj.CoreCompileInputs.cache
 D:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\obj\Debug\X-CodeTris-Alexandre King.csproj.CopyComplete
+D:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\obj\Debug\X-CodeTris-Alexandre King.exe
+D:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\obj\Debug\X-CodeTris-Alexandre King.pdb

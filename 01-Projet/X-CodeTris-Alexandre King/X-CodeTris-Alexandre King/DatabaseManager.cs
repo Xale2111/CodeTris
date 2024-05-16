@@ -175,18 +175,18 @@ namespace X_CodeTris_Alexandre_King
         /// <param name="score">final score</param>
         /// <param name="difficulty">game difficulty</param>
         /// <returns>True = Game has been inserted successfully, False = Game hasn't been inserted</returns>
-        static public bool StockGame(int score, int difficulty)
+        static public bool StockGame(double score, int difficulty)
         {
             OpenDB();
             try
             {
-                int id = FindPlayerIDWithName();
+                int userId = FindPlayerIDWithName();
                 MySql.Data.MySqlClient.MySqlCommand com = _connection.CreateCommand();
 
                 com.CommandType = System.Data.CommandType.Text;
-                com.CommandText = "INSERT INTO " + GAME_TABLE + "(" + SCORE_FIELD + "," + DIFFICULTY_NAME_FIELD + "," + DIFFICULTY_LEVEL_FIELD + "," + FK_DIFFICULTY_FIELD + ") VALUES ('" + score + "','" + FormatDate() + "','" + id + "','" + difficulty + "');";
+                com.CommandText = "INSERT INTO " + GAME_TABLE + "(" + SCORE_FIELD + "," + GAME_DATE_FIELD + "," + FK_USER_FIELD + "," + FK_DIFFICULTY_FIELD + ") VALUES ('" + score + "','" + FormatDate() + "','" + userId + "','" + difficulty + "');";
                 MySql.Data.MySqlClient.MySqlDataReader reader = com.ExecuteReader();
-                ExternalManager.LogInfo("New game by user <<" + id + " : " + ExternalManager.GetPlayerName() + ">> was inserted succesfully. Final score is " + score);
+                ExternalManager.LogInfo("New game by user <<" + userId + " : " + ExternalManager.GetPlayerName() + ">> was inserted succesfully. Final score is " + Math.Floor(score));
                 return true;
             }
             catch (Exception e)

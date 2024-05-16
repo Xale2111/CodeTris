@@ -154,12 +154,11 @@ namespace X_CodeTris_Alexandre_King
             {
                 //depending on the selection, will go something different
                 switch (menuManager.MainMenuEnter(menuSelector))
-                {
-                    //start the game
+                {                    
                     case 0:
                         inMenu = false;
-                        int temp = gameManager.NewGame();
-                        Console.WriteLine(temp);
+                        int gameResult = gameManager.NewGame();
+                        ManageGameResult(gameResult);
                         break;
                     //Go to the option menu
                     case 1:
@@ -180,6 +179,26 @@ namespace X_CodeTris_Alexandre_King
                         menuSelector = 0;
                         break;
                     //Exit isn't written here because it escapes the program
+                }
+            }
+
+            void ManageGameResult(int gameResult)
+            {
+                switch (gameResult)
+                {
+                    case 0:
+                        inMenu = true;
+                        menuManager.CallMainMenu();
+                        if (MenuManager.GetSoundStatus())
+                        {
+                            SoundManager.PlayTetrisThemeSong();
+                        }
+                        lastIndexMenu = menuManager.GetMainMenu().Last().Key;
+                        menuTop = menuManager.GetMenuTopStart();
+                        menuSelector = 0;
+                        break;
+                    default:
+                        break;
                 }
             }
 
@@ -311,6 +330,8 @@ namespace X_CodeTris_Alexandre_King
 
 
         }
+
+        
     }
 
 }
