@@ -730,14 +730,13 @@ namespace X_CodeTris_Alexandre_King
         private string ManagePlayerAnswer()
         {
             string playerAnswer = string.Empty;
-            int moveDown = 1;
-            bool canWriteKey = false;
+            int moveDown = 1;            
             //do while player didn't pressed ENTER
             Console.SetCursorPosition(QUESTION_ANSWER_X_POS, _questionAnswerPosY);
             do
             {
                 ConsoleKeyInfo keyInfo;
-                keyInfo = Console.ReadKey(true);
+                keyInfo = Console.ReadKey();
                 if (playerAnswer.Length%MAX_STRING_LENGTH==0 && playerAnswer.Length != 0)
                 {                    
                     Console.SetCursorPosition(QUESTION_ANSWER_X_POS, _questionAnswerPosY);
@@ -748,7 +747,6 @@ namespace X_CodeTris_Alexandre_King
                 {
                     case ConsoleKey.Spacebar:
                         playerAnswer += " ";
-                        canWriteKey = true;
                         break;
                     case ConsoleKey.Backspace:
                         if (playerAnswer.Length > 0)
@@ -760,7 +758,7 @@ namespace X_CodeTris_Alexandre_King
                         else
                         {                            
                             Console.SetCursorPosition(Console.CursorLeft + 1, Console.CursorTop);
-                        }                        
+                        }
                         break;
                     case ConsoleKey.Enter:
                         return playerAnswer;                                                                
@@ -768,8 +766,7 @@ namespace X_CodeTris_Alexandre_King
                     default:
                         if (keyInfo.KeyChar.ToString() != "\0")
                         {
-                            playerAnswer += keyInfo.KeyChar;
-                            canWriteKey = true;
+                            playerAnswer += keyInfo.KeyChar;                            
                         }
                         else
                         {
@@ -777,11 +774,7 @@ namespace X_CodeTris_Alexandre_King
                         }
 
                         break;
-                }
-                if (canWriteKey)
-                {
-                    Console.Write(keyInfo.KeyChar);
-                    canWriteKey = false;
+
                 }
 
             } while (true);
@@ -1002,6 +995,13 @@ namespace X_CodeTris_Alexandre_King
                     else if (_pressedKey.Key == _rotate)
                     {
                         _instructionsTetriminos.Add(ROTATE_INSTRUCTION);
+                    }
+                    else if (_pressedKey.Key == _dropDown)
+                    {
+                        for (int i = 0; i < PLAY_ZONE_HEIGHT/2 - _playZoneTetriminosYPos; i++)
+                        {
+                            _instructionsTetriminos.Add(DOWN_INSTRUCTION);
+                        }
                     }
 
                     _pressedKey = default(ConsoleKeyInfo);

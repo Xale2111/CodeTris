@@ -1430,3 +1430,32 @@ DATE 				|LEVEL 		|ERROR
 15.05.2024 16:00:40		INFO		Database opened successfully
 15.05.2024 16:00:40		INFO		Database opened successfully
 15.05.2024 16:00:40		INFO		All question of difficulty 2 were selected.
+15.05.2024 16:10:21		INFO		Database opened successfully
+15.05.2024 16:10:23		INFO		Database opened successfully
+15.05.2024 16:10:23		INFO		Database opened successfully
+15.05.2024 16:10:23		INFO		All question of difficulty 2 were selected.
+15.05.2024 16:15:14		INFO		Database opened successfully
+15.05.2024 16:15:16		INFO		Database opened successfully
+15.05.2024 16:15:16		INFO		Database opened successfully
+15.05.2024 16:15:16		INFO		Database opened successfully
+15.05.2024 16:32:26		INFO		Database opened successfully
+15.05.2024 16:32:27		INFO		Database opened successfully
+15.05.2024 16:32:27		INFO		Database opened successfully
+15.05.2024 16:32:27		INFO		All question of difficulty 2 were selected.
+16.05.2024 13:11:29		INFO		Database opened successfully
+16.05.2024 13:11:59		INFO		Database opened successfully
+16.05.2024 13:11:59		INFO		Database opened successfully
+16.05.2024 13:11:59		INFO		All question of difficulty 1 were selected.
+16.05.2024 13:12:06		INFO		Database opened successfully
+16.05.2024 13:12:07		INFO		Database opened successfully
+16.05.2024 13:12:07		INFO		Database opened successfully
+16.05.2024 13:12:07		INFO		All question of difficulty 1 were selected.
+16.05.2024 13:16:03		INFO		Database opened successfully
+16.05.2024 13:16:04		INFO		Database opened successfully
+16.05.2024 13:16:04		INFO		Database opened successfully
+16.05.2024 13:16:04		INFO		All question of difficulty 1 were selected.
+16.05.2024 13:17:45		INFO		Database opened successfully
+16.05.2024 13:18:54		INFO		Database opened successfully
+16.05.2024 13:18:58		INFO		Database opened successfully
+16.05.2024 13:18:59		INFO		Database opened successfully
+16.05.2024 13:18:59		INFO		All question of difficulty 2 were selected.
