@@ -21,8 +21,10 @@ namespace X_CodeTris_Alexandre_King
 
             //Define the console size to the maximum possible size
             Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
+
             //remove the ability to resize the console and to maximaxied it
             ConsoleUtility.DeleteResizeMenu();
+            
             //Move to window to the top left corner
             WindowUtility.MoveWindowToTopLeftCorner();
 
@@ -39,6 +41,8 @@ namespace X_CodeTris_Alexandre_King
             menuManager.CallMainMenu();
             GameManager gameManager = new GameManager();
 
+            //check if the sound is on or off 
+            //if is on, start playing the music
             if (ExternalManager.GetSoundStatusAtStart())
             {
                 SoundManager.PlayTetrisThemeSong();
@@ -181,11 +185,12 @@ namespace X_CodeTris_Alexandre_King
                     //Exit isn't written here because it escapes the program
                 }
             }
-
+            ///Manage the game result
             void ManageGameResult(int gameResult)
             {
                 switch (gameResult)
                 {
+                    //Game is over
                     case 0:
                         inMenu = true;
                         menuManager.CallMainMenu();

@@ -95,32 +95,33 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConsoleUtility.cs" />
-    <Compile Include="DatabaseManager.cs" />
-    <Compile Include="ExternalManager.cs" />
-    <Compile Include="GameManager.cs" />
-    <Compile Include="IBlock.cs" />
-    <Compile Include="JBlock.cs" />
-    <Compile Include="LBlock.cs" />
-    <Compile Include="LevenshteinDistance.cs" />
-    <Compile Include="MenuManager.cs" />
-    <Compile Include="OBlock.cs" />
+    <Compile Include="Imported\ConsoleUtility.cs" />
+    <Compile Include="Manager\DatabaseManager.cs" />
+    <Compile Include="Manager\ExternalManager.cs" />
+    <Compile Include="Manager\GameManager.cs" />
+    <Compile Include="Tetriminos\IBlock.cs" />
+    <Compile Include="Tetriminos\JBlock.cs" />
+    <Compile Include="Tetriminos\LBlock.cs" />
+    <Compile Include="Imported\LevenshteinDistance.cs" />
+    <Compile Include="Manager\MenuManager.cs" />
+    <Compile Include="Tetriminos\OBlock.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Question.cs" />
-    <Compile Include="QuestionsManager.cs" />
-    <Compile Include="SBlock.cs" />
-    <Compile Include="SoundManager.cs" />
-    <Compile Include="TBlock.cs" />
-    <Compile Include="Tetriminos.cs" />
-    <Compile Include="TetriminosManager.cs" />
-    <Compile Include="VisualManager.cs" />
-    <Compile Include="WindowUtility.cs" />
-    <Compile Include="ZBlock.cs" />
+    <Compile Include="Manager\QuestionsManager.cs" />
+    <Compile Include="Tetriminos\SBlock.cs" />
+    <Compile Include="Manager\SoundManager.cs" />
+    <Compile Include="Tetriminos\TBlock.cs" />
+    <Compile Include="Tetriminos\Tetriminos.cs" />
+    <Compile Include="Manager\TetriminosManager.cs" />
+    <Compile Include="Manager\VisualManager.cs" />
+    <Compile Include="Imported\WindowUtility.cs" />
+    <Compile Include="Tetriminos\ZBlock.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace X_CodeTris_Alexandre_King
 {
+    /// <summary>
+    /// Parent. Tetriminos class dor all the different tetriminos
+    /// </summary>
     public class Tetriminos
     {        
         protected string _name;

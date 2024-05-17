@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace X_CodeTris_Alexandre_King
 {
+    /// <summary>
+    /// Manager of the menus. Everything that is menu related is managed here or in the program.cs
+    /// </summary>
     public class MenuManager
     {
         //Each menu, Dictionary to know the position in the options and to have the name of the option
@@ -19,7 +22,7 @@ namespace X_CodeTris_Alexandre_King
         string[] _keysOptions = new string[2] { "WASD", "Flèches" };
 
         //Text in the How To Play menu
-        string[] _howToPlayMessage = new string[13]
+        string[] _howToPlayMessage = new string[14]
         {
         "Comment Jouer ?",
         "",
@@ -28,6 +31,7 @@ namespace X_CodeTris_Alexandre_King
         "Cependant, vous pouvez les faires descendre plus vite avec la touche 'S' ou la flèche du bas selon votre séléction dans le menu 'options'.",
         "Pour déplacer les pièces, utilisez les touches 'A' et 'D' ou les flèches gauche et droite.",
         "Avec la touche 'W' ou la flèche du haut vous pouvez faire pivoter les pièces.",
+        "La touche ESPACE fait descendre la pièce directement tout en bas.",
         "Pour chaque ligne complétée, une question sur le C# vous sera posée. La difficulté varie selon votre séléction dans le menu 'options'.",
         "Plus la difficulté est haute, plus vous gagnerez de points en répondant correctement à une question.",
         "Par contre, si vous répondez faux, une ligne de la zone se bloquera, réduisant ainsi l'espace de jeu.",
@@ -36,8 +40,8 @@ namespace X_CodeTris_Alexandre_King
         "Bonne Chance :) !"
         };
 
-               
-        
+
+
         int[] _xPosMenuOption;          //position x of each option 
         static bool _soundIsOn = false;
         static int _currentDifficulty;
@@ -56,11 +60,11 @@ namespace X_CodeTris_Alexandre_King
             _soundIsOn = ExternalManager.GetSoundStatusAtStart();
             _currentDifficulty = ExternalManager.GetDifficultyAtStart();
             _playKeys = ExternalManager.GetKeysAtStart();
-            if (_playKeys>_keysOptions.Length-1)
+            if (_playKeys > _keysOptions.Length - 1)
             {
                 _playKeys = 0;
             }
-            if (_currentDifficulty > _difficultyOptions.Length-1)
+            if (_currentDifficulty > _difficultyOptions.Length - 1)
             {
                 _currentDifficulty = 0;
             }
@@ -73,11 +77,17 @@ namespace X_CodeTris_Alexandre_King
             //DefinePauseMenu();
         }
 
+        /// <summary>
+        /// Call the main menu
+        /// </summary>
         public void CallMainMenu()
         {
             _currentMenu = "main";
             CreateMenu(_mainMenu);
         }
+        /// <summary>
+        /// Call the option menu
+        /// </summary>
         private void CallOptionMenu()
         {
             _currentMenu = "option";
@@ -89,32 +99,51 @@ namespace X_CodeTris_Alexandre_King
                 currentMenu = "pause";
                 CreateMenu(pauseMenu);
             }*/
+        /// <summary>
+        /// Call the highscore menu
+        /// </summary>
         private void CallHighscoreMenu()
         {
             _currentMenu = "highscore";
             CreateMenu(_highscoreMenu);
-        }  
-        
+        }
+        /// <summary>
+        /// Call the how to play menu 
+        /// </summary>
         private void CallHowToPlayMenu()
         {
             _currentMenu = "howToPlay";
             CreateMenu(_howToPlay);
-        }        
-
+        }
+        /// <summary>
+        /// Get the current menu the user's in 
+        /// </summary>
+        /// <returns>the current menu</returns>
         public string GetCurrentMenu()
         {
             return _currentMenu;
         }
-
+        /// <summary>
+        /// Add all the choices of the main menu
+        /// </summary>
         private void DefineMainMenu()
         {
-            _mainMenu.Add(0, "Jouer");
+            if (!DatabaseManager.GetDBState())
+            {
+                _mainMenu.Add(0, "Jouer (Sans questions, serveur éteint)");
+            }
+            else
+            {
+                _mainMenu.Add(0, "Jouer");
+            }
             _mainMenu.Add(1, "Options");
             _mainMenu.Add(2, "Score");
             _mainMenu.Add(3, "Comment jouer ?");
             _mainMenu.Add(4, "Quitter");
         }
-
+        /// <summary>
+        /// Add all the choices of the option menu
+        /// </summary>
         private void DefineOptionMenu()
         {
             _optionMenu.Add(0, "Musique");
@@ -122,7 +151,9 @@ namespace X_CodeTris_Alexandre_King
             _optionMenu.Add(2, "Difficulté");
             _optionMenu.Add(3, "Retour <=");
         }
-
+        /// <summary>
+        /// Add all the choices of the highscore menu
+        /// </summary>
         private void DefineHighscoreMenu()
         {
             _highscoreMenu.Add(0, "Facile");
@@ -130,11 +161,16 @@ namespace X_CodeTris_Alexandre_King
             _highscoreMenu.Add(2, "Difficile");
             _highscoreMenu.Add(3, "Retour <=");
         }
-
+        /// <summary>
+        /// Add all the choices of the details highscore menu 
+        /// </summary>
         private void DefineDetailHighscoreMenu()
         {
             _detailHighscore.Add(0, "Retour <=");
         }
+        /// <summary>
+        /// Add all the choices of the how to play menu
+        /// </summary>
         private void DefineHowToPlayMenu()
         {
             _howToPlay.Add(0, "Retour <=");
@@ -147,17 +183,20 @@ namespace X_CodeTris_Alexandre_King
                 pauseMenu.Add(2, "Go Back To Menu <=");
                 pauseMenu.Add(3, "Exit");
             }*/
-
+        /// <summary>
+        /// Creates the menu
+        /// </summary>
+        /// <param name="menu">which menu to create</param>
         private void CreateMenu(Dictionary<int, string> menu)
         {
             char movementArrow = '>';
             if (_currentMenu == "main")
             {
                 VisualManager.AddVisualToMainMenu();
-                Console.SetCursorPosition(Console.WindowWidth-5,0);
+                Console.SetCursorPosition(Console.WindowWidth - 5, 0);
                 if (DatabaseManager.GetDBState())
                 {
-                Console.ForegroundColor = ConsoleColor.Green;
+                    Console.ForegroundColor = ConsoleColor.Green;
                 }
                 else
                 {
@@ -173,9 +212,9 @@ namespace X_CodeTris_Alexandre_King
 
             _xPosMenuOption = new int[menu.Count];
             _menuTopStart = Console.WindowHeight / 2 - menu.Count;
-            
+
             Console.ForegroundColor = ConsoleColor.White;
-            Console.SetCursorPosition(Console.WindowWidth / 2, _menuTopStart);            
+            Console.SetCursorPosition(Console.WindowWidth / 2, _menuTopStart);
             foreach (var menuOption in menu)
             {
                 _xPosMenuOption[menuOption.Key] = Console.WindowWidth / 2 - 4;
@@ -232,21 +271,24 @@ namespace X_CodeTris_Alexandre_King
             Console.Write(movementArrow);
 
         }
-
+        /// <summary>
+        /// Show the detail highscore menu
+        /// </summary>
+        /// <param name="difficulty">difficulty of the highscores</param>
         private void ShowDetailHighScoreMenu(int difficulty)
         {
-            Console.Clear();            
+            Console.Clear();
             char movementArrow = '>';
             List<Tuple<string, int, string>> highscores = new List<Tuple<string, int, string>>();
             highscores = DatabaseManager.GetHighScores(difficulty);
             int count = 0;
-            
+
 
             foreach (Tuple<string, int, string> highscore in highscores)
             {
-                string score = (count + 1) + ". " + highscore.Item1 + " : " + highscore.Item2 + " pts"+". Record date : "+ highscore.Item3;
+                string score = (count + 1) + ". " + highscore.Item1 + " : " + highscore.Item2 + " pts" + ". Record date : " + highscore.Item3;
 
-                Console.SetCursorPosition(Console.WindowWidth/2 - score.Length / 2, Console.WindowHeight/2-highscores.Count()/2+count);
+                Console.SetCursorPosition(Console.WindowWidth / 2 - score.Length / 2, Console.WindowHeight / 2 - highscores.Count() / 2 + count);
                 Console.WriteLine(score);
                 count++;
             }
@@ -262,30 +304,38 @@ namespace X_CodeTris_Alexandre_King
             _xPosMenuOption[0] = Console.WindowWidth / 2 - _detailHighscore[0].Length / 2;
             _menuTopStart = Console.WindowHeight / 2 - highscores.Count() + 3 + count;
 
-            Console.SetCursorPosition(_xPosMenuOption[0], _menuTopStart );
+            Console.SetCursorPosition(_xPosMenuOption[0], _menuTopStart);
             Console.WriteLine(_detailHighscore[0]);
 
-            Console.SetCursorPosition(Console.WindowWidth / 2 - _detailHighscore[0].Length/2-2, Console.WindowHeight / 2 - highscores.Count() + 3 + count);
-            Console.Write(movementArrow);            
+            Console.SetCursorPosition(Console.WindowWidth / 2 - _detailHighscore[0].Length / 2 - 2, Console.WindowHeight / 2 - highscores.Count() + 3 + count);
+            Console.Write(movementArrow);
         }
-
+        /// <summary>
+        /// Shows the how to play menu
+        /// </summary>
         private void ShowHowToPlayMenu()
         {
             int count = 0;
             foreach (string howToPlayInstruction in _howToPlayMessage)
             {
-                Console.SetCursorPosition(Console.WindowWidth/2-howToPlayInstruction.Length/2,Console.WindowHeight/4+count);
+                Console.SetCursorPosition(Console.WindowWidth / 2 - howToPlayInstruction.Length / 2, Console.WindowHeight / 4 + count);
                 Console.Write(howToPlayInstruction);
                 count++;
             }
         }
-        
 
+        /// <summary>
+        /// Get the main menu
+        /// </summary>
+        /// <returns>main menu</returns>
         public Dictionary<int, string> GetMainMenu()
         {
             return _mainMenu;
         }
-
+        /// <summary>
+        /// Get the option menu
+        /// </summary>
+        /// <returns>option menu</returns>
         public Dictionary<int, string> GetOptionMenu()
         {
             return _optionMenu;
@@ -295,29 +345,50 @@ namespace X_CodeTris_Alexandre_King
             {
                 return pauseMenu;
             }*/
+        /// <summary>
+        /// Get the highscore menu
+        /// </summary>
+        /// <returns>highscore menu</returns>
         public Dictionary<int, string> GetHighscoreMenu()
         {
             return _highscoreMenu;
         }
+        /// <summary>
+        /// Get the details highscore menu
+        /// </summary>
+        /// <returns>details highscore menu</returns>
         public Dictionary<int, string> GetDetailHighscoreMenu()
         {
             return _detailHighscore;
         }
+        /// <summary>
+        /// Get the how to play menu
+        /// </summary>
+        /// <returns>how to play menu</returns>
         public Dictionary<int, string> GetHowToPlayMenu()
         {
             return _howToPlay;
         }
-
+        /// <summary>
+        /// Get the Y start position of the current menu
+        /// </summary>
+        /// <returns>Y start position</returns>
         public int GetMenuTopStart()
         {
             return _menuTopStart;
         }
-
+        /// <summary>
+        /// Get the position of the current menu options
+        /// </summary>
+        /// <returns>array with the X position of each options</returns>
         public int[] GetMenuOptionPos()
         {
             return _xPosMenuOption;
         }
-
+        /// <summary>
+        /// Change the sound state (true = on, false = off)
+        /// </summary>
+        /// <param name="positionValue"></param>
         private void ChangeSoundState(int positionValue)
         {
             _soundIsOn = !_soundIsOn;
@@ -338,11 +409,11 @@ namespace X_CodeTris_Alexandre_King
             ExternalManager.StockOptionsOnChange();
 
         }
-        public int GetDifficulty()
-        {
-            return _currentDifficulty;
-        }
 
+        /// <summary>
+        /// Changes the difficulty
+        /// </summary>
+        /// <param name="positionValue"></param>
         private void ChangeDifficulty(int positionValue)
         {
             int cursorPosition = _xPosMenuOption[positionValue] + _optionMenu[positionValue].Length + 5;
@@ -373,11 +444,14 @@ namespace X_CodeTris_Alexandre_King
             ExternalManager.StockOptionsOnChange();
 
         }
-
+        /// <summary>
+        /// Changes the playing keys
+        /// </summary>
+        /// <param name="positionValue"></param>
         private void ChangePlayKeys(int positionValue)
         {
             int cursorPosition = _xPosMenuOption[positionValue] + _optionMenu[positionValue].Length + 5;
-            Console.SetCursorPosition(cursorPosition, GetMenuTopStart() + positionValue);            
+            Console.SetCursorPosition(cursorPosition, GetMenuTopStart() + positionValue);
 
             if (_playKeys < _keysOptions.Length - 1)
             {
@@ -394,17 +468,26 @@ namespace X_CodeTris_Alexandre_King
             ExternalManager.StockOptionsOnChange();
 
         }
-
+        /// <summary>
+        /// Get the sound status
+        /// </summary>
+        /// <returns>if the sound is on or off (true = on, false = off)</returns>
         static public bool GetSoundStatus()
         {
             return _soundIsOn;
         }
-
+        /// <summary>
+        /// Get the difficulty level
+        /// </summary>
+        /// <returns>the difficulty level</returns>
         static public int GetDifficultyStatus()
         {
             return _currentDifficulty;
         }
-
+        /// <summary>
+        /// Get the commands the user choose to play with
+        /// </summary>
+        /// <returns>the current playing keys</returns>
         static public int GetPlayingKeys()
         {
             return _playKeys;
@@ -434,7 +517,7 @@ namespace X_CodeTris_Alexandre_King
                 switch (menuOptionValue)
                 {
                     case 0:
-                        Console.Clear();                        
+                        Console.Clear();
                         return 0;
                     case 1:
                         Console.Clear();
@@ -475,7 +558,7 @@ namespace X_CodeTris_Alexandre_King
                         ChangeSoundState(menuOptionValue);
                         ExternalManager.StockOptionsOnChange();
                         return 0;
-                    case 1:                        
+                    case 1:
                         ChangePlayKeys(menuOptionValue);
                         ExternalManager.StockOptionsOnChange();
 
@@ -493,7 +576,7 @@ namespace X_CodeTris_Alexandre_King
         /// <summary>
         /// Management of the pause menu when the key "enter" is pressed
         /// </summary>
-        /// <param name="menuOptionValue"></param>
+        /// <param name="menuOptionValue">Which option of the menu was called</param>
         /// <returns></returns>
         /// 
         /*
@@ -527,6 +610,11 @@ namespace X_CodeTris_Alexandre_King
                 return -1;
             }*/
 
+        /// <summary>
+        /// Management of the Highscore menu when the key "enter" is pressed
+        /// </summary>
+        /// <param name="menuOptionValue">Which option of the menu was called</param>
+        /// <returns>Result of the action so the progam knows what to do next, return -1 if nothing needs to be done</returns>
         public int HighscoreMenuEnter(int menuOptionValue)
         {
             int lastIndex = GetHighscoreMenu().Last().Key;
@@ -543,7 +631,11 @@ namespace X_CodeTris_Alexandre_King
             }
             return -1;
         }
-
+        /// <summary>
+        /// Management of the Details highscore menu when the key "enter" is pressed
+        /// </summary>
+        /// <param name="menuOptionValue">Which option of the menu was called</param>
+        /// <returns>Result of the action so the progam knows what to do next, return -1 if nothing needs to be done</returns>
         public int DetailHighscoreMenuEnter(int menuOptionValue)
         {
             int lastIndex = GetDetailHighscoreMenu().Last().Key;
@@ -552,10 +644,14 @@ namespace X_CodeTris_Alexandre_King
                 Console.Clear();
                 CallHighscoreMenu();
                 return 0;
-            }            
+            }
             return -1;
         }
-
+        /// <summary>
+        /// Management of the How to play menu when the key "enter" is pressed
+        /// </summary>
+        /// <param name="menuOptionValue">Which option of the menu was called</param>
+        /// <returns>Result of the action so the progam knows what to do next, return -1 if nothing needs to be done</returns>
         public int HowToPlayMenuEnter(int menuOptionValue)
         {
             int lastIndex = GetHowToPlayMenu().Last().Key;
@@ -568,4 +664,5 @@ namespace X_CodeTris_Alexandre_King
             return -1;
         }
     }
-    }
+}
+

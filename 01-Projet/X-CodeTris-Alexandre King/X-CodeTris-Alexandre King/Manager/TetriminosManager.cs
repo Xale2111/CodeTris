@@ -6,15 +6,17 @@ using System.Threading.Tasks;
 
 namespace X_CodeTris_Alexandre_King
 {
-    //à voir si public ou static
-    static public class TetriminosManager
+    /// <summary>
+    /// Manager of the tetriminos. this will draw and select the tetriminos
+    /// </summary>
+    static class TetriminosManager
     {
         //Variables
         const int TOTAL_TETRIMINOS = 7;         //Total of tetriminos
         static Random _random = new Random();
-        static Tetriminos _currentTetriminos;                
-        static Tetriminos _nextTetriminos;                
-        
+        static Tetriminos _currentTetriminos;   //current one                
+        static Tetriminos _nextTetriminos;      //next one that will show up (this helps the player by showing him the next tetriminos he'll get)                
+
         /// <summary>
         /// Define a new tetriminos
         /// </summary>
@@ -40,11 +42,11 @@ namespace X_CodeTris_Alexandre_King
         {
             int yPos = yTopPos;
             int multiplySpaces = 0;
-            
+
             VisualManager.SetTextColor(_currentTetriminos.Color);
             foreach (string spriteLine in _currentTetriminos.AllStates[_currentTetriminos.CurrentState])
             {
-                string newSpriteLine = spriteLine;                
+                string newSpriteLine = spriteLine;
                 if (spriteLine.Contains("!!"))
                 {
                     while (newSpriteLine.Contains("!!"))
@@ -52,7 +54,7 @@ namespace X_CodeTris_Alexandre_King
                         multiplySpaces++;
                         newSpriteLine = newSpriteLine.Remove(0, 2);
                     }
-                    Console.SetCursorPosition(xPos + (4 * multiplySpaces), yPos);                    
+                    Console.SetCursorPosition(xPos + (4 * multiplySpaces), yPos);
                     Console.Write(newSpriteLine);
                     multiplySpaces = 0;
 
@@ -63,7 +65,7 @@ namespace X_CodeTris_Alexandre_King
                     Console.Write(spriteLine);
                 }
                 yPos++;
-            }           
+            }
         }
 
         /// <summary>
@@ -107,7 +109,7 @@ namespace X_CodeTris_Alexandre_King
         /// <returns>a tetriminos (child of the Tetriminos class)</returns>
         static private Tetriminos GetRandomTetriminos()
         {
-            int tetriminos = _random.Next(TOTAL_TETRIMINOS);                                   
+            int tetriminos = _random.Next(TOTAL_TETRIMINOS);
             //int tetriminos = 1;
             switch (tetriminos)
             {
@@ -131,7 +133,7 @@ namespace X_CodeTris_Alexandre_King
 
                 case 6:
                     return new SBlock();
-            }            
+            }
             return new OBlock();
         }
 
@@ -141,7 +143,7 @@ namespace X_CodeTris_Alexandre_King
         /// <returns>visual width</returns>
         static public int GetCurrentTetriminosVisualWidth()
         {
-            return _currentTetriminos.Width*2;
+            return _currentTetriminos.Width * 2;
         }
         /// <summary>
         /// Get the visual height (because it use more visual space then the height indicate)
@@ -149,7 +151,7 @@ namespace X_CodeTris_Alexandre_King
         /// <returns>visual height</returns>
         static public int GetCurrentTetriminosVisualHeight()
         {
-            return _currentTetriminos.Height*2;
+            return _currentTetriminos.Height * 2;
         }
         /// <summary>
         /// Get the real widht of the tetriminos
@@ -173,7 +175,7 @@ namespace X_CodeTris_Alexandre_King
         /// <returns>real width</returns>
         static public int GetNextTetriminosWidth()
         {
-            return _nextTetriminos.Width*2;
+            return _nextTetriminos.Width * 2;
         }
         /// <summary>
         /// Get the real height of the tetriminos
@@ -181,7 +183,7 @@ namespace X_CodeTris_Alexandre_King
         /// <returns>real height</returns>
         static public int GetNextTetriminosHeight()
         {
-            return _nextTetriminos.Height*2;
+            return _nextTetriminos.Height * 2;
         }
         /// <summary>
         /// Get the tetriminos Name
@@ -235,8 +237,8 @@ namespace X_CodeTris_Alexandre_King
         /// <param name="whereYpos">where is Y the tetriminos should go</param>
         static public void MoveTetriminos(int xPos, int yTopPos, int whereXpos, int whereYpos)
         {
-            RemoveTetriminos(xPos,yTopPos);
-            DrawCurrentTetriminos(xPos+ (whereXpos*4), yTopPos+ (whereYpos*2));
+            RemoveTetriminos(xPos, yTopPos);
+            DrawCurrentTetriminos(xPos + (whereXpos * 4), yTopPos + (whereYpos * 2));
         }
 
         /// <summary>
@@ -245,10 +247,10 @@ namespace X_CodeTris_Alexandre_King
         /// <param name="xPos"></param>
         /// <param name="yTopPos"></param>
         static public void RotateTetriminos(int xPos, int yTopPos)
-        { 
-            RemoveTetriminos(xPos,yTopPos);
-            _currentTetriminos.ChangeState(1);            
-        }       
+        {
+            RemoveTetriminos(xPos, yTopPos);
+            _currentTetriminos.ChangeState(1);
+        }
 
         /// <summary>
         /// Remove visual the tetriminos
@@ -299,7 +301,7 @@ namespace X_CodeTris_Alexandre_King
         /// <summary>
         /// Get the occupation of the tetriminos if he rotates
         /// </summary>
-        /// <returns></returns>
+        /// <returns>array of bool, if true = case is full, false = case is empty</returns>
         static public bool[,] GetTetriminosRotationOccupation()
         {
             _currentTetriminos.ChangeState(1);

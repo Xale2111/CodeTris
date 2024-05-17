@@ -1829,3 +1829,134 @@ DATE 				|LEVEL 		|ERROR
 16.05.2024 16:22:25		INFO		Database opened successfully
 16.05.2024 16:22:25		INFO		Database opened successfully
 16.05.2024 16:22:25		INFO		Database opened successfully
+17.05.2024 10:22:57		ERROR		Unable to connect to any of the specified MySQL hosts.
+17.05.2024 10:30:37		INFO		Database opened successfully
+17.05.2024 10:30:40		INFO		Database opened successfully
+17.05.2024 10:30:40		INFO		Database opened successfully
+17.05.2024 10:30:40		INFO		All question of difficulty 0 were selected.
+17.05.2024 10:31:05		INFO		Database opened successfully
+17.05.2024 10:31:05		INFO		Database opened successfully
+17.05.2024 10:31:05		INFO		Database opened successfully
+17.05.2024 10:31:05		INFO		All question of difficulty 0 were selected.
+17.05.2024 10:31:31		INFO		Database opened successfully
+17.05.2024 10:31:31		INFO		New game by user <<2 : JoyfulHorse71>> was inserted succesfully. Final score is 0
+17.05.2024 10:31:53		INFO		Database opened successfully
+17.05.2024 10:31:53		INFO		Database opened successfully
+17.05.2024 10:31:53		INFO		Database opened successfully
+17.05.2024 10:31:53		INFO		Database opened successfully
+17.05.2024 10:31:53		INFO		Database opened successfully
+17.05.2024 10:31:57		INFO		Database opened successfully
+17.05.2024 10:31:57		INFO		Database opened successfully
+17.05.2024 10:31:58		INFO		Database opened successfully
+17.05.2024 10:31:58		INFO		Database opened successfully
+17.05.2024 10:31:58		INFO		Database opened successfully
+17.05.2024 10:31:58		INFO		Database opened successfully
+17.05.2024 10:32:56		INFO		Database opened successfully
+17.05.2024 10:36:42		INFO		Database opened successfully
+17.05.2024 11:35:04		INFO		Database opened successfully
+17.05.2024 11:37:25		INFO		Database opened successfully
+17.05.2024 11:37:37		INFO		Database opened successfully
+17.05.2024 11:37:37		INFO		Database opened successfully
+17.05.2024 11:37:37		INFO		All question of difficulty 2 were selected.
+17.05.2024 13:18:30		INFO		Database opened successfully
+17.05.2024 13:18:30		INFO		Database opened successfully
+17.05.2024 13:18:30		INFO		Database opened successfully
+17.05.2024 13:18:30		INFO		All question of difficulty 2 were selected.
+17.05.2024 13:30:36		INFO		Database opened successfully
+17.05.2024 13:30:56		INFO		Database opened successfully
+17.05.2024 13:30:56		INFO		Database opened successfully
+17.05.2024 13:30:56		INFO		All question of difficulty 2 were selected.
+17.05.2024 13:32:03		INFO		Database opened successfully
+17.05.2024 13:32:03		INFO		Database opened successfully
+17.05.2024 13:32:03		INFO		Database opened successfully
+17.05.2024 13:32:03		INFO		All question of difficulty 2 were selected.
+17.05.2024 13:33:49		INFO		Database opened successfully
+17.05.2024 13:33:50		INFO		Database opened successfully
+17.05.2024 13:33:50		INFO		Database opened successfully
+17.05.2024 13:33:50		INFO		All question of difficulty 2 were selected.
+17.05.2024 13:34:02		INFO		Database opened successfully
+17.05.2024 13:34:02		INFO		New game by user <<2 : JoyfulHorse71>> was inserted succesfully. Final score is 0
+17.05.2024 13:34:14		INFO		Database opened successfully
+17.05.2024 13:34:14		INFO		Database opened successfully
+17.05.2024 13:34:14		INFO		All question of difficulty 2 were selected.
+17.05.2024 13:34:37		INFO		Database opened successfully
+17.05.2024 13:34:37		INFO		New game by user <<2 : JoyfulHorse71>> was inserted succesfully. Final score is 0
+17.05.2024 13:34:52		INFO		Database opened successfully
+17.05.2024 13:34:52		INFO		Database opened successfully
+17.05.2024 13:34:52		INFO		All question of difficulty 2 were selected.
+17.05.2024 13:40:04		INFO		Database opened successfully
+17.05.2024 13:40:06		INFO		Database opened successfully
+17.05.2024 13:40:06		INFO		Database opened successfully
+17.05.2024 13:40:06		INFO		All question of difficulty 2 were selected.
+17.05.2024 13:41:15		ERROR		Unable to connect to any of the specified MySQL hosts.
+17.05.2024 13:41:18		ERROR		Unable to connect to any of the specified MySQL hosts.
+17.05.2024 13:41:18		ERROR		Connection must be valid and open.
+17.05.2024 13:41:20		ERROR		Unable to connect to any of the specified MySQL hosts.
+17.05.2024 13:41:20		ERROR		Connection must be valid and open.
+17.05.2024 13:42:38		ERROR		Unable to connect to any of the specified MySQL hosts.
+17.05.2024 13:56:44		ERROR		Unable to connect to any of the specified MySQL hosts.
+17.05.2024 13:58:23		ERROR		Unable to connect to any of the specified MySQL hosts.
+17.05.2024 15:33:44		ERROR		Unable to connect to any of the specified MySQL hosts.
+17.05.2024 15:35:57		ERROR		Unable to connect to any of the specified MySQL hosts.
+17.05.2024 15:36:00		ERROR		Unable to connect to any of the specified MySQL hosts.
+17.05.2024 15:36:00		ERROR		Connection must be valid and open.
+17.05.2024 15:36:02		ERROR		Unable to connect to any of the specified MySQL hosts.
+17.05.2024 15:36:02		ERROR		Connection must be valid and open.
+17.05.2024 15:37:12		ERROR		Unable to connect to any of the specified MySQL hosts.
+17.05.2024 15:37:14		ERROR		Unable to connect to any of the specified MySQL hosts.
+17.05.2024 15:37:15		ERROR		Connection must be valid and open.
+17.05.2024 15:37:17		ERROR		Unable to connect to any of the specified MySQL hosts.
+17.05.2024 15:37:17		ERROR		Connection must be valid and open.
+17.05.2024 15:39:25		ERROR		Unable to connect to any of the specified MySQL hosts.
+17.05.2024 15:39:25		ERROR		Connection must be valid and open.
+17.05.2024 15:39:25		ERROR		Connection must be valid and open.
+17.05.2024 15:40:00		INFO		Database opened successfully
+17.05.2024 15:40:01		INFO		Database opened successfully
+17.05.2024 15:40:01		INFO		Database opened successfully
+17.05.2024 15:40:01		INFO		All question of difficulty 2 were selected.
+17.05.2024 15:40:46		INFO		Database opened successfully
+17.05.2024 15:40:47		INFO		Database opened successfully
+17.05.2024 15:40:47		INFO		Database opened successfully
+17.05.2024 15:40:47		INFO		All question of difficulty 2 were selected.
+17.05.2024 15:42:52		INFO		Database opened successfully
+17.05.2024 15:42:53		INFO		Database opened successfully
+17.05.2024 15:42:53		INFO		Database opened successfully
+17.05.2024 15:42:53		INFO		All question of difficulty 2 were selected.
+17.05.2024 15:43:43		INFO		Database opened successfully
+17.05.2024 15:43:46		INFO		Database opened successfully
+17.05.2024 15:43:46		INFO		Database opened successfully
+17.05.2024 15:43:46		INFO		All question of difficulty 2 were selected.
+17.05.2024 15:45:51		INFO		Database opened successfully
+17.05.2024 15:45:58		INFO		Database opened successfully
+17.05.2024 15:45:58		INFO		Database opened successfully
+17.05.2024 15:45:58		INFO		All question of difficulty 2 were selected.
+17.05.2024 15:48:28		INFO		Database opened successfully
+17.05.2024 15:48:29		INFO		Database opened successfully
+17.05.2024 15:48:29		INFO		Database opened successfully
+17.05.2024 15:48:29		INFO		All question of difficulty 2 were selected.
+17.05.2024 15:54:12		INFO		Database opened successfully
+17.05.2024 15:54:13		INFO		Database opened successfully
+17.05.2024 15:54:13		INFO		Database opened successfully
+17.05.2024 15:54:13		INFO		All question of difficulty 2 were selected.
+17.05.2024 15:55:50		INFO		Database opened successfully
+17.05.2024 15:55:51		INFO		Database opened successfully
+17.05.2024 15:55:51		INFO		Database opened successfully
+17.05.2024 15:55:51		INFO		All question of difficulty 2 were selected.
+17.05.2024 15:56:53		INFO		Database opened successfully
+17.05.2024 15:56:54		INFO		Database opened successfully
+17.05.2024 15:56:54		INFO		Database opened successfully
+17.05.2024 15:56:54		INFO		All question of difficulty 2 were selected.
+17.05.2024 15:59:09		INFO		Database opened successfully
+17.05.2024 15:59:09		INFO		Database opened successfully
+17.05.2024 15:59:09		INFO		Database opened successfully
+17.05.2024 15:59:09		INFO		All question of difficulty 2 were selected.
+17.05.2024 16:02:52		INFO		Database opened successfully
+17.05.2024 16:02:52		INFO		Database opened successfully
+17.05.2024 16:02:52		INFO		Database opened successfully
+17.05.2024 16:02:52		INFO		All question of difficulty 2 were selected.
+17.05.2024 16:03:22		INFO		Database opened successfully
+17.05.2024 16:03:27		INFO		Database opened successfully
+17.05.2024 16:03:27		INFO		Database opened successfully
+17.05.2024 16:03:27		INFO		All question of difficulty 2 were selected.
+17.05.2024 16:07:29		INFO		Database opened successfully
+17.05.2024 16:07:29		INFO		New game by user <<2 : JoyfulHorse71>> was inserted succesfully. Final score is 400

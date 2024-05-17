@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace X_CodeTris_Alexandre_King
 {
+    /// <summary>
+    /// Child of the tetriminos class
+    /// </summary>
     public class ZBlock : Tetriminos
     {
+        //possible States of the tetriminos (!! is equal to space)
         string[] _state1 = new string[6]
         {
         "!!████",
@@ -17,6 +21,9 @@ namespace X_CodeTris_Alexandre_King
         "████",
         "████"
         };
+        /// <summary>
+        /// Constructor of the tetriminos
+        /// </summary>
         public ZBlock()
         {
             _name = "Zblock";
@@ -32,12 +39,17 @@ namespace X_CodeTris_Alexandre_King
             _height = 2;
             DefineAllStates();
         }
+        /// <summary>
+        /// Add all the possible states of the tetriminos to a list
+        /// </summary>
         private void DefineAllStates()
         {
             _allStates.Add(_baseSprite);
             _allStates.Add(_state1);
         }
-
+        /// <summary>
+        /// Define the occupation of each state
+        /// </summary>
         override protected void DefineOccupation()
         {
             _occupation = new bool[OCCUPATION_SIZE, OCCUPATION_SIZE];

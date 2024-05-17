@@ -5,6 +5,9 @@ using System.Linq;
 
 namespace X_CodeTris_Alexandre_King
 {
+    /// <summary>
+    /// Manager of the database. All interactions with the DB is done here
+    /// </summary>
     static public class DatabaseManager
     {
         //Variables 
@@ -25,7 +28,7 @@ namespace X_CodeTris_Alexandre_King
         //game table infos
         const string GAME_TABLE = "`t_game`";
         const string SCORE_FIELD = "`score`";
-        const string GAME_DATE_FIELD = "`gameDate`";       
+        const string GAME_DATE_FIELD = "`gameDate`";
 
         //difficulty table infos
         const string DIFFICULTY_TABLE = "`t_difficulty`";
@@ -46,14 +49,14 @@ namespace X_CodeTris_Alexandre_King
 
         //DB variables (from the config.ini file)
         static Dictionary<string, string> _dbConfigurationInfos = new Dictionary<string, string>()
-        {            
+        {
             {"server", ""},
             {"database", ""},
             {"uid", ""},
-            {"password", ""},                   
-        };       
-       
-        
+            {"password", ""},
+        };
+
+
         /// <summary>
         /// Will get the raw infos from the config.ini file via the external manager and then set the variable for the connection
         /// </summary>
@@ -66,7 +69,7 @@ namespace X_CodeTris_Alexandre_King
                 {
                     _dbConfigurationInfos[_dbConfigurationInfos.ElementAt(i).Key] = rawInfos.Split(';')[i].Split('=')[1].Trim();
                 }
-                _hasConfiguration = true;                
+                _hasConfiguration = true;
             }
         }
 
@@ -335,7 +338,7 @@ namespace X_CodeTris_Alexandre_King
                 MySql.Data.MySqlClient.MySqlCommand com = _connection.CreateCommand();
 
                 com.CommandType = System.Data.CommandType.Text;
-                com.CommandText = "SELECT * FROM " + GAME_TABLE + "WHERE fkDifficulty = "+ difficultyID + " ORDER BY " + SCORE_FIELD + " DESC LIMIT 10";
+                com.CommandText = "SELECT * FROM " + GAME_TABLE + "WHERE fkDifficulty = " + difficultyID + " ORDER BY " + SCORE_FIELD + " DESC LIMIT 10";
                 MySql.Data.MySqlClient.MySqlDataReader reader = com.ExecuteReader();
 
                 if (reader.HasRows)
@@ -372,7 +375,11 @@ namespace X_CodeTris_Alexandre_King
             return highscores;
 
         }
-        
+        /// <summary>
+        /// Get all the questions of a given difficulty
+        /// </summary>
+        /// <param name="difficulty">difficulty level</param>
+        /// <returns>list of questions</returns>
         static public List<Question> GetAllQuestionOfDifficulty(int difficulty)
         {
             int difficultyID = FindDifficultyIDWithLevel(difficulty);
@@ -380,12 +387,12 @@ namespace X_CodeTris_Alexandre_King
 
             string question = string.Empty;
             string answer = string.Empty;
-            
+
             List<Question> questions = new List<Question>();
 
             OpenDB();
             try
-            {                
+            {
                 MySql.Data.MySqlClient.MySqlCommand com = _connection.CreateCommand();
 
                 com.CommandType = System.Data.CommandType.Text;
@@ -399,17 +406,17 @@ namespace X_CodeTris_Alexandre_King
                     {
                         question = reader.GetString(1);
                         answer = reader.GetString(2);
-                        Question newQuestion = new Question(question,answer);
+                        Question newQuestion = new Question(question, answer);
                         questions.Add(newQuestion);
                     }
                     reader.Close();
                 }
 
-                ExternalManager.LogInfo("All question of difficulty "+ difficulty + " were selected.");                
+                ExternalManager.LogInfo("All question of difficulty " + difficulty + " were selected.");
             }
             catch (Exception e)
             {
-                ExternalManager.LogError(e.Message);                
+                ExternalManager.LogError(e.Message);
             }
 
             _connection.Close();

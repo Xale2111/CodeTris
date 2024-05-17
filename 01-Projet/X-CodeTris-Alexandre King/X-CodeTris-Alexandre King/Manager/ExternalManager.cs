@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace X_CodeTris_Alexandre_King
 {
+    /// <summary>
+    /// Manager of external elements of the project such as txt file 
+    /// </summary>
     static public class ExternalManager
     {
         //parameters variables
@@ -15,7 +18,7 @@ namespace X_CodeTris_Alexandre_King
         const string ANIMALS_FILE_PATH = "../../params/AdjectivesNom.txt";
         const string ADJECTIVES_FILE_PATH = "../../params/AnimauxNom.txt";
         const string PLAYER_NAME_FILE_PATH = "../../params/PlayerName.txt";
-        
+
         //logs variables
         const string LOGS_DIR_PATH = "../../logs/";
         const string LOGS_FILE_PATH = "/logs.txt";
@@ -64,10 +67,10 @@ namespace X_CodeTris_Alexandre_King
         /// <returns>raw content of the config.ini file</returns>
         static public string GetDBConfiguration()
         {
-            string rawFile = String.Empty;            
+            string rawFile = String.Empty;
             if (File.Exists(CONFIG_FILE_PATH))
             {
-                rawFile = File.ReadAllText(CONFIG_FILE_PATH);                
+                rawFile = File.ReadAllText(CONFIG_FILE_PATH);
             }
             return rawFile;
         }
@@ -141,7 +144,7 @@ namespace X_CodeTris_Alexandre_King
             _playerName = name;
             _soundState = sound;
             _difficultyState = difficulty;
-            _keysState = keys;            
+            _keysState = keys;
 
         }
         /// <summary>
@@ -230,7 +233,7 @@ namespace X_CodeTris_Alexandre_King
         /// <param name="error">Error to log</param>
         static public void LogError(string error)
         {
-            if (File.Exists(LOGS_DIR_PATH+ LOGS_FILE_PATH))
+            if (File.Exists(LOGS_DIR_PATH + LOGS_FILE_PATH))
             {
                 string message = DateTime.Now.ToString() + "\t\t" + "ERROR" + "\t\t" + error;
                 using (StreamWriter w = File.AppendText(LOGS_DIR_PATH + LOGS_FILE_PATH))

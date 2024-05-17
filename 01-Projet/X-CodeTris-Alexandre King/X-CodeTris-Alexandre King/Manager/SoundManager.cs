@@ -7,11 +7,14 @@ using System.Threading.Tasks;
 
 namespace X_CodeTris_Alexandre_King
 {
+    /// <summary>
+    /// Manager of the sound. Everything that is sound related is managed here
+    /// </summary>
     static public class SoundManager
     {
         //Variables
         static SoundPlayer _soundPlayer = new SoundPlayer();
-        static string _musicPath = "../../music/";        
+        static string _musicPath = "../../music/";
         static string _tetrisSongFile = "TetrisSong.wav";
         static string _supsensSongFile = "suspens.wav";
         //string _QVGDMFile = "TetrisSong.wav"; //musique de qui veut gagner des millions        
@@ -24,7 +27,10 @@ namespace X_CodeTris_Alexandre_King
             _soundPlayer.SoundLocation = _musicPath + _tetrisSongFile;
             _soundPlayer.PlayLooping();
         }
-        static public void PlaySuspenseSong()
+        /// <summary>
+        /// Play the suspens
+        /// </summary>
+        static public void PlaySuspensSong()
         {
             _soundPlayer.SoundLocation = _musicPath + _supsensSongFile;
             _soundPlayer.PlayLooping();
