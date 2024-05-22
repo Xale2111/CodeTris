@@ -280,7 +280,10 @@ namespace X_CodeTris_Alexandre_King
             Console.Clear();
             char movementArrow = '>';
             List<Tuple<string, int, string>> highscores = new List<Tuple<string, int, string>>();
-            highscores = DatabaseManager.GetHighScores(difficulty);
+            if (DatabaseManager.GetDBState())
+            {
+                highscores = DatabaseManager.GetHighScores(difficulty);
+            }
             int count = 0;
 
 

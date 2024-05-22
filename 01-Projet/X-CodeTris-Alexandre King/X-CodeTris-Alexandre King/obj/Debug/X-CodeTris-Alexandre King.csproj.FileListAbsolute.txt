@@ -38,3 +38,42 @@ D:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-
 D:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\obj\Debug\X-CodeTris-Alexandre King.csproj.CopyComplete
 D:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\obj\Debug\X-CodeTris-Alexandre King.exe
 D:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\obj\Debug\X-CodeTris-Alexandre King.pdb
+E:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\bin\Debug\X-CodeTris-Alexandre King.exe.config
+E:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\bin\Debug\X-CodeTris-Alexandre King.exe
+E:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\bin\Debug\X-CodeTris-Alexandre King.pdb
+E:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\bin\Debug\BouncyCastle.Cryptography.dll
+E:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\bin\Debug\Google.Protobuf.dll
+E:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\bin\Debug\K4os.Compression.LZ4.dll
+E:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\bin\Debug\K4os.Compression.LZ4.Streams.dll
+E:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\bin\Debug\K4os.Hash.xxHash.dll
+E:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+E:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\bin\Debug\MySql.Data.dll
+E:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\bin\Debug\System.Buffers.dll
+E:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\bin\Debug\System.Configuration.ConfigurationManager.dll
+E:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\bin\Debug\System.Diagnostics.DiagnosticSource.dll
+E:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\bin\Debug\System.IO.Pipelines.dll
+E:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\bin\Debug\System.Memory.dll
+E:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\bin\Debug\System.Numerics.Vectors.dll
+E:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+E:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\bin\Debug\System.Threading.Tasks.Extensions.dll
+E:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\bin\Debug\ZstdSharp.dll
+E:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\bin\Debug\BouncyCastle.Cryptography.xml
+E:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\bin\Debug\Google.Protobuf.pdb
+E:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\bin\Debug\Google.Protobuf.xml
+E:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\bin\Debug\K4os.Compression.LZ4.xml
+E:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\bin\Debug\K4os.Compression.LZ4.Streams.xml
+E:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\bin\Debug\K4os.Hash.xxHash.xml
+E:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+E:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\bin\Debug\MySql.Data.xml
+E:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\bin\Debug\System.Buffers.xml
+E:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\bin\Debug\System.Diagnostics.DiagnosticSource.xml
+E:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\bin\Debug\System.IO.Pipelines.xml
+E:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\bin\Debug\System.Memory.xml
+E:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\bin\Debug\System.Numerics.Vectors.xml
+E:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+E:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\bin\Debug\System.Threading.Tasks.Extensions.xml
+E:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\obj\Debug\X-CodeTris-Alexandre King.csproj.AssemblyReference.cache
+E:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\obj\Debug\X-CodeTris-Alexandre King.csproj.CoreCompileInputs.cache
+E:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\obj\Debug\X-CodeTris-Alexandre King.csproj.CopyComplete
+E:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\obj\Debug\X-CodeTris-Alexandre King.exe
+E:\01-Projets\00-TPI\01-CodeTris\01-Projet\X-CodeTris-Alexandre King\X-CodeTris-Alexandre King\obj\Debug\X-CodeTris-Alexandre King.pdb

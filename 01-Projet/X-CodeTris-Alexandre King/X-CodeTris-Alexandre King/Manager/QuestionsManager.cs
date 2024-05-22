@@ -30,7 +30,10 @@ namespace X_CodeTris_Alexandre_King
         /// <param name="difficulty">current difficulty of the game</param>
         public QuestionsManager(int difficulty)
         {
-            _allQuestions = DatabaseManager.GetAllQuestionOfDifficulty(difficulty);
+            if (DatabaseManager.GetDBState())
+            {
+                _allQuestions = DatabaseManager.GetAllQuestionOfDifficulty(difficulty);
+            }
         }
         /// <summary>
         /// Get a random question from the list of possibility questions
