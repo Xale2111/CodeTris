@@ -724,7 +724,10 @@ namespace X_CodeTris_Alexandre_King
                         }
                         else
                         {
-                            _score += _pointsToAdd * _completedLineMultiplycator;
+                            for (int i = 0; i < amountOfLanes; i++)
+                            {
+                                _score += _pointsToAdd * _completedLineMultiplycator;
+                            }
                             WriteScore();
                         }
                         for (int k = 0; k < amountOfLanes; k++)
