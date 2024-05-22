@@ -68,8 +68,10 @@ namespace X_CodeTris_Alexandre_King
         bool _inGame = false;
         bool _gameOver = false;
         bool _isPaused = false;
+        bool _returnToMenu = false;
         bool _isUpdating = false;
         bool _canSpawnNew = true;
+        bool _hasToRedrawGameOverArea = true;
         bool _threadsStarted = false;
         int _frameTiming;
         int _frameBeforeNew = 2;
@@ -120,6 +122,7 @@ namespace X_CodeTris_Alexandre_King
         /// <returns>the result of that game (0= game over)</returns>
         public int NewGame()
         {
+            Console.CursorVisible = false;
             Console.Clear();
             ResetAll();
             DrawPlayArea();
@@ -204,6 +207,8 @@ namespace X_CodeTris_Alexandre_King
             _isUpdating = false;
             _inGame = false;
             _isPaused = false;
+            _hasToRedrawGameOverArea = true;
+            _returnToMenu = false;
             _canSpawnNew = true;
             _threadsStarted = false;
             _pressedKey = default(ConsoleKeyInfo);
@@ -412,9 +417,15 @@ namespace X_CodeTris_Alexandre_King
                         {
                             _instructionsTetriminos.RemoveAt(0);
                         }
+                        
                         if (_currentTetriminosYPos > MAX_HEIGHT_BEFORE_GAME_OVER + PLAY_ZONE_Y_POS)
                         {
-                            DrawGameOverArea();
+                            if (_hasToRedrawGameOverArea)
+                            {
+                                DrawGameOverArea();
+                                _hasToRedrawGameOverArea = false;
+                            }
+                             
                         }
                     }
                 }
@@ -457,6 +468,13 @@ namespace X_CodeTris_Alexandre_King
                 Console.Clear();
             }
         }
+
+        private void ReturnToMainMenu()
+        {
+            VisualManager.SetTextColor("white");
+            VisualManager.SetBackgroundColor("black");
+            Console.Clear();
+        }
         /// <summary>
         /// Start the game
         /// </summary>
@@ -474,6 +492,14 @@ namespace X_CodeTris_Alexandre_King
                     StopAllThreads();
                     PauseGame();
                     ShowGameOverScreen();
+                    return 0;
+                }
+
+                if (_returnToMenu)
+                {
+                    StopAllThreads();
+                    PauseGame();
+                    ReturnToMainMenu();
                     return 0;
                 }
 
@@ -501,6 +527,7 @@ namespace X_CodeTris_Alexandre_King
                     {
                         _canSpawnNew = false;
                         _instructionsTetriminos.Clear();
+                        _hasToRedrawGameOverArea = true;
                         TetriminosManager.DefineNewTetriminos();
                         DrawNewTetriminos();
                         DrawNextTetriminos();
@@ -513,7 +540,7 @@ namespace X_CodeTris_Alexandre_King
                         StartAllThreads();
                         _threadsStarted = true;
                     }
-                }
+                }                
             }
             //shouldn't do those line
             Debug.Write("Main While(True) of the game has ended. Attention is required");
@@ -1073,7 +1100,14 @@ namespace X_CodeTris_Alexandre_King
                     case ConsoleKey.Enter:
                         return playerAnswer;
 
+                    case ConsoleKey.Escape:
+                        _returnToMenu = true;
+                        _isPaused = false;
+                        StartAllThreads();
+                        break;
+
                     default:
+
                         if (keyInfo.KeyChar.ToString() != "\0")
                         {
                             playerAnswer += keyInfo.KeyChar;
@@ -1081,8 +1115,7 @@ namespace X_CodeTris_Alexandre_King
                         else
                         {
                             Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
-                        }
-
+                        }                
                         break;
 
                 }
@@ -1347,6 +1380,10 @@ namespace X_CodeTris_Alexandre_King
                         {
                             _instructionsTetriminos.Add(DOWN_INSTRUCTION);
                         }
+                    }
+                    if (_pressedKey.Key == ConsoleKey.Escape)
+                    {
+                        _returnToMenu = true;
                     }
 
                     _pressedKey = default(ConsoleKeyInfo);
