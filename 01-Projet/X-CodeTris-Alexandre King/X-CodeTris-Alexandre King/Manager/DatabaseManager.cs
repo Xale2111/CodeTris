@@ -90,28 +90,21 @@ namespace X_CodeTris_Alexandre_King
                 string connectionString;
                 connectionString = "SERVER=" + _dbConfigurationInfos["server"] + ";" + "DATABASE=" + _dbConfigurationInfos["database"] + ";" + "UID=" + _dbConfigurationInfos["uid"] + ";" + "PASSWORD=" + _dbConfigurationInfos["password"] + ";";
                 _connection = new MySqlConnection(connectionString);
-                bool canPing = _connection.Ping();
 
-                if (canPing)
+                //pas possible de réduire le timeout (possible sur les commandes mais pas la connection)
+                try
                 {
-                    try
-                    {
-                        _connection.Open();
-                        ExternalManager.LogInfo("Database opened successfully");
-                        _dbState = true;
-                    }
-                    catch (Exception e)
-                    {
-                        ExternalManager.LogError(e.Message);
-                        _dbState = false;
-
-                    }
+                    _connection.Open();
+                    ExternalManager.LogInfo("Database opened successfully");
+                    _dbState = true;
                 }
-                else
+                catch (Exception e)
                 {
-                    ExternalManager.LogError("Wasn't able to ping the server. Please, verify server is launch");
+                    ExternalManager.LogError(e.Message);
                     _dbState = false;
+
                 }
+
             }
         }
 

@@ -1977,3 +1977,7 @@ DATE 				|LEVEL 		|ERROR
 22.05.2024 08:38:17		ERROR		Wasn't able to ping the server. Please, verify server is launch
 22.05.2024 08:38:17		ERROR		Connection must be valid and open.
 22.05.2024 08:38:17		ERROR		Connection must be valid and open.
+22.05.2024 09:01:50		ERROR		Wasn't able to ping the server. Please, verify server is launch
+22.05.2024 09:02:12		ERROR		Wasn't able to ping the server. Please, verify server is launch
+22.05.2024 09:03:06		ERROR		Wasn't able to ping the server. Please, verify server is launch
+22.05.2024 09:03:42		INFO		Database opened successfully
