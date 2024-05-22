@@ -23,7 +23,7 @@ namespace X_CodeTris_Alexandre_King
             Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
 
             //remove the ability to resize the console and to maximaxied it
-            //ConsoleUtility.DeleteResizeMenu();
+            ConsoleUtility.DeleteResizeMenu();
             
             //Move to window to the top left corner
             WindowUtility.MoveWindowToTopLeftCorner();
