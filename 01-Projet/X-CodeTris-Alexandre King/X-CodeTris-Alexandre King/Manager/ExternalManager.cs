@@ -77,7 +77,7 @@ namespace X_CodeTris_Alexandre_King
         /// <summary>
         /// Makes sure the logs file exists
         /// </summary>
-        static public void LogFile()
+        static public void CheckForLogFile()
         {
             if (!Directory.Exists(LOGS_DIR_PATH))
             {

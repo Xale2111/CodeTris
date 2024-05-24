@@ -17,7 +17,7 @@ namespace X_CodeTris_Alexandre_King
             Console.Title = "CodeTris";
 
             //Make sure the log file exist, otherwise create one
-            ExternalManager.LogFile();                       
+            ExternalManager.CheckForLogFile();                       
 
             //Define the console size to the maximum possible size
             Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight);

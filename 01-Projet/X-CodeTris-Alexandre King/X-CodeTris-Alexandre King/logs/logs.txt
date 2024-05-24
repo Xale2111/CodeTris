@@ -2020,3 +2020,4 @@ DATE 				|LEVEL 		|ERROR
 22.05.2024 10:43:23		INFO		Database opened successfully
 22.05.2024 10:43:23		INFO		Database opened successfully
 22.05.2024 10:43:23		INFO		All question of difficulty 2 were selected.
+23.05.2024 14:04:43		INFO		Database opened successfully
